@@ -1,0 +1,1539 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/apple-touch-icon-120x120-precomposed.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الثقافة الزوجية | بوابة التقييم الذاتي</title>
+  <meta name="description" content="تقييم للمقبلين على الزواج والمتزوجين لفهم أساسيات الحياة الزوجية على نهج أهل البيت عليهم السلام.">
+    <style>
+        :root {
+            --primary-color: #059669; 
+            --secondary-color: #0891b2;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333;
+            --success-color: #198754;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #d1fae5 0%, #cffafe 50%, #e0f2fe 100%);
+            color: var(--text-color);
+            margin: 0;
+            padding: 15px;
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(5, 150, 105, 0.15);
+        }
+
+        h1, h2, h3 { text-align: center; color: var(--primary-color); }
+        
+        h1 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        /* Page System */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Introduction Page */
+        .intro-icon {
+            font-size: 4em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .intro-text {
+            background: linear-gradient(135deg, #ecfdf5, #f0fdfa);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-right: 4px solid var(--primary-color);
+        }
+
+        .intro-text p {
+            margin: 10px 0;
+        }
+
+        .intro-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .intro-list li {
+            padding: 10px 15px;
+            margin: 8px 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .intro-list li::before {
+            content: "📚 ";
+        }
+
+        /* Progress Indicator */
+        .progress-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 25px 0;
+        }
+
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            transition: all 0.3s;
+        }
+
+        .progress-dot.active {
+            background: var(--primary-color);
+            transform: scale(1.3);
+        }
+
+        .progress-dot.completed {
+            background: var(--success-color);
+        }
+
+        /* Section Title */
+        .section-title {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.1em;
+            box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
+        }
+
+        .sub-section-title {
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            color: var(--secondary-color);
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 20px 0 15px 0;
+            font-weight: bold;
+            border-right: 4px solid var(--secondary-color);
+        }
+
+        .section-description {
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+
+        /* Question Styling */
+        .question-row {
+            padding: 20px;
+            background: #fafafa;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #eee;
+            transition: all 0.3s;
+        }
+
+        .question-row:hover {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .question-row.answered {
+            border-color: var(--success-color);
+            background: #f8fff8;
+        }
+
+        .question-text {
+            font-weight: 500;
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            gap: 5px;
+        }
+
+        .options label {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 8px;
+            border-radius: 10px;
+            transition: all 0.3s;
+            flex: 1;
+            text-align: center;
+        }
+
+        .options label:hover {
+            background: #d1fae5;
+        }
+
+        .options input {
+            margin-bottom: 8px;
+            accent-color: var(--primary-color);
+            transform: scale(1.3);
+        }
+
+        .options span {
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        .option-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8em;
+            color: #888;
+            margin-top: 10px;
+            padding: 0 5px;
+        }
+
+        /* Rating Labels */
+        .rating-scale {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 4px 20px rgba(5, 150, 105, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(5, 150, 105, 0.5);
+        }
+
+        .btn-secondary {
+            background: #e9ecef;
+            color: #495057;
+        }
+
+        .btn-secondary:hover {
+            background: #dee2e6;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn-container .btn {
+            flex: 1;
+        }
+
+        .btn-full {
+            width: 100%;
+            margin-top: 25px;
+        }
+
+        /* Video Section */
+        .video-section {
+            margin: 25px 0;
+        }
+
+        .video-link-card {
+            display: block;
+            text-decoration: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .video-link-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .video-thumbnail img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: auto;
+            min-height: 100%;
+            object-fit: cover;
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s;
+        }
+
+        .video-link-card:hover .play-button {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .play-button svg {
+            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+        }
+
+        .video-info {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, var(--primary-color), #047857);
+            color: white;
+        }
+
+        .video-icon-small {
+            font-size: 1.3em;
+            margin-left: 10px;
+        }
+
+        .video-text {
+            flex: 1;
+            font-weight: bold;
+            font-size: 1em;
+        }
+
+        .external-icon {
+            font-size: 1.2em;
+            opacity: 0.8;
+        }
+
+        /* Axis Introduction Items */
+        .axis-intro {
+            margin: 20px 0;
+        }
+
+        .axis-intro-item {
+            display: flex;
+            align-items: flex-start;
+            background: white;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-right: 4px solid var(--secondary-color);
+        }
+
+        .axis-intro-item:nth-child(1) {
+            border-right-color: #059669;
+        }
+
+        .axis-intro-item:nth-child(2) {
+            border-right-color: #0891b2;
+        }
+
+        .axis-intro-item:nth-child(3) {
+            border-right-color: #7c3aed;
+        }
+
+        .axis-number {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-left: 15px;
+            flex-shrink: 0;
+        }
+
+        .axis-intro-item:nth-child(1) .axis-number {
+            background: linear-gradient(135deg, #059669, #047857);
+        }
+
+        .axis-intro-item:nth-child(2) .axis-number {
+            background: linear-gradient(135deg, #0891b2, #0e7490);
+        }
+
+        .axis-intro-item:nth-child(3) .axis-number {
+            background: linear-gradient(135deg, #7c3aed, #6d28d9);
+        }
+
+        .axis-content {
+            flex: 1;
+        }
+
+        .axis-content strong {
+            color: var(--primary-color);
+            font-size: 1.05em;
+        }
+
+        .axis-content p {
+            margin: 8px 0 0 0;
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Pillar styling */
+        .pillar-list {
+            margin: 10px 0 0 20px;
+            padding: 0;
+            list-style: none;
+        }
+
+        .pillar-list li {
+            position: relative;
+            padding-right: 20px;
+            margin: 5px 0;
+            font-size: 0.85em;
+            color: #555;
+        }
+
+        .pillar-list li::before {
+            content: "◆";
+            position: absolute;
+            right: 0;
+            color: var(--secondary-color);
+            font-size: 0.7em;
+        }
+
+        /* Results Page */
+        .result-card {
+            background: linear-gradient(135deg, #d1fae5, #cffafe);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .total-score {
+            font-size: 4em;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 15px 0;
+        }
+
+        .score-label {
+            font-size: 1.2em;
+            color: #666;
+        }
+
+        .target-score {
+            display: inline-block;
+            background: #fff3cd;
+            color: #856404;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        .axis-result {
+            margin-bottom: 20px;
+            text-align: right;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .axis-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .axis-name {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .axis-score {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .progress-bar-bg {
+            background-color: #e9ecef;
+            height: 25px;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            text-align: center;
+            color: white;
+            font-size: 0.85em;
+            line-height: 25px;
+            transition: width 1s ease-in-out;
+            border-radius: 15px;
+        }
+
+        .advice-box {
+            background-color: #fff8e1;
+            border-right: 5px solid #ffc107;
+            padding: 20px;
+            margin-top: 15px;
+            border-radius: 10px;
+            text-align: right;
+        }
+
+        .advice-title {
+            font-weight: bold;
+            color: #856404;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .hadith-quote {
+            display: block;
+            background: linear-gradient(135deg, #fef9c3, #fef3c7);
+            border-right: 3px solid #f59e0b;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-style: italic;
+            color: #92400e;
+        }
+
+        .restart-btn {
+            margin-top: 30px;
+        }
+
+        /* Ayah Box */
+        .ayah-box {
+            background: linear-gradient(135deg, #fef3c7, #fef9c3);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            border: 2px solid #f59e0b;
+        }
+
+        .ayah-text {
+            font-size: 1.3em;
+            color: #92400e;
+            font-weight: bold;
+            line-height: 2;
+        }
+
+        .ayah-reference {
+            color: #b45309;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .options {
+                gap: 3px;
+            }
+
+            .options label {
+                padding: 8px 5px;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+
+            .total-score {
+                font-size: 3em;
+            }
+
+            .axis-intro-item {
+                flex-direction: column;
+            }
+
+            .axis-number {
+                margin-bottom: 10px;
+                margin-left: 0;
+            }
+        }
+
+/* === Floating tools (copied from الزوج/الزوجة) === */
+
+/* Unified theme variables (match الزوج/الزوجة) */
+:root{
+  --primary:#0d6efd;
+  --primary-2:#6f42c1;
+  --bg:#f6f8fb;
+  --card:#ffffff;
+  --text:#111827;
+  --muted:#6b7280;
+  --shadow:0 18px 55px rgba(0,0,0,0.10);
+}
+body{background:var(--bg); color:var(--text);}
+.container{background:rgba(255,255,255,0.55);}
+.tools{
+      position:fixed;
+      bottom:16px;
+      right:16px;
+      z-index:1200;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:flex-end;
+    }
+.fab{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      border:none;
+      cursor:pointer;
+      font-size:20px;
+      color:white;
+      background:linear-gradient(135deg,var(--primary), #6f42c1);
+      box-shadow:0 12px 25px rgba(0,0,0,0.18);
+    }
+.panel{
+      width:220px;
+      background:rgba(255,255,255,0.96);
+      border:1px solid rgba(0,0,0,0.10);
+      border-radius:16px;
+      padding:10px;
+      box-shadow:0 16px 30px rgba(0,0,0,0.14);
+      backdrop-filter:blur(6px);
+    }
+.grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+    }
+.tbtn{
+      border:1px solid rgba(0,0,0,0.12);
+      background:#fff;
+      border-radius:12px;
+      padding:10px 8px;
+      cursor:pointer;
+      font-weight:900;
+      font-size:13px;
+    }
+.toast{
+      position:fixed;
+      bottom:16px;
+      left:16px;
+      background:rgba(33,37,41,0.95);
+      color:white;
+      padding:12px 16px;
+      border-radius:14px;
+      font-weight:bold;
+      transform:translateY(100px);
+      opacity:0;
+      transition:all 0.25s ease;
+      z-index:1000;
+      max-width:85vw;
+    }
+
+/* Alias for assessments that use progress-indicator instead of progress-dots */
+.progress-indicator{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin:8px 0 18px;
+}
+.progress-indicator .progress-dot{
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:rgba(0,0,0,0.15);
+  transition:transform .2s ease, background .2s ease;
+}
+body.dark .progress-indicator .progress-dot{background:rgba(255,255,255,0.22);}
+.progress-indicator .progress-dot.active{
+  background:linear-gradient(135deg,var(--primary), #6f42c1);
+  transform:scale(1.15);
+}
+
+/* Dark mode fixes */
+    body.dark{
+      background:#0b1220 !important;
+      color:#e5e7eb !important;
+    }
+    body.dark .container{
+      background:rgba(2,6,23,0.72) !important;
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    body.dark h1, body.dark h2{color:#93c5fd;}
+    body.dark h3{color:#cbd5e1;}
+
+    body.dark .intro-text,
+    body.dark .axis-intro-item,
+    body.dark .question-row,
+    body.dark .axis-result,
+    body.dark .result-card,
+    body.dark .tips-section,
+    body.dark .promise-container,
+    body.dark .video-card,
+    body.dark .pillar-item{
+      background:rgba(255,255,255,0.06) !important;
+      border-color:rgba(255,255,255,0.10) !important;
+      color:#e5e7eb !important;
+    }
+
+    body.dark .tip-card.good{
+      background:rgba(25,135,84,0.14) !important;
+    }
+    body.dark .tip-card.medium{
+      background:rgba(255,193,7,0.16) !important;
+    }
+    body.dark .tip-card.low{
+      background:rgba(220,53,69,0.14) !important;
+    }
+
+    body.dark .sub-section-title{
+      background:linear-gradient(135deg, rgba(147,197,253,0.14), rgba(196,181,253,0.12));
+      border-color:rgba(255,255,255,0.10);
+      color:#e5e7eb;
+    }
+
+    body.dark .options label{
+      background:rgba(255,255,255,0.06);
+      border-color:rgba(255,255,255,0.14);
+      color:#e5e7eb;
+    }
+    body.dark .options label:hover{
+      background:rgba(147,197,253,0.10);
+      border-color:rgba(147,197,253,0.25);
+    }
+
+    body.dark textarea{
+      background:rgba(255,255,255,0.06);
+      border-color:rgba(255,255,255,0.16);
+      color:#e5e7eb;
+    }
+
+    body.dark .suggestion-item{
+      background:rgba(255,255,255,0.06);
+      border-color:rgba(255,255,255,0.12);
+      color:#e5e7eb;
+    }
+
+    body.dark .panel{
+      background:rgba(2,6,23,0.90);
+      border-color:rgba(255,255,255,0.10);
+      color:#e5e7eb;
+    }
+    body.dark .tbtn{
+      background:rgba(255,255,255,0.06);
+      border-color:rgba(255,255,255,0.12);
+      color:#e5e7eb;
+    }
+ 
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MFBM0K072V"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MFBM0K072V');
+</script>
+
+  <link rel="canonical" href="https://squaredoo.netlify.app/marital-culture">
+  <meta name="robots" content="index,follow">
+  <meta property="og:locale" content="ar_AR">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="بوابة التقييم الذاتي">
+  <meta property="og:title" content="الثقافة الزوجية | بوابة التقييم الذاتي">
+  <meta property="og:description" content="تقييم للمقبلين على الزواج والمتزوجين لفهم أساسيات الحياة الزوجية على نهج أهل البيت عليهم السلام.">
+  <meta property="og:url" content="https://squaredoo.netlify.app/marital-culture">
+  <meta property="og:image" content="https://squaredoo.netlify.app/apple-touch-icon-180x180.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="الثقافة الزوجية | بوابة التقييم الذاتي">
+  <meta name="twitter:description" content="تقييم للمقبلين على الزواج والمتزوجين لفهم أساسيات الحياة الزوجية على نهج أهل البيت عليهم السلام.">
+  <meta name="twitter:image" content="https://squaredoo.netlify.app/apple-touch-icon-180x180.png">
+</head>
+<body>
+
+<div class="container">
+    
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+        <div class="progress-dot" id="dot0"></div>
+        <div class="progress-dot" id="dot1"></div>
+        <div class="progress-dot" id="dot2"></div>
+        <div class="progress-dot" id="dot3"></div>
+        <div class="progress-dot" id="dot4"></div>
+    </div>
+
+    <!-- Page 0: Introduction -->
+    <div class="page active" id="page0">
+        <div class="intro-icon">💍</div>
+        <h1>الثقافة الزوجية</h1>
+        <h3>تقييم ذاتي مستوحى من خطبة العلاقة الزوجية</h3>
+        
+        <div class="ayah-box">
+            <div class="ayah-text">﴿ وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ﴾</div>
+            <div class="ayah-reference">سورة الروم - آية 21</div>
+        </div>
+
+        <div class="intro-text">
+            <p>الحياة الزوجية هي <strong>مزيج بين فطرة وخبرة</strong>. الجانب الفطري موجود في كل إنسان، لكن <strong>الجانب الثقافي والتعلمي</strong> ضروري لنجاح العلاقة الزوجية.</p>
+            <p>كما يحتاج الإنسان لتعلم آداب الطعام رغم أنه أمر فطري، كذلك يحتاج للتثقف في العلاقة الزوجية.</p>
+            <p>هذا التقييم يقيس مستوى <strong>الثقافة الزوجية</strong> لديك ومدى استعدادك للحياة الزوجية الناجحة.</p>
+        </div>
+
+        <!-- Video Section -->
+        <div class="video-section">
+            <a href="https://www.youtube.com/watch?v=gXJDWYS7lBE" target="_blank" class="video-link-card">
+                <div class="video-thumbnail">
+                    <img src="https://img.youtube.com/vi/gXJDWYS7lBE/maxresdefault.jpg" alt="خطبة العلاقة الزوجية">
+                    <div class="play-button">
+                        <svg viewBox="0 0 68 48" width="68" height="48">
+                            <path class="play-bg" d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#f00"></path>
+                            <path d="M 45,24 27,14 27,34" fill="#fff"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <span class="video-icon-small">🎬</span>
+                    <span class="video-text">شاهد الخطبة كاملة (اختياري)</span>
+                    <span class="external-icon">↗</span>
+                </div>
+            </a>
+        </div>
+
+        <h3>المحاور الرئيسية:</h3>
+        
+        <div class="axis-intro">
+            <div class="axis-intro-item">
+                <div class="axis-number">1</div>
+                <div class="axis-content">
+                    <strong>الوعي بأهمية الثقافة الزوجية</strong>
+                    <p>فهم أن الحياة الزوجية تحتاج تعلماً وخبرة وليست فطرة فقط</p>
+                    <ul class="pillar-list">
+                        <li>السعي للتعلم عبر الكتب والدورات</li>
+                        <li>مشاورة ذوي الخبرة والحكمة</li>
+                        <li>الانفتاح على التثقيف الزوجي</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="axis-intro-item">
+                <div class="axis-number">2</div>
+                <div class="axis-content">
+                    <strong>فهم طبيعة الطرف الآخر</strong>
+                    <p>استيعاب الاختلافات بين الرجل والمرأة في التفكير والتعبير</p>
+                    <ul class="pillar-list">
+                        <li>فهم لغة المرأة ومعانيها</li>
+                        <li>معرفة الضوابط والآداب الشرعية</li>
+                        <li>التثقف في العلاقة الخاصة</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="axis-intro-item">
+                <div class="axis-number">3</div>
+                <div class="axis-content">
+                    <strong>إدارة الحياة الزوجية</strong>
+                    <p>المهارات العملية لإدارة البيت والعلاقات والخلافات</p>
+                    <ul class="pillar-list">
+                        <li>إدارة المنزل والاقتصاد العائلي</li>
+                        <li>التعامل مع العائلة الكبيرة</li>
+                        <li>فنون الحوار وإدارة الخلاف</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="intro-text" style="background: linear-gradient(135deg, #e8f5e9, #f1f8e9); border-right-color: #4caf50;">
+            <p>📝 <strong>تعليمات التقييم:</strong></p>
+            <p>• أجب بصدق تام مع نفسك</p>
+            <p>• اختر من 1 (لا ينطبق عليّ أبداً) إلى 5 (ينطبق عليّ دائماً)</p>
+            <p>• الهدف: الوصول إلى <strong>60%</strong> على الأقل في كل محور</p>
+        </div>
+
+        <button class="btn btn-primary btn-full" onclick="nextPage()">ابدأ التقييم ←</button>
+    </div>
+
+    <!-- Page 1: Axis 1 - الوعي بأهمية الثقافة الزوجية -->
+    <div class="page" id="page1">
+        <div class="section-title">المحور الأول: الوعي بأهمية الثقافة الزوجية</div>
+        <p class="section-description">مدى إدراكك لأهمية التعلم والتثقف في شؤون الحياة الزوجية</p>
+        
+        <div class="rating-scale">
+            <span>1 = لا ينطبق أبداً</span>
+            <span>5 = ينطبق دائماً</span>
+        </div>
+
+        <div id="axis1_questions"></div>
+
+        <div class="btn-container">
+            <button class="btn btn-secondary" onclick="prevPage()">→ السابق</button>
+            <button class="btn btn-primary" onclick="nextPage()">التالي ←</button>
+        </div>
+    </div>
+
+    <!-- Page 2: Axis 2 - فهم طبيعة الطرف الآخر -->
+    <div class="page" id="page2">
+        <div class="section-title">المحور الثاني: فهم طبيعة الطرف الآخر</div>
+        <p class="section-description">مدى فهمك للاختلافات والضوابط في العلاقة الزوجية</p>
+        
+        <div class="rating-scale">
+            <span>1 = لا ينطبق أبداً</span>
+            <span>5 = ينطبق دائماً</span>
+        </div>
+
+        <div id="axis2_questions"></div>
+
+        <div class="btn-container">
+            <button class="btn btn-secondary" onclick="prevPage()">→ السابق</button>
+            <button class="btn btn-primary" onclick="nextPage()">التالي ←</button>
+        </div>
+    </div>
+
+    <!-- Page 3: Axis 3 - إدارة الحياة الزوجية -->
+    <div class="page" id="page3">
+        <div class="section-title">المحور الثالث: إدارة الحياة الزوجية</div>
+        <p class="section-description">المهارات العملية في إدارة البيت والعلاقات</p>
+        
+        <div class="rating-scale">
+            <span>1 = لا ينطبق أبداً</span>
+            <span>5 = ينطبق دائماً</span>
+        </div>
+
+        <div id="axis3_questions"></div>
+
+        <div class="btn-container">
+            <button class="btn btn-secondary" onclick="prevPage()">→ السابق</button>
+            <button class="btn btn-primary" onclick="calculateResults()">عرض النتائج ←</button>
+        </div>
+    </div>
+
+    <!-- Page 4: Results -->
+    <div class="page" id="page4">
+        <h2>📊 نتائج التقييم</h2>
+        
+        <div class="result-card">
+            <div class="score-label">النتيجة الإجمالية</div>
+            <div class="total-score" id="finalScore">0%</div>
+            <p id="finalMessage"></p>
+            <div class="target-score">🎯 الهدف المطلوب: 60%</div>
+        </div>
+
+        <h3>تحليل المحاور التفصيلي</h3>
+        
+        <div class="axis-result">
+            <div class="axis-header">
+                <span class="axis-name">📚 الوعي بأهمية الثقافة الزوجية</span>
+                <span class="axis-score" id="scoreAxis1">0%</span>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="barAxis1" style="width: 0%;"></div>
+            </div>
+            <div id="adviceAxis1" class="advice-box" style="display:none;"></div>
+        </div>
+
+        <div class="axis-result">
+            <div class="axis-header">
+                <span class="axis-name">🧠 فهم طبيعة الطرف الآخر</span>
+                <span class="axis-score" id="scoreAxis2">0%</span>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="barAxis2" style="width: 0%;"></div>
+            </div>
+            <div id="adviceAxis2" class="advice-box" style="display:none;"></div>
+        </div>
+
+        <div class="axis-result">
+            <div class="axis-header">
+                <span class="axis-name">🏠 إدارة الحياة الزوجية</span>
+                <span class="axis-score" id="scoreAxis3">0%</span>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="barAxis3" style="width: 0%;"></div>
+            </div>
+            <div id="adviceAxis3" class="advice-box" style="display:none;"></div>
+        </div>
+
+        <button class="btn btn-secondary btn-full restart-btn" onclick="restartAssessment()">🔄 إعادة التقييم</button>
+    </div>
+
+</div>
+
+<script>
+    // Questions Data based on the sermon
+    const questions = [
+        // Axis 1: الوعي بأهمية الثقافة الزوجية (7 questions)
+        { id: 1, text: "أؤمن بأن الحياة الزوجية تحتاج تعلماً وخبرة وليست فطرة فقط", axis: 1, pillar: "الوعي" },
+        { id: 2, text: "قرأت كتباً أو مقالات عن العلاقات الزوجية", axis: 1, pillar: "التعلم" },
+        { id: 3, text: "حضرت أو أرغب بحضور دورات تثقيفية عن الزواج", axis: 1, pillar: "التعلم" },
+        { id: 4, text: "أستشير ذوي الخبرة والحكمة في شؤون الحياة الزوجية", axis: 1, pillar: "المشورة" },
+        { id: 5, text: "أسعى لفهم الآداب والضوابط الشرعية في العلاقة الزوجية", axis: 1, pillar: "الشرع" },
+        { id: 6, text: "أنتقي مصادر ثقافتي الزوجية من مصادر موثوقة وأصيلة", axis: 1, pillar: "المصادر" },
+        { id: 7, text: "أتجنب الثقافات الدخيلة والغريبة في العلاقات الزوجية", axis: 1, pillar: "المصادر" },
+
+        // Axis 2: فهم طبيعة الطرف الآخر (7 questions)
+        { id: 8, text: "أدرك أن المرأة كيان مختلف عن الرجل في التفكير والتعبير", axis: 2, pillar: "الفهم" },
+        { id: 9, text: "أفهم أن لغة المرأة قد تحمل معاني مختلفة عما تبدو عليه", axis: 2, pillar: "الفهم" },
+        { id: 10, text: "أعرف حقوق كل طرف وواجباته في العلاقة الزوجية", axis: 2, pillar: "الحقوق" },
+        { id: 11, text: "أتثقف في كيفية الإشباع العاطفي للطرف الآخر", axis: 2, pillar: "العاطفة" },
+        { id: 12, text: "أفهم أهمية التواصل الجيد والاستماع في العلاقة", axis: 2, pillar: "التواصل" },
+        { id: 13, text: "أعرف كيف أتعامل مع تقلبات الطرف الآخر النفسية", axis: 2, pillar: "التفهم" },
+        { id: 14, text: "أدرك أن العلاقة الخاصة تحتاج فهماً وتعلماً أيضاً", axis: 2, pillar: "العلاقة" },
+
+        // Axis 3: إدارة الحياة الزوجية (7 questions)
+        { id: 15, text: "أعرف كيفية إدارة المنزل وتنظيمه بشكل جيد", axis: 3, pillar: "المنزل" },
+        { id: 16, text: "أفهم كيفية التعامل مع العائلة الكبيرة (الأهل والنسايب)", axis: 3, pillar: "العائلة" },
+        { id: 17, text: "أعرف كيف أدير الميزانية والاقتصاد العائلي بحكمة", axis: 3, pillar: "الاقتصاد" },
+        { id: 18, text: "أميز بين الضروري والكمالي في المصاريف", axis: 3, pillar: "الاقتصاد" },
+        { id: 19, text: "أعرف كيف أتحاور وأتفاهم مع الطرف الآخر بفعالية", axis: 3, pillar: "الحوار" },
+        { id: 20, text: "أعرف كيف أدير الخلاف دون تصعيد المشكلة", axis: 3, pillar: "الخلاف" },
+        { id: 21, text: "أحافظ على أسرار بيتي ولا أفشي خصوصياتنا للآخرين", axis: 3, pillar: "الخصوصية" }
+    ];
+
+    // Advice Database - Based on the sermon teachings
+    const adviceDB = {
+        axis1: `
+            <span class="advice-title">💡 نصيحة لتحسين الوعي بالثقافة الزوجية:</span>
+            <p>الحياة الزوجية مزيج من الفطرة والخبرة. لا يكفي الاكتفاء بالفطرة فقط، بل أنت بحاجة للتعلم والتثقف:</p>
+            <span class="hadith-quote">"كما أنك تتعلم الحساب والرياضيات واللغة لتمشي أي جانب مهني في حياتك، هذا الجانب بحاجة إلى تعلم"</span>
+            <p><strong>وسائل التعلم:</strong></p>
+            <p>• <strong>الكتب:</strong> هناك كتب كثيرة مكتوبة في العلاقات الزوجية، سواء من إسلاميين أو من أهل الحكمة</p>
+            <p>• <strong>الدورات الثقافية:</strong> ابحث عن أناس ثقات من أهل الحكمة واخضع لدورات ثقافية - فكرة واحدة قد تنقذك وتنقذ أسرتك</p>
+            <p>• <strong>مشاورة ذوي الخبرة:</strong> لا تتحمل عبء الحياة وحدك، بل الجأ لمن هم من أهل الخبرة والمشورة</p>
+            <span class="hadith-quote">"الثقافة الزوجية هي في الحقيقة فرصة لتفاهم أكثر بين الزوجين ولحياة سعيدة أكثر"</span>
+        `,
+        axis2: `
+            <span class="advice-title">💡 نصيحة لتحسين فهم طبيعة الطرف الآخر:</span>
+            <p>المرأة كيان مختلف عن الرجل - صحيح شكلها مثل شكلنا لكنها كيان آخر:</p>
+            <span class="hadith-quote">"لغتها غير، كلامها غير، تصوراتها غير، عواطفها غير - من الضروري فهم الطرف الآخر"</span>
+            <p><strong>أمثلة على فهم لغة المرأة:</strong></p>
+            <p>• إذا قالت "ما أدري" فهي تقصد "ما أبي"</p>
+            <p>• إذا قالت "ولا مرة طلعتنا" فهي تقصد "أمس ما طلعتنا"</p>
+            <p>• إذا سألت "شنو رأيك بهذا المشروع؟" فهي تقصد "أنا أبي هذا المشروع"</p>
+            <p><strong>المجالات المهمة للتثقف:</strong></p>
+            <p>• معرفة الضوابط والآداب الشرعية في العلاقة بين الزوجين</p>
+            <p>• التثقف فيما يرتبط بالعلاقة الخاصة</p>
+            <p>• كيفية إدارة الخلاف إذا وقع بين الزوجين</p>
+            <span class="hadith-quote">"الإنسان الناجح هو الذي يفهم هذه المفاتيح وكيف يتعامل معها، والعاجز هو الذي لا يفهم"</span>
+        `,
+        axis3: `
+            <span class="advice-title">💡 نصيحة لتحسين إدارة الحياة الزوجية:</span>
+            <p><strong>إدارة المنزل:</strong></p>
+            <span class="hadith-quote">"أنتِ في المنزل في مملكتك، في المكان الذي يعكس شخصيتك - هناك فنون في إدارته ونظافته وترتيبه وجماله"</span>
+            <p><strong>التعامل مع العائلة الكبيرة:</strong></p>
+            <p>• جزء من المشاكل يبدأ عندما لا نعرف كيف نتعامل مع الأسرة الكبيرة</p>
+            <p>• كيف تكون العلاقة، إلى أي حدود، أي مسافة، الزيارة كيف تكون</p>
+            <p><strong>الاقتصاد العائلي:</strong></p>
+            <span class="hadith-quote">"جزء رئيسي من المشاكل الزوجية يبدأ عندما تكون متطلبات البيت كثيرة والزوج غير قادر على تحملها"</span>
+            <p>• راعِ ظروف الطرف الآخر المالية</p>
+            <p>• ميّز بين الضروري والكمالي</p>
+            <p>• أدر المصروف بحكمة</p>
+            <p><strong>فنون الحوار والتفاهم:</strong></p>
+            <p>• إذا عرفت كيف تتحاور مع شريك حياتك ستحقق أمنيتك في علاقة ناجحة</p>
+            <p>• الحوار الجيد يكون عن طريق حسن التفاهم والتعامل</p>
+        `
+    };
+
+    let currentPage = 0;
+    const totalPages = 5;
+
+    // Initialize
+    function init() {
+        renderQuestions();
+        updateProgressDots();
+    }
+
+    // Render Questions
+    function renderQuestions() {
+        questions.forEach(q => {
+            const html = `
+                <div class="question-row" id="qrow${q.id}">
+                    <div class="question-text">${q.id}. ${q.text}</div>
+                    <div class="options">
+                        ${[1,2,3,4,5].map(val => `
+                            <label>
+                                <input type="radio" name="q${q.id}" value="${val}" onchange="markAnswered(${q.id})">
+                                <span>${val}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            document.getElementById(`axis${q.axis}_questions`).insertAdjacentHTML('beforeend', html);
+        });
+    }
+
+    // Mark question as answered
+    function markAnswered(qId) {
+        document.getElementById(`qrow${qId}`).classList.add('answered');
+    }
+
+    // Navigation
+    function nextPage() {
+        if (currentPage > 0 && currentPage < totalPages - 1) {
+            if (!validatePage(currentPage)) {
+                return;
+            }
+        }
+        
+        if (currentPage < totalPages - 1) {
+            document.getElementById(`page${currentPage}`).classList.remove('active');
+            currentPage++;
+            document.getElementById(`page${currentPage}`).classList.add('active');
+            updateProgressDots();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+
+    function prevPage() {
+        if (currentPage > 0) {
+            document.getElementById(`page${currentPage}`).classList.remove('active');
+            currentPage--;
+            document.getElementById(`page${currentPage}`).classList.add('active');
+            updateProgressDots();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+
+    function goToPage(pageNum) {
+        document.getElementById(`page${currentPage}`).classList.remove('active');
+        currentPage = pageNum;
+        document.getElementById(`page${currentPage}`).classList.add('active');
+        updateProgressDots();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Update progress dots
+    function updateProgressDots() {
+        for (let i = 0; i < totalPages; i++) {
+            const dot = document.getElementById(`dot${i}`);
+            dot.classList.remove('active', 'completed');
+            
+            if (i < currentPage) {
+                dot.classList.add('completed');
+            } else if (i === currentPage) {
+                dot.classList.add('active');
+            }
+        }
+    }
+
+    // Validate page questions
+    function validatePage(pageNum) {
+        let startQ, endQ;
+        
+        if (pageNum === 1) { startQ = 1; endQ = 7; }
+        else if (pageNum === 2) { startQ = 8; endQ = 14; }
+        else if (pageNum === 3) { startQ = 15; endQ = 21; }
+        else return true;
+
+        for (let i = startQ; i <= endQ; i++) {
+            const radios = document.getElementsByName(`q${i}`);
+            let answered = false;
+            for (const r of radios) {
+                if (r.checked) { answered = true; break; }
+            }
+            if (!answered) {
+                alert(`الرجاء الإجابة على السؤال رقم ${i}`);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Calculate Results
+    function calculateResults() {
+        // Validate all pages
+        for (let p = 1; p <= 3; p++) {
+            if (!validatePage(p)) {
+                goToPage(p);
+                return;
+            }
+        }
+
+        let scores = { axis1: 0, axis2: 0, axis3: 0, total: 0 };
+        let maxScores = { axis1: 35, axis2: 35, axis3: 35, total: 105 }; // 7*5=35 per axis
+
+        // Calculate scores
+        for (let i = 1; i <= 21; i++) {
+            const radios = document.getElementsByName(`q${i}`);
+            let val = 0;
+            for (const r of radios) if (r.checked) val = parseInt(r.value);
+            
+            if (i <= 7) scores.axis1 += val;
+            else if (i <= 14) scores.axis2 += val;
+            else scores.axis3 += val;
+        }
+
+        scores.total = scores.axis1 + scores.axis2 + scores.axis3;
+
+        // Calculate Percentages
+        const pct = {
+            axis1: (scores.axis1 / maxScores.axis1) * 100,
+            axis2: (scores.axis2 / maxScores.axis2) * 100,
+            axis3: (scores.axis3 / maxScores.axis3) * 100,
+            total: (scores.total / maxScores.total) * 100
+        };
+
+        // Display Total
+        document.getElementById('finalScore').innerText = pct.total.toFixed(0) + "%";
+        
+        let message = "";
+        if (pct.total >= 80) {
+            message = "<strong style='color: #198754;'>ممتاز! 🌟</strong><br>ثقافتك الزوجية ممتازة، استمر في التعلم والتطوير.";
+        } else if (pct.total >= 60) {
+            message = "<strong style='color: #ffc107;'>جيد 👍</strong><br>لديك أساس جيد مع فرص للتحسين في بعض الجوانب.";
+        } else if (pct.total >= 40) {
+            message = "<strong style='color: #fd7e14;'>مقبول ⚠️</strong><br>تحتاج لبذل المزيد من الجهد في التثقف. راجع النصائح أدناه.";
+        } else {
+            message = "<strong style='color: #dc3545;'>يحتاج تحسين كبير 💪</strong><br>ابدأ رحلة التعلم الآن. راجع النصائح أدناه.";
+        }
+        document.getElementById('finalMessage').innerHTML = message;
+
+        // Update Axis UI
+        updateAxisUI(1, pct.axis1);
+        updateAxisUI(2, pct.axis2);
+        updateAxisUI(3, pct.axis3);
+
+        // Show results page
+        goToPage(4);
+    }
+
+    function updateAxisUI(axisNum, percentage) {
+        const bar = document.getElementById(`barAxis${axisNum}`);
+        const text = document.getElementById(`scoreAxis${axisNum}`);
+        const adviceDiv = document.getElementById(`adviceAxis${axisNum}`);
+        
+        text.innerText = percentage.toFixed(0) + "%";
+        
+        setTimeout(() => {
+            bar.style.width = percentage + "%";
+        }, 100);
+        
+        // Color coding
+        if (percentage >= 80) {
+            bar.style.backgroundColor = "#198754";
+        } else if (percentage >= 60) {
+            bar.style.backgroundColor = "#ffc107";
+        } else if (percentage >= 40) {
+            bar.style.backgroundColor = "#fd7e14";
+        } else {
+            bar.style.backgroundColor = "#dc3545";
+        }
+
+        // Show Advice if < 60%
+        if (percentage < 60) {
+            adviceDiv.innerHTML = adviceDB[`axis${axisNum}`];
+            adviceDiv.style.display = "block";
+        } else {
+            adviceDiv.style.display = "none";
+        }
+    }
+
+    // Restart Assessment
+    function restartAssessment() {
+        // Reset all radio buttons
+        for (let i = 1; i <= 21; i++) {
+            const radios = document.getElementsByName(`q${i}`);
+            for (const r of radios) r.checked = false;
+            document.getElementById(`qrow${i}`).classList.remove('answered');
+        }
+        
+        // Reset progress bars
+        for (let i = 1; i <= 3; i++) {
+            document.getElementById(`barAxis${i}`).style.width = "0%";
+            document.getElementById(`adviceAxis${i}`).style.display = "none";
+        }
+        
+        // Go to intro page
+        goToPage(0);
+    }
+
+    // Initialize on load
+    init();
+</script>
+
+
+
+<!-- Floating tools -->
+  <div class="tools" aria-label="أدوات">
+    <button class="fab" type="button" onclick="togglePanel()" aria-label="فتح الأدوات">⚙️</button>
+    <div class="panel" id="panel" hidden>
+      <div class="grid">
+        <button class="tbtn" type="button" onclick="toggleTheme()">🌙 الوضع</button>
+        <button class="tbtn" type="button" onclick="exportText()">📄 تقرير</button>
+        <button class="tbtn" type="button" onclick="resetAnswers()">🧹 تفريغ</button>
+        <button class="tbtn" type="button" onclick="saveProgress()">💾 حفظ</button>
+        <button class="tbtn" type="button" onclick="loadProgress()">📥 تحميل</button>
+        <button class="tbtn" type="button" onclick="clearSaved()">🗑️ مسح</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+<script>
+  (function(){
+    const THEME_KEY = 'squaredoo_theme';
+    const PROGRESS_KEY = 'squaredoo_progress:' + (location.pathname || '');
+
+    function toast(msg){
+      const el = document.getElementById('toast');
+      if (!el) return;
+      el.textContent = msg;
+      el.classList.add('show');
+      clearTimeout(el._t);
+      el._t = setTimeout(() => el.classList.remove('show'), 2200);
+    }
+
+    // Expose globally (matches الزوج/الزوجة)
+    window.togglePanel = function togglePanel(){
+      const p = document.getElementById('panel');
+      if (!p) return;
+      p.hidden = !p.hidden;
+    };
+
+    window.toggleTheme = function toggleTheme(){
+      document.body.classList.toggle('dark');
+      const isDark = document.body.classList.contains('dark');
+      try{ localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light'); }catch(e){}
+      toast(isDark ? 'تم تفعيل الوضع الداكن' : 'تم إلغاء الوضع الداكن');
+    };
+
+    window.saveProgress = function saveProgress(){
+      try{
+        const data = collectFormState();
+        const activePage = document.querySelector('.page.active');
+        data.activePageId = activePage ? activePage.id : null;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(data));
+        toast('تم حفظ التقدم');
+      }catch(e){
+        toast('تعذر الحفظ');
+      }
+    };
+
+    window.loadProgress = function loadProgress(){
+      try{
+        const raw = localStorage.getItem(PROGRESS_KEY);
+        if (!raw){ toast('لا يوجد حفظ سابق'); return; }
+        const data = JSON.parse(raw);
+        applyFormState(data);
+        // Navigate back to the saved page if possible
+        if (data.activePageId){
+          const m = String(data.activePageId).match(/page(\d+)/i);
+          const idx = m ? parseInt(m[1],10) : null;
+          if (typeof window.goToPage === 'function' && Number.isFinite(idx)){
+            window.goToPage(idx);
+          } else {
+            activatePageById(data.activePageId);
+          }
+        }
+        toast('تم تحميل التقدم');
+      }catch(e){
+        toast('تعذر التحميل');
+      }
+    };
+
+    window.clearSaved = function clearSaved(){
+      try{
+        localStorage.removeItem(PROGRESS_KEY);
+        toast('تم مسح الحفظ');
+      }catch(e){
+        toast('تعذر المسح');
+      }
+    };
+
+    window.resetAnswers = function resetAnswers(){
+      // Clear inputs
+      document.querySelectorAll('input[type="radio"],input[type="checkbox"]').forEach(i => { i.checked = false; });
+      document.querySelectorAll('textarea, input[type="text"], input[type="number"]').forEach(i => { i.value = ''; });
+      // If the page code has a reset function, call it (non-breaking)
+      if (typeof window.init === 'function') {
+        try{ window.init(); }catch(e){}
+      }
+      if (typeof window.goToPage === 'function') {
+        try{ window.goToPage(0); }catch(e){}
+      } else {
+        activatePageById('page0');
+      }
+      try{ localStorage.removeItem(PROGRESS_KEY); }catch(e){}
+      toast('تم تفريغ الإجابات');
+    };
+
+    window.exportText = function exportText(){
+      const title = document.title || 'تقييم';
+      const when = new Date().toLocaleString('ar-KW');
+      let txt = `${title}\n${location.href}\n${when}\n\n`;
+
+      const results = document.querySelector('#resultsPage, #pageResults, .results, .result, #results, .result-page');
+      if (results){
+        txt += results.innerText.trim() + '\n';
+      } else {
+        // Best-effort: list checked answers
+        const lines = [];
+        const checked = Array.from(document.querySelectorAll('input[type="radio"]:checked, input[type="checkbox"]:checked'));
+        checked.forEach(inp => {
+          const label = document.querySelector(`label[for="${CSS.escape(inp.id)}"]`);
+          const val = label ? label.innerText.trim() : (inp.value || inp.name || inp.id);
+          lines.push(`- ${val}`);
+        });
+        if (lines.length){
+          txt += 'الإجابات المحددة:\n' + lines.join('\n') + '\n';
+        } else {
+          txt += 'لم يتم العثور على تقرير تلقائي هنا.\n';
+        }
+      }
+
+      try{
+        navigator.clipboard.writeText(txt).then(() => toast('تم نسخ التقرير'));
+      }catch(e){
+        // Fallback
+        const ta = document.createElement('textarea');
+        ta.value = txt;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+        toast('تم نسخ التقرير');
+      }
+    };
+
+    function collectFormState(){
+      const inputs = [];
+      document.querySelectorAll('input, textarea, select').forEach(el => {
+        if (!el.name && !el.id) return;
+        const item = {
+          id: el.id || null,
+          name: el.name || null,
+          type: el.type || el.tagName.toLowerCase(),
+          value: (el.type === 'checkbox' || el.type === 'radio') ? el.checked : el.value
+        };
+        inputs.push(item);
+      });
+      return { inputs };
+    }
+
+    function applyFormState(data){
+      if (!data || !Array.isArray(data.inputs)) return;
+      data.inputs.forEach(item => {
+        let el = null;
+        if (item.id) el = document.getElementById(item.id);
+        if (!el && item.name){
+          // try find by name and value
+          const candidates = document.querySelectorAll(`[name="${CSS.escape(item.name)}"]`);
+          if (candidates.length === 1) el = candidates[0];
+          if (!el && candidates.length > 1 && (item.type === 'radio' || item.type === 'checkbox')){
+            // best effort: match checked state by value if possible
+            candidates.forEach(c => {
+              if (c.value === item.value) el = c;
+            });
+          }
+        }
+        if (!el) return;
+        if (el.type === 'checkbox' || el.type === 'radio'){
+          el.checked = !!item.value;
+          el.dispatchEvent(new Event('change', {bubbles:true}));
+        } else {
+          el.value = item.value ?? '';
+          el.dispatchEvent(new Event('input', {bubbles:true}));
+        }
+      });
+    }
+
+    function activatePageById(id){
+      if (!id) return;
+      const pages = Array.from(document.querySelectorAll('.page'));
+      if (!pages.length) return;
+      pages.forEach(p => p.classList.remove('active'));
+      const target = document.getElementById(id);
+      if (target) target.classList.add('active');
+    }
+
+    // Close tools panel on outside click
+    document.addEventListener('click', (e) => {
+      const panel = document.getElementById('panel');
+      const tools = document.querySelector('.tools');
+      if (!panel || panel.hidden) return;
+      if (!tools) return;
+      if (!tools.contains(e.target)) {
+        panel.hidden = true;
+      }
+    });
+
+    // Apply saved theme on load
+    try{
+      const t = localStorage.getItem(THEME_KEY);
+      if (t === 'dark') document.body.classList.add('dark');
+    }catch(e){}
+  })();
+</script>
+
+</body>
+</html>

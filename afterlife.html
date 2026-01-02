@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/apple-touch-icon-120x120-precomposed.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>هل أنت مستعد للرحيل؟ | بوابة التقييم الذاتي</title>
+  <meta name="description" content="تقييم ذاتي يساعدك على مراجعة استعدادك للقاء الله تعالى عبر محاور عملية في العبادة والأخلاق والحقوق.">
+    <style>
+        :root {
+            --primary-color: #1a5f4a;
+            --secondary-color: #c9a227;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333;
+            --success-color: #198754;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e8f5e9 0%, #fff8e1 50%, #e0f2f1 100%);
+            color: var(--text-color);
+            margin: 0;
+            padding: 15px;
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(26, 95, 74, 0.15);
+        }
+
+        h1, h2, h3 { text-align: center; color: var(--primary-color); }
+        
+        h1 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        /* Page System */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Introduction Page */
+        .intro-icon {
+            font-size: 4em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .intro-text {
+            background: linear-gradient(135deg, #e8f5e9, #fff8e1);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-right: 4px solid var(--primary-color);
+        }
+
+        .intro-text p {
+            margin: 10px 0;
+        }
+
+        .verse-box {
+            background: linear-gradient(135deg, #1a5f4a, #2e7d64);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 2;
+        }
+
+        .intro-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .intro-list li {
+            padding: 10px 15px;
+            margin: 8px 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .intro-list li::before {
+            content: "🌙 ";
+        }
+
+        /* Video Section */
+        .video-section {
+            margin: 25px 0;
+        }
+
+        .video-link-card {
+            display: block;
+            text-decoration: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .video-link-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .video-thumbnail img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: auto;
+            min-height: 100%;
+            object-fit: cover;
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s;
+        }
+
+        .video-link-card:hover .play-button {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .play-button svg {
+            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3));
+        }
+
+        .video-info {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, var(--primary-color), #2e7d64);
+            color: white;
+        }
+
+        .video-icon-small {
+            font-size: 1.3em;
+            margin-left: 10px;
+        }
+
+        .video-text {
+            flex: 1;
+            font-weight: bold;
+            font-size: 1em;
+        }
+
+        .external-icon {
+            font-size: 1.2em;
+            opacity: 0.8;
+        }
+
+        /* Progress Indicator */
+        .progress-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 25px 0;
+        }
+
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            transition: all 0.3s;
+        }
+
+        .progress-dot.active {
+            background: var(--primary-color);
+            transform: scale(1.3);
+        }
+
+        .progress-dot.completed {
+            background: var(--success-color);
+        }
+
+        /* Section Title */
+        .section-title {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.1em;
+            box-shadow: 0 4px 15px rgba(26, 95, 74, 0.3);
+        }
+
+        .section-description {
+            text-align: center;
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+
+        /* Question Styling */
+        .question-row {
+            padding: 20px;
+            background: #fafafa;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #eee;
+            transition: all 0.3s;
+        }
+
+        .question-row:hover {
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .question-row.answered {
+            border-color: var(--success-color);
+            background: #f0fff4;
+        }
+
+        .question-text {
+            font-weight: 500;
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+
+        .options {
+            display: flex;
+            justify-content: space-between;
+            gap: 5px;
+        }
+
+        .options label {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 8px;
+            border-radius: 10px;
+            transition: all 0.3s;
+            flex: 1;
+            text-align: center;
+        }
+
+        .options label:hover {
+            background: #e8f5e9;
+        }
+
+        .options input {
+            margin-bottom: 8px;
+            accent-color: var(--primary-color);
+            transform: scale(1.3);
+        }
+
+        .options span {
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        .option-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8em;
+            color: #888;
+            margin-top: 10px;
+            padding: 0 5px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), #2e7d64);
+            color: white;
+            box-shadow: 0 4px 20px rgba(26, 95, 74, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(26, 95, 74, 0.5);
+        }
+
+        .btn-secondary {
+            background: #e9ecef;
+            color: #495057;
+        }
+
+        .btn-secondary:hover {
+            background: #dee2e6;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        /* Results Page */
+        .result-score-circle {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 30px auto;
+            color: white;
+            box-shadow: 0 10px 30px rgba(26, 95, 74, 0.3);
+        }
+
+        .result-score-circle .score {
+            font-size: 3em;
+            font-weight: bold;
+        }
+
+        .result-score-circle .label {
+            font-size: 1em;
+        }
+
+        .result-message {
+            text-align: center;
+            font-size: 1.2em;
+            padding: 20px;
+            background: linear-gradient(135deg, #e8f5e9, #fff8e1);
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        /* Axis Results */
+        .axis-result {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .axis-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .axis-title {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .axis-score {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .progress-bar-bg {
+            background: #e0e0e0;
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 1s ease;
+            width: 0%;
+        }
+
+        /* Advice Box */
+        .advice-box {
+            display: none;
+            background: linear-gradient(135deg, #fff8e1, #e8f5e9);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 15px;
+            border-right: 4px solid var(--secondary-color);
+        }
+
+        .advice-title {
+            display: block;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .hadith-quote {
+            display: block;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-style: italic;
+            color: #1a5f4a;
+            border-right: 3px solid var(--secondary-color);
+        }
+
+        .hadith-source {
+            display: block;
+            text-align: left;
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 5px;
+            font-style: normal;
+        }
+
+        /* Level Badge */
+        .level-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .level-1 { background: #198754; color: white; }
+        .level-2 { background: #ffc107; color: #333; }
+        .level-3 { background: #fd7e14; color: white; }
+        .level-4 { background: #dc3545; color: white; }
+
+        /* Footer */
+        .footer-note {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 20px; }
+            h1 { font-size: 1.5em; }
+            .options span { font-size: 0.75em; }
+            .result-score-circle { width: 150px; height: 150px; }
+            .result-score-circle .score { font-size: 2.5em; }
+        }
+
+/* === Floating tools (copied from الزوج/الزوجة) === */
+
+/* Unified theme variables (match الزوج/الزوجة) */
+:root{
+  --primary:#0d6efd;
+  --primary-2:#6f42c1;
+  --bg:#f6f8fb;
+  --card:#ffffff;
+  --text:#111827;
+  --muted:#6b7280;
+  --shadow:0 18px 55px rgba(0,0,0,0.10);
+}
+body{background:var(--bg); color:var(--text);}
+.container{background:rgba(255,255,255,0.55);}
+.tools{
+      position:fixed;
+      bottom:16px;
+      right:16px;
+      z-index:1200;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:flex-end;
+    }
+.fab{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      border:none;
+      cursor:pointer;
+      font-size:20px;
+      color:white;
+      background:linear-gradient(135deg,var(--primary), #6f42c1);
+      box-shadow:0 12px 25px rgba(0,0,0,0.18);
+    }
+.panel{
+      width:220px;
+      background:rgba(255,255,255,0.96);
+      border:1px solid rgba(0,0,0,0.10);
+      border-radius:16px;
+      padding:10px;
+      box-shadow:0 16px 30px rgba(0,0,0,0.14);
+      backdrop-filter:blur(6px);
+    }
+.grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+    }
+.tbtn{
+      border:1px solid rgba(0,0,0,0.12);
+      background:#fff;
+      border-radius:12px;
+      padding:10px 8px;
+      cursor:pointer;
+      font-weight:900;
+      font-size:13px;
+    }
+.toast{
+      position:fixed;
+      bottom:16px;
+      left:16px;
+      background:rgba(33,37,41,0.95);
+      color:white;
+      padding:12px 16px;
+      border-radius:14px;
+      font-weight:bold;
+      transform:translateY(100px);
+      opacity:0;
+      transition:all 0.25s ease;
+      z-index:1000;
+      max-width:85vw;
+    }
+
+/* Alias for assessments that use progress-indicator instead of progress-dots */
+.progress-indicator{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin:8px 0 18px;
+}
+.progress-indicator .progress-dot{
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:rgba(0,0,0,0.15);
+  transition:transform .2s ease, background .2s ease;
+}
+body.dark .progress-indicator .progress-dot{background:rgba(255,255,255,0.22);}
+.progress-indicator .progress-dot.active{
+  background:linear-gradient(135deg,var(--primary), #6f42c1);
+  transform:scale(1.15);
+}
+
+/* Dark mode fixes */
+    body.dark{
+      background:#0b1220 !important;
+      color:#e5e7eb !important;
+    }
+    body.dark .container{
+      background:rgba(2,6,23,0.72) !important;
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    body.dark h1, body.dark h2{color:#93c5fd;}
+    body.dark h3{color:#cbd5e1;}
+
+    body.dark .intro-text,
+    body.dark .axis-intro-item,
+    body.dark .question-row,
+    body.dark .axis-result,
+    body.dark .result-card,
+    body.dark .tips-section,
+    body.dark .promise-container,
+    body.dark .video-card,
+    body.dark .pillar-item{
+      background:rgba(255,255,255,0.06) !important;
+      border-color:rgba(255,255,255,0.10) !important;
+      color:#e5e7eb !important;
+    }
+
+    body.dark .tip-card.good{
+      background:rgba(25,135,84,0.14) !important;
+    }
+    body.dark .tip-card.medium{
+      background:rgba(255,193,7,0.16) !important;
+    }
+    body.dark .tip-card.low{
+      background:rgba(220,53,69,0.14) !important;
+    }
+
+    body.dark .sub-section-title{
+      background:linear-gradient(135deg, rgba(147,197,253,0.14), rgba(196,181,253,0.12));
+      border-color:rgba(255,255,255,0.10);
+      color:#e5e7eb;
+    }
+
+    body.dark .options label{
+      background:rgba(255,255,255,0.06);
+      border-color:rgba(255,255,255,0.14);
+      color:#e5e7eb;
+    }
+    body.dark .options label:hover{
+      background:rgba(147,197,253,0.10);
+      border-color:rgba(147,197,253,0.25);
+    }
+
+    body.dark textarea{
+      background:rgba(255,255,255,0.06);
+      border-color:rgba(255,255,255,0.16);
+      color:#e5e7eb;
+    }
+
+    body.dark .suggestion-item{
+      background:rgba(255,255,255,0.06);
+      border-color:rgba(255,255,255,0.12);
+      color:#e5e7eb;
+    }
+
+    body.dark .panel{
+      background:rgba(2,6,23,0.90);
+      border-color:rgba(255,255,255,0.10);
+      color:#e5e7eb;
+    }
+    body.dark .tbtn{
+      background:rgba(255,255,255,0.06);
+      border-color:rgba(255,255,255,0.12);
+      color:#e5e7eb;
+    }
+ 
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MFBM0K072V"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MFBM0K072V');
+</script>
+
+  <link rel="canonical" href="https://squaredoo.netlify.app/afterlife">
+  <meta name="robots" content="index,follow">
+  <meta property="og:locale" content="ar_AR">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="بوابة التقييم الذاتي">
+  <meta property="og:title" content="هل أنت مستعد للرحيل؟ | بوابة التقييم الذاتي">
+  <meta property="og:description" content="تقييم ذاتي يساعدك على مراجعة استعدادك للقاء الله تعالى عبر محاور عملية في العبادة والأخلاق والحقوق.">
+  <meta property="og:url" content="https://squaredoo.netlify.app/afterlife">
+  <meta property="og:image" content="https://squaredoo.netlify.app/apple-touch-icon-180x180.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="هل أنت مستعد للرحيل؟ | بوابة التقييم الذاتي">
+  <meta name="twitter:description" content="تقييم ذاتي يساعدك على مراجعة استعدادك للقاء الله تعالى عبر محاور عملية في العبادة والأخلاق والحقوق.">
+  <meta name="twitter:image" content="https://squaredoo.netlify.app/apple-touch-icon-180x180.png">
+</head>
+<body>
+
+<div class="container">
+    <!-- Progress Dots -->
+    <div class="progress-indicator">
+        <div class="progress-dot active" id="dot0"></div>
+        <div class="progress-dot" id="dot1"></div>
+        <div class="progress-dot" id="dot2"></div>
+        <div class="progress-dot" id="dot3"></div>
+        <div class="progress-dot" id="dot4"></div>
+        <div class="progress-dot" id="dot5"></div>
+        <div class="progress-dot" id="dot6"></div>
+    </div>
+
+    <!-- Page 0: Introduction -->
+    <div class="page active" id="page0">
+        <div class="intro-icon">🕯️</div>
+        <h1>الاستعداد للرحيل عن الدنيا</h1>
+        <h3>تقييم ذاتي شامل</h3>
+
+        <div class="verse-box">
+            ﴿ يَا أَيَّتُهَا النَّفْسُ الْمُطْمَئِنَّةُ ۝ ارْجِعِي إِلَىٰ رَبِّكِ رَاضِيَةً مَّرْضِيَّةً ۝ فَادْخُلِي فِي عِبَادِي ۝ وَادْخُلِي جَنَّتِي ﴾
+        </div>
+
+        <div class="intro-text">
+            <p><strong>ماذا لو دُعيت للرحيل عن هذه الحياة الدنيا؟</strong></p>
+            <p>ماذا لو نادى المنادي وقال: قد انتهت المدة وانتهت الفرصة، أما الآن فموعد الرحيل عن كل ما في هذه الدنيا وما تعلقت به...</p>
+            <p><strong>هل أنت مستعد لهذا الرحيل؟</strong></p>
+        </div>
+
+        <!-- Video Section -->
+        <div class="video-section">
+            <a href="https://youtu.be/ndogz2ypQlM?si=q1t0IQKGb-Y56sVZ" target="_blank" class="video-link-card">
+                <div class="video-thumbnail">
+                    <img src="https://img.youtube.com/vi/ndogz2ypQlM/maxresdefault.jpg" alt="خطبة الاستعداد للرحيل عن الدنيا">
+                    <div class="play-button">
+                        <svg viewBox="0 0 68 48" width="68" height="48">
+                            <path class="play-bg" d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#f00"></path>
+                            <path d="M 45,24 27,14 27,34" fill="#fff"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <span class="video-icon-small">🎬</span>
+                    <span class="video-text">شاهد الخطبة كاملة (اختياري)</span>
+                    <span class="external-icon">↗</span>
+                </div>
+            </a>
+        </div>
+
+        <ul class="intro-list">
+            <li>المحور الأول: الوعي بحقيقة الموت والرحيل</li>
+            <li>المحور الثاني: حقوق الناس (المادية والمعنوية)</li>
+            <li>المحور الثالث: حقوق الله تعالى</li>
+            <li>المحور الرابع: الوصية وتنظيم الأمور</li>
+            <li>المحور الخامس: العمل الصالح والصدقة الجارية</li>
+        </ul>
+
+        <div class="btn-container">
+            <button class="btn btn-primary" onclick="nextPage()">ابدأ التقييم ←</button>
+        </div>
+    </div>
+
+    <!-- Page 1: Axis 1 - الوعي بحقيقة الموت -->
+    <div class="page" id="page1">
+        <div class="section-title">🌙 المحور الأول: الوعي بحقيقة الموت</div>
+        <div class="section-description">
+            "كل نفس ذائقة الموت" - الرحيل حقيقة حتمية لا مفر منها
+        </div>
+        <div class="option-labels">
+            <span>أبداً ❌</span>
+            <span>دائماً ✓</span>
+        </div>
+        <div id="axis1_questions"></div>
+
+        <div class="btn-container">
+            <button class="btn btn-secondary" onclick="prevPage()">→ السابق</button>
+            <button class="btn btn-primary" onclick="nextPage()">التالي ←</button>
+        </div>
+    </div>
+
+    <!-- Page 2: Axis 2 - حقوق الناس -->
+    <div class="page" id="page2">
+        <div class="section-title">⚖️ المحور الثاني: حقوق الناس</div>
+        <div class="section-description">
+            "اليوم التصافي سهل، غداً بالحسنات والدرجات"
+        </div>
+        <div class="option-labels">
+            <span>أبداً ❌</span>
+            <span>دائماً ✓</span>
+        </div>
+        <div id="axis2_questions"></div>
+
+        <div class="btn-container">
+            <button class="btn btn-secondary" onclick="prevPage()">→ السابق</button>
+            <button class="btn btn-primary" onclick="nextPage()">التالي ←</button>
+        </div>
+    </div>
+
+    <!-- Page 3: Axis 3 - حقوق الله -->
+    <div class="page" id="page3">
+        <div class="section-title">🤲 المحور الثالث: حقوق الله تعالى</div>
+        <div class="section-description">
+            "تعال وقابل الله وهو راضٍ عنك"
+        </div>
+        <div class="option-labels">
+            <span>أبداً ❌</span>
+            <span>دائماً ✓</span>
+        </div>
+        <div id="axis3_questions"></div>
+
+        <div class="btn-container">
+            <button class="btn btn-secondary" onclick="prevPage()">→ السابق</button>
+            <button class="btn btn-primary" onclick="nextPage()">التالي ←</button>
+        </div>
+    </div>
+
+    <!-- Page 4: Axis 4 - الوصية -->
+    <div class="page" id="page4">
+        <div class="section-title">📜 المحور الرابع: الوصية وتنظيم الأمور</div>
+        <div class="section-description">
+            "لا ينبغي لامرئ مسلم أن يبيت ليلة إلا ووصيته تحت رأسه"
+        </div>
+        <div class="option-labels">
+            <span>أبداً ❌</span>
+            <span>دائماً ✓</span>
+        </div>
+        <div id="axis4_questions"></div>
+
+        <div class="btn-container">
+            <button class="btn btn-secondary" onclick="prevPage()">→ السابق</button>
+            <button class="btn btn-primary" onclick="nextPage()">التالي ←</button>
+        </div>
+    </div>
+
+    <!-- Page 5: Axis 5 - العمل الصالح -->
+    <div class="page" id="page5">
+        <div class="section-title">🌱 المحور الخامس: العمل الصالح والصدقة الجارية</div>
+        <div class="section-description">
+            "إذا مات ابن آدم انقطع عمله إلا من ثلاث: صدقة جارية، أو علم ينتفع به، أو ولد صالح يدعو له"
+        </div>
+        <div class="option-labels">
+            <span>أبداً ❌</span>
+            <span>دائماً ✓</span>
+        </div>
+        <div id="axis5_questions"></div>
+
+        <div class="btn-container">
+            <button class="btn btn-secondary" onclick="prevPage()">→ السابق</button>
+            <button class="btn btn-primary" onclick="calculateResults()">عرض النتائج 📊</button>
+        </div>
+    </div>
+
+    <!-- Page 6: Results -->
+    <div class="page" id="page6">
+        <h1>📊 نتائج التقييم</h1>
+
+        <div class="result-score-circle">
+            <span class="score" id="finalScore">0%</span>
+            <span class="label">درجة الاستعداد</span>
+        </div>
+
+        <div class="result-message" id="finalMessage"></div>
+
+        <div id="levelBadge" style="text-align: center;"></div>
+
+        <!-- Axis Results -->
+        <div class="axis-result">
+            <div class="axis-header">
+                <span class="axis-title">🌙 الوعي بحقيقة الموت</span>
+                <span class="axis-score" id="scoreAxis1">0%</span>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="barAxis1"></div>
+            </div>
+            <div class="advice-box" id="adviceAxis1"></div>
+        </div>
+
+        <div class="axis-result">
+            <div class="axis-header">
+                <span class="axis-title">⚖️ حقوق الناس</span>
+                <span class="axis-score" id="scoreAxis2">0%</span>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="barAxis2"></div>
+            </div>
+            <div class="advice-box" id="adviceAxis2"></div>
+        </div>
+
+        <div class="axis-result">
+            <div class="axis-header">
+                <span class="axis-title">🤲 حقوق الله تعالى</span>
+                <span class="axis-score" id="scoreAxis3">0%</span>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="barAxis3"></div>
+            </div>
+            <div class="advice-box" id="adviceAxis3"></div>
+        </div>
+
+        <div class="axis-result">
+            <div class="axis-header">
+                <span class="axis-title">📜 الوصية وتنظيم الأمور</span>
+                <span class="axis-score" id="scoreAxis4">0%</span>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="barAxis4"></div>
+            </div>
+            <div class="advice-box" id="adviceAxis4"></div>
+        </div>
+
+        <div class="axis-result">
+            <div class="axis-header">
+                <span class="axis-title">🌱 العمل الصالح</span>
+                <span class="axis-score" id="scoreAxis5">0%</span>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="barAxis5"></div>
+            </div>
+            <div class="advice-box" id="adviceAxis5"></div>
+        </div>
+
+        <div class="footer-note">
+            <p>﴿ رَبِّ ارْجِعُونِ ۝ لَعَلِّي أَعْمَلُ صَالِحًا فِيمَا تَرَكْتُ ﴾</p>
+            <p>الفرصة لا تزال أمامك... فبادر قبل فوات الأوان</p>
+        </div>
+
+        <div class="btn-container">
+            <button class="btn btn-primary" onclick="restartAssessment()">إعادة التقييم 🔄</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Questions Database
+    const questions = [
+        // Axis 1: الوعي بحقيقة الموت (4 questions)
+        { id: 1, axis: 1, text: "هل تتذكر الموت بشكل يومي وتستحضره في قلبك؟" },
+        { id: 2, axis: 1, text: "هل تشعر حقاً أن الموت قد يأتيك في أي لحظة دون سابق إنذار؟" },
+        { id: 3, axis: 1, text: "هل زيارة المقابر والجنازات تؤثر فيك وتغير سلوكك؟" },
+        { id: 4, axis: 1, text: "هل تعيش حياتك وكأنها قد تكون آخر يوم لك؟" },
+
+        // Axis 2: حقوق الناس (5 questions)
+        { id: 5, axis: 2, text: "هل أنت متأكد أنه لا يوجد أحد له حق مالي عليك (ديون، مظالم)؟" },
+        { id: 6, axis: 2, text: "هل بادرت بالاعتذار لكل من أسأت إليه بالقول أو الفعل؟" },
+        { id: 7, axis: 2, text: "هل تحرص على عدم اغتياب الناس وحفظ أعراضهم؟" },
+        { id: 8, axis: 2, text: "هل علاقتك مع أقاربك وأرحامك صافية بلا خصومات؟" },
+        { id: 9, axis: 2, text: "هل لو رحلت الآن ستكون مرتاح الضمير تجاه الجميع؟" },
+
+        // Axis 3: حقوق الله (5 questions)
+        { id: 10, axis: 3, text: "هل تحافظ على صلواتك الخمس في أوقاتها؟" },
+        { id: 11, axis: 3, text: "هل ليس عليك قضاء صلوات أو صيام فائت؟" },
+        { id: 12, axis: 3, text: "هل تؤدي حقوقك المالية الشرعية (الخمس/الزكاة) في وقتها؟" },
+        { id: 13, axis: 3, text: "هل تشعر أن الله راضٍ عنك لو لقيته الآن؟" },
+        { id: 14, axis: 3, text: "هل تبتعد عن الذنوب الكبيرة وتسارع للتوبة؟" },
+
+        // Axis 4: الوصية (4 questions)
+        { id: 15, axis: 4, text: "هل كتبت وصيتك وحددت فيها ما تريده بعد رحيلك؟" },
+        { id: 16, axis: 4, text: "هل نظمت شؤون عائلتك المالية (الورث، الممتلكات) لتجنب النزاعات؟" },
+        { id: 17, axis: 4, text: "هل وثّقت ديونك وحقوق الآخرين لديك كتابياً؟" },
+        { id: 18, axis: 4, text: "هل أوراقك ومستنداتك المهمة مرتبة ومعروفة لأهلك؟" },
+
+        // Axis 5: العمل الصالح (4 questions)
+        { id: 19, axis: 5, text: "هل لديك صدقة جارية مستمرة تنفع الناس وتبقى بعدك؟" },
+        { id: 20, axis: 5, text: "هل تساهم في نشر العلم النافع (دعم طلبة العلم، طباعة كتب، تعليم)؟" },
+        { id: 21, axis: 5, text: "هل تربي أولادك على الصلاح والدين ليكونوا ذخراً لك؟" },
+        { id: 22, axis: 5, text: "هل تستثمر وقتك ومالك في أعمال تبقى لك بعد موتك؟" }
+    ];
+
+    // Advice Database - مطعّم بروايات أهل البيت عليهم السلام
+    const adviceDB = {
+        axis1: `
+            <span class="advice-title">🌙 تذكّر الموت - من وصايا أهل البيت (عليهم السلام):</span>
+            
+            <p>قال أمير المؤمنين علي بن أبي طالب (عليه السلام):</p>
+            <span class="hadith-quote">"أَكْثِرُوا ذِكْرَ الْمَوْتِ، وَيَوْمَ خُرُوجِكُمْ مِنَ الْقُبُورِ، وَقِيَامِكُمْ بَيْنَ يَدَيِ اللهِ تَعَالَى، تَهُونُ عَلَيْكُمُ الْمَصَائِبُ"
+            <span class="hadith-source">- نهج البلاغة</span></span>
+            
+            <p>وقال الإمام جعفر الصادق (عليه السلام):</p>
+            <span class="hadith-quote">"ذِكْرُ الْمَوْتِ يُمِيتُ الشَّهَوَاتِ فِي النَّفْسِ، وَيَقْطَعُ مَنَابِتَ الْغَفْلَةِ، وَيُقَوِّي الْقَلْبَ بِمَوَاعِدِ اللهِ، وَيُرِقُّ الطَّبْعَ، وَيَكْسِرُ أَعْلَامَ الْهَوَى، وَيُطْفِئُ نَارَ الْحِرْصِ"
+            <span class="hadith-source">- الكافي</span></span>
+            
+            <p>وقال رسول الله (صلى الله عليه وآله):</p>
+            <span class="hadith-quote">"كَفَى بِالْمَوْتِ وَاعِظاً، وَكَفَى بِالْيَقِينِ غِنًى"
+            <span class="hadith-source">- بحار الأنوار</span></span>
+            
+            <p>وقال الإمام علي (عليه السلام):</p>
+            <span class="hadith-quote">"النَّاسُ نِيَامٌ فَإِذَا مَاتُوا انْتَبَهُوا"
+            <span class="hadith-source">- غرر الحكم</span></span>
+            
+            <p>ومن دعاء الإمام زين العابدين (عليه السلام) في الصحيفة السجادية:</p>
+            <span class="hadith-quote">"وَارْحَمْنِي صَرِيعاً عَلَى الْفِرَاشِ، تُقَلِّبُنِي أَيْدِي أَحِبَّتِي"
+            <span class="hadith-source">- الصحيفة السجادية</span></span>
+            
+            <p><strong>🔸 نصائح عملية:</strong></p>
+            <p>• زر المقابر كل جمعة واقرأ الفاتحة للمؤمنين<br>
+            • اجعل لك ورداً يومياً من دعاء أبي حمزة الثمالي<br>
+            • صلِّ صلاة الليل ولو ركعتين، وتذكر قيامك من قبرك<br>
+            • اسأل نفسك كل ليلة: لو قُبضت الآن، هل أنا مستعد؟</p>
+        `,
+        axis2: `
+            <span class="advice-title">⚖️ حقوق الناس - من هدي أهل البيت (عليهم السلام):</span>
+            
+            <p>قال رسول الله (صلى الله عليه وآله):</p>
+            <span class="hadith-quote">"مَنْ كَانَتْ عِنْدَهُ مَظْلِمَةٌ لِأَخِيهِ مِنْ عِرْضِهِ أَوْ مَالِهِ فَلْيَتَحَلَّلْهُ مِنْهُ الْيَوْمَ قَبْلَ أَنْ لَا يَكُونَ دِينَارٌ وَلَا دِرْهَمٌ، إِنْ كَانَ لَهُ عَمَلٌ صَالِحٌ أُخِذَ مِنْهُ بِقَدْرِ مَظْلِمَتِهِ، وَإِنْ لَمْ يَكُنْ لَهُ حَسَنَاتٌ أُخِذَ مِنْ سَيِّئَاتِ صَاحِبِهِ فَحُمِلَ عَلَيْهِ"
+            <span class="hadith-source">- الكافي</span></span>
+            
+            <p>وقال أمير المؤمنين (عليه السلام):</p>
+            <span class="hadith-quote">"أَشَدُّ الذُّنُوبِ مَا اسْتَخَفَّ بِهِ صَاحِبُهُ"
+            <span class="hadith-source">- نهج البلاغة</span></span>
+            
+            <p>وعن الإمام محمد الباقر (عليه السلام):</p>
+            <span class="hadith-quote">"إِنَّ الْعَبْدَ لَيُحْبَسُ عَلَى بَابِ الْجَنَّةِ أَرْبَعِينَ سَنَةً بِالْمَظْلِمَةِ تَكُونُ عَلَيْهِ"
+            <span class="hadith-source">- الكافي</span></span>
+            
+            <p>وقال الإمام الصادق (عليه السلام) في الغيبة:</p>
+            <span class="hadith-quote">"الْغِيبَةُ أَنْ تَقُولَ فِي أَخِيكَ مَا سَتَرَهُ اللهُ عَلَيْهِ، وَالْبُهْتَانُ أَنْ تَقُولَ فِيهِ مَا لَيْسَ فِيهِ"
+            <span class="hadith-source">- الكافي</span></span>
+            
+            <p>وقال رسول الله (صلى الله عليه وآله) في صلة الرحم:</p>
+            <span class="hadith-quote">"الرَّحِمُ مُعَلَّقَةٌ بِالْعَرْشِ تَقُولُ: مَنْ وَصَلَنِي وَصَلَهُ اللهُ، وَمَنْ قَطَعَنِي قَطَعَهُ اللهُ"
+            <span class="hadith-source">- بحار الأنوار</span></span>
+            
+            <p><strong>🔸 نصائح عملية:</strong></p>
+            <p>• اكتب قائمة بكل من لهم حق عليك وبادر بالتصافي الآن<br>
+            • سدد ديونك مهما كانت صغيرة - فدرهم واحد قد يحبسك<br>
+            • صِل رحمك حتى لو قاطعوك، فالواصل من يصل من قطعه<br>
+            • استحلّ ممن اغتبته قبل أن تلقى الله</p>
+        `,
+        axis3: `
+            <span class="advice-title">🤲 حقوق الله تعالى - من تعاليم أهل البيت (عليهم السلام):</span>
+            
+            <p>قال أمير المؤمنين (عليه السلام) لما ضُرب على رأسه:</p>
+            <span class="hadith-quote">"فُزْتُ وَرَبِّ الْكَعْبَةِ!"
+            <span class="hadith-source">- بحار الأنوار</span></span>
+            
+            <p>وقال الإمام الصادق (عليه السلام) عن الصلاة:</p>
+            <span class="hadith-quote">"أَوَّلُ مَا يُحَاسَبُ بِهِ الْعَبْدُ الصَّلَاةُ، فَإِنْ قُبِلَتْ قُبِلَ مَا سِوَاهَا، وَإِنْ رُدَّتْ رُدَّ مَا سِوَاهَا"
+            <span class="hadith-source">- الكافي</span></span>
+            
+            <p>وقال رسول الله (صلى الله عليه وآله):</p>
+            <span class="hadith-quote">"الصَّلَاةُ عَمُودُ الدِّينِ، مَنْ أَقَامَهَا فَقَدْ أَقَامَ الدِّينَ، وَمَنْ تَرَكَهَا فَقَدْ هَدَمَ الدِّينَ"
+            <span class="hadith-source">- وسائل الشيعة</span></span>
+            
+            <p>وعن الإمام الرضا (عليه السلام) في الخمس:</p>
+            <span class="hadith-quote">"إِنَّ اللهَ لَمْ يُحَرِّمْ حَرَاماً إِلَّا وَقَدْ عَلِمَ أَنَّهُ يُنْتَهَكُ، وَلَا أَمَرَ بِشَيْءٍ إِلَّا وَقَدْ عَلِمَ أَنَّهُ يُعْصَى فِيهِ"
+            <span class="hadith-source">- علل الشرائع</span></span>
+            
+            <p>وقال الإمام الباقر (عليه السلام) في التوبة:</p>
+            <span class="hadith-quote">"التَّائِبُ مِنَ الذَّنْبِ كَمَنْ لَا ذَنْبَ لَهُ، وَالْمُقِيمُ عَلَى الذَّنْبِ وَهُوَ مُسْتَغْفِرٌ مِنْهُ كَالْمُسْتَهْزِئِ"
+            <span class="hadith-source">- الكافي</span></span>
+            
+            <p><strong>🔸 نصائح عملية:</strong></p>
+            <p>• لا تُعوّل على الورثة - أدِّ قضاء صلواتك وصيامك بنفسك الآن<br>
+            • أخرج الخمس والزكاة فوراً ولا تتردد<br>
+            • داوم على صلاة الليل ولو ركعتين، فهي شرف المؤمن<br>
+            • تب توبة نصوحاً بشروطها: الندم والعزم وردّ المظالم</p>
+        `,
+        axis4: `
+            <span class="advice-title">📜 الوصية - من سنة النبي وأهل البيت (عليهم السلام):</span>
+            
+            <p>قال رسول الله (صلى الله عليه وآله):</p>
+            <span class="hadith-quote">"مَا حَقُّ امْرِئٍ مُسْلِمٍ لَهُ شَيْءٌ يُوصِي فِيهِ، يَبِيتُ لَيْلَتَيْنِ إِلَّا وَوَصِيَّتُهُ مَكْتُوبَةٌ عِنْدَهُ"
+            <span class="hadith-source">- وسائل الشيعة</span></span>
+            
+            <p>وفي الحديث القدسي عن الإمام الصادق (عليه السلام):</p>
+            <span class="hadith-quote">"يَا ابْنَ آدَمَ، تَطَوَّلْتُ عَلَيْكَ بِثَلَاثٍ: سَتَرْتُ عَلَيْكَ مَا لَوْ يَعْلَمُهُ أَهْلُكَ مَا وَارَوْكَ، وَأَوْسَعْتُ عَلَيْكَ فَاسْتَقْرَضْتُ مِنْكَ فَلَمْ تُقَدِّمْ خَيْراً، وَجَعَلْتُ لَكَ نَظِرَةً عِنْدَ مَوْتِكَ فِي ثُلُثِكَ فَلَمْ تُقَدِّمْ خَيْراً"
+            <span class="hadith-source">- الكافي</span></span>
+            
+            <p>وقال أمير المؤمنين (عليه السلام):</p>
+            <span class="hadith-quote">"رَحِمَ اللهُ امْرَأً أَعَدَّ لِنَفْسِهِ، وَاسْتَعَدَّ لِرَمْسِهِ، وَعَلِمَ مِنْ أَيْنَ وَفِي أَيْنَ وَإِلَى أَيْنَ"
+            <span class="hadith-source">- نهج البلاغة</span></span>
+            
+            <p>وقال (عليه السلام) أيضاً:</p>
+            <span class="hadith-quote">"اعْمَلْ لِدُنْيَاكَ كَأَنَّكَ تَعِيشُ أَبَداً، وَاعْمَلْ لِآخِرَتِكَ كَأَنَّكَ تَمُوتُ غَداً"
+            <span class="hadith-source">- غرر الحكم</span></span>
+            
+            <p>وعن الإمام الصادق (عليه السلام):</p>
+            <span class="hadith-quote">"مَنْ مَاتَ بِغَيْرِ وَصِيَّةٍ مَاتَ مِيتَةً جَاهِلِيَّةً"
+            <span class="hadith-source">- وسائل الشيعة</span></span>
+            
+            <p><strong>🔸 نصائح عملية:</strong></p>
+            <p>• اكتب وصيتك الليلة ولا تؤجل - بيّن فيها ديونك وحقوق الناس<br>
+            • أوصِ بثلثك في وجوه البر: الحج، العمرة، زيارة الأئمة (ع)<br>
+            • نظّم شؤون عائلتك لتجنب النزاعات بين الورثة<br>
+            • حدد كيف تُغسّل وتُكفّن ومن يصلي عليك</p>
+        `,
+        axis5: `
+            <span class="advice-title">🌱 العمل الصالح الباقي - من كنوز أهل البيت (عليهم السلام):</span>
+            
+            <p>قال رسول الله (صلى الله عليه وآله):</p>
+            <span class="hadith-quote">"إِذَا مَاتَ ابْنُ آدَمَ انْقَطَعَ عَمَلُهُ إِلَّا مِنْ ثَلَاثٍ: صَدَقَةٍ جَارِيَةٍ، أَوْ عِلْمٍ يُنْتَفَعُ بِهِ، أَوْ وَلَدٍ صَالِحٍ يَدْعُو لَهُ"
+            <span class="hadith-source">- الكافي</span></span>
+            
+            <p>وقال أمير المؤمنين (عليه السلام):</p>
+            <span class="hadith-quote">"الدُّنْيَا دَارُ مَمَرٍّ لَا دَارُ مَقَرٍّ، وَالنَّاسُ فِيهَا رَجُلَانِ: رَجُلٌ بَاعَ نَفْسَهُ فَأَوْبَقَهَا، وَرَجُلٌ ابْتَاعَ نَفْسَهُ فَأَعْتَقَهَا"
+            <span class="hadith-source">- نهج البلاغة</span></span>
+            
+            <p>وعن الإمام الصادق (عليه السلام) في فضل العلم:</p>
+            <span class="hadith-quote">"مَنْ عَلَّمَ بَابَ هُدًى فَلَهُ مِثْلُ أَجْرِ مَنْ عَمِلَ بِهِ، وَلَا يَنْقُصُ أُولَئِكَ مِنْ أُجُورِهِمْ شَيْئاً"
+            <span class="hadith-source">- الكافي</span></span>
+            
+            <p>وقال (عليه السلام) أيضاً:</p>
+            <span class="hadith-quote">"لَوْ يَعْلَمُ النَّاسُ مَا فِي طَلَبِ الْعِلْمِ لَطَلَبُوهُ وَلَوْ بِسَفْكِ الْمُهَجِ وَخَوْضِ اللُّجَجِ"
+            <span class="hadith-source">- الكافي</span></span>
+            
+            <p>وعن النبي (صلى الله عليه وآله) في تربية الأولاد:</p>
+            <span class="hadith-quote">"مَا نَحَلَ وَالِدٌ وَلَداً نِحْلَةً أَفْضَلَ مِنْ أَدَبٍ حَسَنٍ"
+            <span class="hadith-source">- بحار الأنوار</span></span>
+            
+            <p>وقال الإمام علي (عليه السلام):</p>
+            <span class="hadith-quote">"مَا جَمَعَ شَيْءٌ إِلَى شَيْءٍ أَفْضَلَ مِنْ حِلْمٍ إِلَى عِلْمٍ"
+            <span class="hadith-source">- نهج البلاغة</span></span>
+            
+            <p><strong>🔸 نصائح عملية:</strong></p>
+            <p>• أنشئ صدقة جارية: سقاية ماء، حسينية، طباعة كتب أهل البيت (ع)<br>
+            • ادعم طالب علم في الحوزة العلمية<br>
+            • علّم أولادك حب أهل البيت (ع) والولاية<br>
+            • ساهم في نشر معارف آل محمد (ص) ومجالس عزاء الحسين (ع)</p>
+        `
+    };
+
+    let currentPage = 0;
+    const totalPages = 7;
+
+    // Initialize
+    function init() {
+        renderQuestions();
+        updateProgressDots();
+    }
+
+    // Render Questions
+    function renderQuestions() {
+        questions.forEach(q => {
+            const html = `
+                <div class="question-row" id="qrow${q.id}">
+                    <div class="question-text">${q.id}. ${q.text}</div>
+                    <div class="options">
+                        ${[1,2,3,4,5].map(val => `
+                            <label>
+                                <input type="radio" name="q${q.id}" value="${val}" onchange="markAnswered(${q.id})">
+                                <span>${val}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            document.getElementById(`axis${q.axis}_questions`).insertAdjacentHTML('beforeend', html);
+        });
+    }
+
+    // Mark question as answered
+    function markAnswered(qId) {
+        document.getElementById(`qrow${qId}`).classList.add('answered');
+    }
+
+    // Navigation
+    function nextPage() {
+        // Validate current page questions before moving (except intro and results)
+        if (currentPage >= 1 && currentPage <= 5) {
+            if (!validatePage(currentPage)) {
+                return;
+            }
+        }
+        
+        if (currentPage < totalPages - 1) {
+            document.getElementById(`page${currentPage}`).classList.remove('active');
+            currentPage++;
+            document.getElementById(`page${currentPage}`).classList.add('active');
+            updateProgressDots();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+
+    function prevPage() {
+        if (currentPage > 0) {
+            document.getElementById(`page${currentPage}`).classList.remove('active');
+            currentPage--;
+            document.getElementById(`page${currentPage}`).classList.add('active');
+            updateProgressDots();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
+
+    function goToPage(pageNum) {
+        document.getElementById(`page${currentPage}`).classList.remove('active');
+        currentPage = pageNum;
+        document.getElementById(`page${currentPage}`).classList.add('active');
+        updateProgressDots();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Update progress dots
+    function updateProgressDots() {
+        for (let i = 0; i < totalPages; i++) {
+            const dot = document.getElementById(`dot${i}`);
+            dot.classList.remove('active', 'completed');
+            
+            if (i < currentPage) {
+                dot.classList.add('completed');
+            } else if (i === currentPage) {
+                dot.classList.add('active');
+            }
+        }
+    }
+
+    // Validate page questions
+    function validatePage(pageNum) {
+        const axisRanges = {
+            1: [1, 4],
+            2: [5, 9],
+            3: [10, 14],
+            4: [15, 18],
+            5: [19, 22]
+        };
+
+        const range = axisRanges[pageNum];
+        if (!range) return true;
+
+        for (let i = range[0]; i <= range[1]; i++) {
+            const radios = document.getElementsByName(`q${i}`);
+            let answered = false;
+            for (const r of radios) {
+                if (r.checked) { answered = true; break; }
+            }
+            if (!answered) {
+                alert(`الرجاء الإجابة على السؤال رقم ${i}`);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Calculate Results
+    function calculateResults() {
+        // Validate all pages
+        for (let p = 1; p <= 5; p++) {
+            if (!validatePage(p)) {
+                goToPage(p);
+                return;
+            }
+        }
+
+        let scores = { axis1: 0, axis2: 0, axis3: 0, axis4: 0, axis5: 0, total: 0 };
+        let maxScores = { axis1: 20, axis2: 25, axis3: 25, axis4: 20, axis5: 20, total: 110 };
+
+        // Calculate scores
+        for (let i = 1; i <= 22; i++) {
+            const radios = document.getElementsByName(`q${i}`);
+            let val = 0;
+            for (const r of radios) if (r.checked) val = parseInt(r.value);
+            
+            if (i <= 4) scores.axis1 += val;
+            else if (i <= 9) scores.axis2 += val;
+            else if (i <= 14) scores.axis3 += val;
+            else if (i <= 18) scores.axis4 += val;
+            else scores.axis5 += val;
+        }
+
+        scores.total = scores.axis1 + scores.axis2 + scores.axis3 + scores.axis4 + scores.axis5;
+
+        // Calculate Percentages
+        const pct = {
+            axis1: (scores.axis1 / maxScores.axis1) * 100,
+            axis2: (scores.axis2 / maxScores.axis2) * 100,
+            axis3: (scores.axis3 / maxScores.axis3) * 100,
+            axis4: (scores.axis4 / maxScores.axis4) * 100,
+            axis5: (scores.axis5 / maxScores.axis5) * 100,
+            total: (scores.total / maxScores.total) * 100
+        };
+
+        // Display Total
+        document.getElementById('finalScore').innerText = pct.total.toFixed(0) + "%";
+        
+        let message = "";
+        let badgeHTML = "";
+        
+        if (pct.total >= 80) {
+            message = "<strong style='color: #198754;'>ممتاز! 🌟</strong><br>أنت من المتقين المستعدين للقاء الله. استمر في إحسانك وزد من أعمالك الصالحة.";
+            badgeHTML = "<span class='level-badge level-1'>المستعد تماماً ✓</span>";
+        } else if (pct.total >= 60) {
+            message = "<strong style='color: #ffc107;'>جيد 👍</strong><br>أنت على الطريق الصحيح، لكن تحتاج لتحسين بعض الجوانب. راجع النصائح أدناه.";
+            badgeHTML = "<span class='level-badge level-2'>المستعد للحد الأدنى</span>";
+        } else if (pct.total >= 40) {
+            message = "<strong style='color: #fd7e14;'>يحتاج تحسين ⚠️</strong><br>أنت في حالة غفلة عن الآخرة. راجع نفسك وابدأ التغيير الآن.";
+            badgeHTML = "<span class='level-badge level-3'>الغافل عن الآخرة</span>";
+        } else {
+            message = "<strong style='color: #dc3545;'>إنذار! 🚨</strong><br>أنت في خطر! الموت قد يأتي في أي لحظة وأنت غير مستعد. بادر فوراً بالتغيير.";
+            badgeHTML = "<span class='level-badge level-4'>الأعمى عن الموت</span>";
+        }
+        
+        document.getElementById('finalMessage').innerHTML = message;
+        document.getElementById('levelBadge').innerHTML = badgeHTML;
+
+        // Update Axis UI
+        for (let i = 1; i <= 5; i++) {
+            updateAxisUI(i, pct[`axis${i}`]);
+        }
+
+        // Show results page
+        goToPage(6);
+    }
+
+    function updateAxisUI(axisNum, percentage) {
+        const bar = document.getElementById(`barAxis${axisNum}`);
+        const text = document.getElementById(`scoreAxis${axisNum}`);
+        const adviceDiv = document.getElementById(`adviceAxis${axisNum}`);
+        
+        text.innerText = percentage.toFixed(0) + "%";
+        
+        setTimeout(() => {
+            bar.style.width = percentage + "%";
+        }, 100);
+        
+        // Color coding
+        if (percentage >= 80) {
+            bar.style.backgroundColor = "#198754";
+        } else if (percentage >= 60) {
+            bar.style.backgroundColor = "#ffc107";
+        } else {
+            bar.style.backgroundColor = "#dc3545";
+        }
+
+        // Show Advice if < 60%
+        if (percentage < 60) {
+            adviceDiv.innerHTML = adviceDB[`axis${axisNum}`];
+            adviceDiv.style.display = "block";
+        } else {
+            adviceDiv.style.display = "none";
+        }
+    }
+
+    // Restart Assessment
+    function restartAssessment() {
+        // Reset all radio buttons
+        for (let i = 1; i <= 22; i++) {
+            const radios = document.getElementsByName(`q${i}`);
+            for (const r of radios) r.checked = false;
+            document.getElementById(`qrow${i}`).classList.remove('answered');
+        }
+        
+        // Reset progress bars
+        for (let i = 1; i <= 5; i++) {
+            document.getElementById(`barAxis${i}`).style.width = "0%";
+            document.getElementById(`adviceAxis${i}`).style.display = "none";
+        }
+        
+        // Go to intro page
+        goToPage(0);
+    }
+
+    // Initialize on load
+    init();
+</script>
+
+
+
+<!-- Floating tools -->
+  <div class="tools" aria-label="أدوات">
+    <button class="fab" type="button" onclick="togglePanel()" aria-label="فتح الأدوات">⚙️</button>
+    <div class="panel" id="panel" hidden>
+      <div class="grid">
+        <button class="tbtn" type="button" onclick="toggleTheme()">🌙 الوضع</button>
+        <button class="tbtn" type="button" onclick="exportText()">📄 تقرير</button>
+        <button class="tbtn" type="button" onclick="resetAnswers()">🧹 تفريغ</button>
+        <button class="tbtn" type="button" onclick="saveProgress()">💾 حفظ</button>
+        <button class="tbtn" type="button" onclick="loadProgress()">📥 تحميل</button>
+        <button class="tbtn" type="button" onclick="clearSaved()">🗑️ مسح</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+<script>
+  (function(){
+    const THEME_KEY = 'squaredoo_theme';
+    const PROGRESS_KEY = 'squaredoo_progress:' + (location.pathname || '');
+
+    function toast(msg){
+      const el = document.getElementById('toast');
+      if (!el) return;
+      el.textContent = msg;
+      el.classList.add('show');
+      clearTimeout(el._t);
+      el._t = setTimeout(() => el.classList.remove('show'), 2200);
+    }
+
+    // Expose globally (matches الزوج/الزوجة)
+    window.togglePanel = function togglePanel(){
+      const p = document.getElementById('panel');
+      if (!p) return;
+      p.hidden = !p.hidden;
+    };
+
+    window.toggleTheme = function toggleTheme(){
+      document.body.classList.toggle('dark');
+      const isDark = document.body.classList.contains('dark');
+      try{ localStorage.setItem(THEME_KEY, isDark ? 'dark' : 'light'); }catch(e){}
+      toast(isDark ? 'تم تفعيل الوضع الداكن' : 'تم إلغاء الوضع الداكن');
+    };
+
+    window.saveProgress = function saveProgress(){
+      try{
+        const data = collectFormState();
+        const activePage = document.querySelector('.page.active');
+        data.activePageId = activePage ? activePage.id : null;
+        localStorage.setItem(PROGRESS_KEY, JSON.stringify(data));
+        toast('تم حفظ التقدم');
+      }catch(e){
+        toast('تعذر الحفظ');
+      }
+    };
+
+    window.loadProgress = function loadProgress(){
+      try{
+        const raw = localStorage.getItem(PROGRESS_KEY);
+        if (!raw){ toast('لا يوجد حفظ سابق'); return; }
+        const data = JSON.parse(raw);
+        applyFormState(data);
+        // Navigate back to the saved page if possible
+        if (data.activePageId){
+          const m = String(data.activePageId).match(/page(\d+)/i);
+          const idx = m ? parseInt(m[1],10) : null;
+          if (typeof window.goToPage === 'function' && Number.isFinite(idx)){
+            window.goToPage(idx);
+          } else {
+            activatePageById(data.activePageId);
+          }
+        }
+        toast('تم تحميل التقدم');
+      }catch(e){
+        toast('تعذر التحميل');
+      }
+    };
+
+    window.clearSaved = function clearSaved(){
+      try{
+        localStorage.removeItem(PROGRESS_KEY);
+        toast('تم مسح الحفظ');
+      }catch(e){
+        toast('تعذر المسح');
+      }
+    };
+
+    window.resetAnswers = function resetAnswers(){
+      // Clear inputs
+      document.querySelectorAll('input[type="radio"],input[type="checkbox"]').forEach(i => { i.checked = false; });
+      document.querySelectorAll('textarea, input[type="text"], input[type="number"]').forEach(i => { i.value = ''; });
+      // If the page code has a reset function, call it (non-breaking)
+      if (typeof window.init === 'function') {
+        try{ window.init(); }catch(e){}
+      }
+      if (typeof window.goToPage === 'function') {
+        try{ window.goToPage(0); }catch(e){}
+      } else {
+        activatePageById('page0');
+      }
+      try{ localStorage.removeItem(PROGRESS_KEY); }catch(e){}
+      toast('تم تفريغ الإجابات');
+    };
+
+    window.exportText = function exportText(){
+      const title = document.title || 'تقييم';
+      const when = new Date().toLocaleString('ar-KW');
+      let txt = `${title}\n${location.href}\n${when}\n\n`;
+
+      const results = document.querySelector('#resultsPage, #pageResults, .results, .result, #results, .result-page');
+      if (results){
+        txt += results.innerText.trim() + '\n';
+      } else {
+        // Best-effort: list checked answers
+        const lines = [];
+        const checked = Array.from(document.querySelectorAll('input[type="radio"]:checked, input[type="checkbox"]:checked'));
+        checked.forEach(inp => {
+          const label = document.querySelector(`label[for="${CSS.escape(inp.id)}"]`);
+          const val = label ? label.innerText.trim() : (inp.value || inp.name || inp.id);
+          lines.push(`- ${val}`);
+        });
+        if (lines.length){
+          txt += 'الإجابات المحددة:\n' + lines.join('\n') + '\n';
+        } else {
+          txt += 'لم يتم العثور على تقرير تلقائي هنا.\n';
+        }
+      }
+
+      try{
+        navigator.clipboard.writeText(txt).then(() => toast('تم نسخ التقرير'));
+      }catch(e){
+        // Fallback
+        const ta = document.createElement('textarea');
+        ta.value = txt;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+        toast('تم نسخ التقرير');
+      }
+    };
+
+    function collectFormState(){
+      const inputs = [];
+      document.querySelectorAll('input, textarea, select').forEach(el => {
+        if (!el.name && !el.id) return;
+        const item = {
+          id: el.id || null,
+          name: el.name || null,
+          type: el.type || el.tagName.toLowerCase(),
+          value: (el.type === 'checkbox' || el.type === 'radio') ? el.checked : el.value
+        };
+        inputs.push(item);
+      });
+      return { inputs };
+    }
+
+    function applyFormState(data){
+      if (!data || !Array.isArray(data.inputs)) return;
+      data.inputs.forEach(item => {
+        let el = null;
+        if (item.id) el = document.getElementById(item.id);
+        if (!el && item.name){
+          // try find by name and value
+          const candidates = document.querySelectorAll(`[name="${CSS.escape(item.name)}"]`);
+          if (candidates.length === 1) el = candidates[0];
+          if (!el && candidates.length > 1 && (item.type === 'radio' || item.type === 'checkbox')){
+            // best effort: match checked state by value if possible
+            candidates.forEach(c => {
+              if (c.value === item.value) el = c;
+            });
+          }
+        }
+        if (!el) return;
+        if (el.type === 'checkbox' || el.type === 'radio'){
+          el.checked = !!item.value;
+          el.dispatchEvent(new Event('change', {bubbles:true}));
+        } else {
+          el.value = item.value ?? '';
+          el.dispatchEvent(new Event('input', {bubbles:true}));
+        }
+      });
+    }
+
+    function activatePageById(id){
+      if (!id) return;
+      const pages = Array.from(document.querySelectorAll('.page'));
+      if (!pages.length) return;
+      pages.forEach(p => p.classList.remove('active'));
+      const target = document.getElementById(id);
+      if (target) target.classList.add('active');
+    }
+
+    // Close tools panel on outside click
+    document.addEventListener('click', (e) => {
+      const panel = document.getElementById('panel');
+      const tools = document.querySelector('.tools');
+      if (!panel || panel.hidden) return;
+      if (!tools) return;
+      if (!tools.contains(e.target)) {
+        panel.hidden = true;
+      }
+    });
+
+    // Apply saved theme on load
+    try{
+      const t = localStorage.getItem(THEME_KEY);
+      if (t === 'dark') document.body.classList.add('dark');
+    }catch(e){}
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://squaredoo.netlify.app/sitemap.xml
