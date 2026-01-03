@@ -1141,9 +1141,10 @@
       questions.forEach(q=>{
         const selected = document.querySelector(`input[name="q${q.id}"]:checked`);
         const value = selected ? parseInt(selected.value) : 0;
+        const convertedValue = convertValue(value);
 
         if(!pillarScores[q.pillar]) pillarScores[q.pillar] = { total:0, count:0, axis:q.axis };
-        pillarScores[q.pillar].total += value;
+        pillarScores[q.pillar].total += convertedValue;
         pillarScores[q.pillar].count += 1;
       });
 
@@ -1166,12 +1167,13 @@
       const axisScores = {1:0,2:0};
       const axisCounts = {1:0,2:0};
 
-      questions.forEach(q=>{
-        const selected = document.querySelector(`input[name="q${q.id}"]:checked`);
-        const value = selected ? parseInt(selected.value) : 0;
-        axisScores[q.axis] += value;
-        axisCounts[q.axis] += 1;
-      });
+     questions.forEach(q=>{
+    const selected = document.querySelector(`input[name="q${q.id}"]:checked`);
+    const value = selected ? parseInt(selected.value) : 0;
+    const convertedValue = convertValue(value);  // <-- ADDED THIS LINE
+    axisScores[q.axis] += convertedValue;        // <-- CHANGED FROM 'value' TO 'convertedValue'
+    axisCounts[q.axis] += 1;
+  });
 
       const axisPercentages = {};
       for(let axis=1; axis<=2; axis++){
@@ -1593,6 +1595,15 @@
       } catch(e){
         showToast("❌ تعذر مسح الحفظ");
       }
+    }
+        // Convert answer value to new scale: 1=0%, 2=25%, 3=50%, 4=75%, 5=100%
+    function convertValue(value){
+      if(value === 1) return 0;
+      if(value === 2) return 1.25;
+      if(value === 3) return 2.5;
+      if(value === 4) return 3.75;
+      if(value === 5) return 5;
+      return 0;
     }
 
     init();
