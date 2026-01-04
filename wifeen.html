@@ -5,7 +5,7 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png">
   <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
-  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/apple-touch-icon-120x120-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-120x120-precomposed.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
 
   <meta charset="utf-8" />
@@ -25,9 +25,6 @@
       --bg2:#ede7f6;
 
       --text:#212529;
-      --card:#ffffff;
-      --border:rgba(0,0,0,0.08);
-
       --radius:16px;
       --shadow:0 10px 30px rgba(0,0,0,0.12);
     }
@@ -82,26 +79,63 @@
     }
 
     .pillar-list{margin:10px 0; padding-right:20px;}
+    body.ltr .pillar-list{padding-left:20px; padding-right:0;}
     .pillar-list li{margin:6px 0;}
 
-    /* Progress dots */
-    .progress-dots{
+    /* Video card */
+    .video-section { margin: 25px 0; }
+    .video-link-card {
+      display:block;
+      text-decoration:none;
+      border-radius:15px;
+      overflow:hidden;
+      box-shadow:0 4px 15px rgba(0,0,0,0.1);
+      transition:all 0.3s;
+      background:white;
+    }
+    .video-link-card:hover {
+      transform: translateY(-3px);
+      box-shadow:0 8px 25px rgba(0,0,0,0.15);
+    }
+    .video-thumbnail {
+      position:relative;
+      width:100%;
+      padding-bottom:56.25%;
+      background:#000;
+      overflow:hidden;
+    }
+    .video-thumbnail img {
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform: translate(-50%, -50%);
+      width:100%;
+      height:auto;
+      min-height:100%;
+      object-fit:cover;
+    }
+    .play-button {
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform: translate(-50%, -50%);
+      transition: all 0.3s;
+    }
+    .video-link-card:hover .play-button {
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+    .play-button svg { filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3)); }
+    .video-info {
       display:flex;
-      justify-content:center;
-      margin:12px 0 18px;
-      gap:8px;
+      align-items:center;
+      padding:15px 20px;
+      background: linear-gradient(135deg, var(--primary), #047857);
+      color:white;
     }
-    .progress-dot{
-      width:12px;
-      height:12px;
-      border-radius:50%;
-      background:rgba(0,0,0,0.15);
-      transition:all 0.25s ease;
-    }
-    .progress-dot.active{
-      background:var(--primary);
-      transform:scale(1.15);
-    }
+    .video-icon-small { font-size:1.3em; margin-left:10px; }
+    body.ltr .video-icon-small{ margin-right:10px; margin-left:0; }
+    .video-text { flex:1; font-weight:bold; font-size:1em; }
+    .external-icon { font-size:1.2em; opacity:0.8; }
 
     /* Axis intro items */
     .axis-intro{margin:22px 0;}
@@ -132,16 +166,26 @@
     .axis-content strong{color:#4b1f34;}
     .axis-content p{margin:8px 0 0 0; color:#6c757d; line-height:1.65;}
 
-    /* Section headers inside pages */
-    .sub-section-title{
-      background:linear-gradient(135deg, rgba(214,51,132,0.12), rgba(111,66,193,0.12));
-      padding:12px 15px;
-      border-radius:14px;
-      margin:18px 0 10px;
-      font-weight:bold;
-      border:1px solid rgba(214,51,132,0.18);
-      text-align:center;
+    /* Progress dots */
+    .progress-dots{
+      display:flex;
+      justify-content:center;
+      margin:12px 0 18px;
+      gap:8px;
     }
+    .progress-dot{
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      background:rgba(0,0,0,0.15);
+      transition:all 0.25s ease;
+    }
+    .progress-dot.active{
+      background:var(--primary);
+      transform:scale(1.15);
+    }
+
+    /* Questions */
     .section-hint{
       text-align:center;
       color:#6c757d;
@@ -150,7 +194,6 @@
       line-height:1.7;
     }
 
-    /* Questions */
     .question-row{
       display:flex;
       flex-direction:column;
@@ -331,25 +374,46 @@
       border-bottom:1px solid rgba(0,0,0,0.06);
       line-height:1.9;
     }
+    body.ltr .tip-card{
+      border-left:4px solid var(--primary);
+      border-right:1px solid rgba(0,0,0,0.06);
+    }
     .tip-card h4{margin:0 0 8px 0;}
 
     .tip-card.good{
       border-right-color:var(--success);
       background:rgba(25,135,84,0.06);
     }
+    body.ltr .tip-card.good{border-left-color:var(--success);}
     .tip-card.good h4{color:var(--success);}
 
     .tip-card.medium{
       border-right-color:var(--warning);
       background:rgba(255,193,7,0.14);
     }
+    body.ltr .tip-card.medium{border-left-color:var(--warning);}
     .tip-card.medium h4{color:#856404;}
 
     .tip-card.low{
       border-right-color:var(--danger);
       background:rgba(220,53,69,0.08);
     }
+    body.ltr .tip-card.low{border-left-color:var(--danger);}
     .tip-card.low h4{color:#721c24;}
+
+    details.quote{
+      background:rgba(255,255,255,0.55);
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid rgba(0,0,0,0.08);
+      margin:10px 0;
+    }
+    details.quote summary{
+      cursor:pointer;
+      font-weight:900;
+      color:#374151;
+    }
+    details.quote p{margin:10px 0 0 0;}
 
     /* Promise */
     .promise-container{
@@ -436,7 +500,7 @@
       box-shadow:0 12px 25px rgba(0,0,0,0.18);
     }
     .panel{
-      width:220px;
+      width:240px;
       background:rgba(255,255,255,0.96);
       border:1px solid rgba(0,0,0,0.10);
       border-radius:16px;
@@ -457,6 +521,7 @@
       cursor:pointer;
       font-weight:900;
       font-size:13px;
+      white-space:nowrap;
     }
 
     @media (max-width:600px){
@@ -465,61 +530,8 @@
       .options label{min-width:44px; padding:8px 6px;}
       .btn{min-width:120px; padding:12px 16px;}
       .total-score{font-size:45px;}
+      .panel{width:220px;}
     }
-
-    /* Unified YouTube Card (same as husband file) */
-    .video-section { margin: 25px 0; }
-    .video-link-card {
-      display:block;
-      text-decoration:none;
-      border-radius:15px;
-      overflow:hidden;
-      box-shadow:0 4px 15px rgba(0,0,0,0.1);
-      transition:all 0.3s;
-      background:white;
-    }
-    .video-link-card:hover {
-      transform: translateY(-3px);
-      box-shadow:0 8px 25px rgba(0,0,0,0.15);
-    }
-    .video-thumbnail {
-      position:relative;
-      width:100%;
-      padding-bottom:56.25%;
-      background:#000;
-      overflow:hidden;
-    }
-    .video-thumbnail img {
-      position:absolute;
-      top:50%;
-      left:50%;
-      transform: translate(-50%, -50%);
-      width:100%;
-      height:auto;
-      min-height:100%;
-      object-fit:cover;
-    }
-    .play-button {
-      position:absolute;
-      top:50%;
-      left:50%;
-      transform: translate(-50%, -50%);
-      transition: all 0.3s;
-    }
-    .video-link-card:hover .play-button {
-      transform: translate(-50%, -50%) scale(1.1);
-    }
-    .play-button svg { filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3)); }
-    .video-info {
-      display:flex;
-      align-items:center;
-      padding:15px 20px;
-      background: linear-gradient(135deg, var(--primary), #047857);
-      color:white;
-    }
-    .video-icon-small { font-size:1.3em; margin-left:10px; }
-    .video-text { flex:1; font-weight:bold; font-size:1em; }
-    .external-icon { font-size:1.2em; opacity:0.8; }
 
     /* Dark mode */
     body.dark{
@@ -540,17 +552,14 @@
     body.dark .result-card,
     body.dark .tips-section,
     body.dark .promise-container,
-    body.dark .video-link-card{
+    body.dark .video-link-card,
+    body.dark details.quote{
       background:rgba(255,255,255,0.06) !important;
       border-color:rgba(255,255,255,0.10) !important;
       color:#e5e7eb !important;
     }
 
-    body.dark .sub-section-title{
-      background:linear-gradient(135deg, rgba(251,207,232,0.14), rgba(196,181,253,0.12));
-      border-color:rgba(255,255,255,0.10);
-      color:#e5e7eb;
-    }
+    body.dark .axis-content p{color:#cbd5e1;}
     body.dark .section-hint{color:#cbd5e1;}
 
     body.dark .options label{
@@ -594,17 +603,8 @@
       #page0,#page1,#page2,#page3{display:none !important;}
     }
 
-    /* LTR mode (English) */
+    /* LTR helper */
     body.ltr{ direction:ltr; }
-    body.ltr .pillar-list{ padding-left:20px; padding-right:0; }
-    body.ltr .tip-card{
-      border-left:4px solid var(--primary);
-      border-right:1px solid rgba(0,0,0,0.06);
-    }
-    body.ltr .tip-card.good{ border-left-color:var(--success); }
-    body.ltr .tip-card.medium{ border-left-color:var(--warning); }
-    body.ltr .tip-card.low{ border-left-color:var(--danger); }
-    body.ltr .video-icon-small{ margin-right:10px; margin-left:0; }
   </style>
 
   <!-- GA4 -->
@@ -621,26 +621,26 @@
   <meta property="og:locale" content="ar_AR">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="بوابة التقييم الذاتي">
-  <meta property="og:title" content="هل أنت زوجة جيدة؟ | بوابة التقييم الذاتي">
+  <meta property="og:title" content="هل أنتِ زوجة جيدة؟ | بوابة التقييم الذاتي">
   <meta property="og:description" content="تقييم ذاتي للزوجة عبر أسئلة قصيرة، يعطيك نتيجتك ونصائح عملية لتحسين العلاقة الزوجية.">
   <meta property="og:url" content="https://squaredoo.netlify.app/wife">
   <meta property="og:image" content="https://squaredoo.netlify.app/apple-touch-icon-180x180.png">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="هل أنت زوجة جيدة؟ | بوابة التقييم الذاتي">
+  <meta name="twitter:title" content="هل أنتِ زوجة جيدة؟ | بوابة التقييم الذاتي">
   <meta name="twitter:description" content="تقييم ذاتي للزوجة عبر أسئلة قصيرة، يعطيك نتيجتك ونصائح عملية لتحسين العلاقة الزوجية.">
   <meta name="twitter:image" content="https://squaredoo.netlify.app/apple-touch-icon-180x180.png">
 </head>
 
 <body>
   <noscript>
-    <div style="max-width:850px;margin:0 auto 12px;background:#fff3cd;border:1px solid rgba(0,0,0,0.12);padding:14px;border-radius:14px;line-height:1.7;">
+    <div id="noscriptBox" style="max-width:850px;margin:0 auto 12px;background:#fff3cd;border:1px solid rgba(0,0,0,0.12);padding:14px;border-radius:14px;line-height:1.7;">
       هذا الملف يحتاج تفعيل JavaScript لكي يعمل التقييم، الرجاء تفعيل JavaScript في المتصفح ثم إعادة فتح الصفحة.
     </div>
   </noscript>
 
   <div class="container">
 
-    <div class="progress-dots" aria-label="مؤشر التقدم">
+    <div class="progress-dots" id="progressDots" aria-label="مؤشر التقدم">
       <div class="progress-dot active" id="dot0"></div>
       <div class="progress-dot" id="dot1"></div>
       <div class="progress-dot" id="dot2"></div>
@@ -655,34 +655,15 @@
       <h1 id="introTitle">هل أنتِ زوجةٌ جيدة؟</h1>
       <h3 id="introSubtitle">تقييم ذاتي مستوحى من خطبة الشيخ د. حسن البلوشي</h3>
 
-      <div class="intro-text" id="introText">
-        <p>
-          في خطبته، يطرح الشيخ الدكتور حسن البلوشي سؤالاً مهماً:
-          <strong>"هل أنتِ زوجةٌ جيدة؟"</strong>
-        </p>
-        <p>
-          ويجيب عنه من خلال صفات <strong>واقعية وليست خيالية</strong> للزوجة الصالحة،
-          مستنداً إلى تعاليم أهل البيت (ع) وسيرة السيدة الزهراء والسيدة خديجة (عليهما السلام).
-        </p>
-
-        <p><strong>طريقة الإجابة:</strong> قيّمي كل عبارة من 1 إلى 5 حيث:</p>
-        <ul class="pillar-list">
-          <li><strong>1</strong> = لا ينطبق أبداً</li>
-          <li><strong>2</strong> = نادراً</li>
-          <li><strong>3</strong> = أحياناً</li>
-          <li><strong>4</strong> = غالباً</li>
-          <li><strong>5</strong> = ينطبق دائماً</li>
-        </ul>
-
-        <p><strong>الهدف:</strong> الوصول إلى <strong>60%</strong> على الأقل في كل محور</p>
-      </div>
+      <div class="intro-text" id="introText"></div>
 
       <div class="video-section">
         <a href="https://www.youtube.com/watch?v=cDoZfNmQ_Oo" target="_blank" rel="noopener" class="video-link-card">
           <div class="video-thumbnail">
-            <img src="https://i.ytimg.com/vi/cDoZfNmQ_Oo/maxresdefault.jpg"
+            <img id="videoThumb"
+                 src="https://i.ytimg.com/vi/cDoZfNmQ_Oo/maxresdefault.jpg"
                  onerror="this.onerror=null;this.src='https://img.youtube.com/vi/cDoZfNmQ_Oo/hqdefault.jpg';"
-                 alt="YouTube">
+                 alt="رابط الخطبة على يوتيوب">
             <div class="play-button">
               <svg viewBox="0 0 68 48" width="68" height="48">
                 <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#f00"></path>
@@ -700,31 +681,7 @@
 
       <h3 id="axesTitle">المحاور الثلاثة للزوجة الصالحة:</h3>
 
-      <div class="axis-intro" id="axisIntro">
-        <div class="axis-intro-item">
-          <div class="axis-number">1</div>
-          <div class="axis-content">
-            <strong>أخلاق السكينة</strong>
-            <p>أن تكوني مصدراً للهدوء والأمان النفسي، منطقة راحة تنسيه هموم العمل. كما وصف أمير المؤمنين (ع) السيدة الزهراء (ع): كان ينظر إليها فتنكشف عنه الهموم.</p>
-          </div>
-        </div>
-
-        <div class="axis-intro-item">
-          <div class="axis-number">2</div>
-          <div class="axis-content">
-            <strong>أخلاق المودة</strong>
-            <p>إشعار الزوج بأنه السند والفارس، ودعمه في طموحاته. كما فعلت السيدة خديجة (ع) حين ثبّتت النبي (ص) وآمنت به.</p>
-          </div>
-        </div>
-
-        <div class="axis-intro-item">
-          <div class="axis-number">3</div>
-          <div class="axis-content">
-            <strong>أخلاق الرحمة</strong>
-            <p>التعامل بحكمة في الخلافات، واحتواؤها داخل البيت، مع التدبير الاقتصادي الحكيم الذي وصفه النبي (ص) بأن فاعلته من "عمّال الله".</p>
-          </div>
-        </div>
-      </div>
+      <div class="axis-intro" id="axisIntro"></div>
 
       <div class="btn-container">
         <button class="btn btn-primary" type="button" onclick="nextPage()" id="btnStart">ابدأي التقييم ←</button>
@@ -815,7 +772,7 @@
       </div>
     </div>
 
-    <!-- Page 5: Advice + Copy points + Promise -->
+    <!-- Page 5: Advice -->
     <div class="page" id="page5">
       <h2 id="adviceTitle">💡 النصائح والتوجيهات</h2>
 
@@ -830,11 +787,7 @@
       <div class="promise-container">
         <div class="intro-icon">✍️</div>
         <h3 style="margin-top:0;" id="promiseTitle">وعدي لنفسي</h3>
-        <p style="line-height:1.7; text-align:center; margin-top:0;" id="promiseIntro">
-          اكتبي وعداً لنفسك حول ما تريدين تطويره وتحسينه في حياتك الزوجية.
-          <br />
-          هذا الوعد بينك وبين نفسك، والتزامك به هو أول خطوة نحو التغيير الإيجابي.
-        </p>
+        <p style="line-height:1.7; text-align:center; margin-top:0;" id="promiseIntro"></p>
 
         <textarea id="promiseText" placeholder="أكتبي وعدك هنا..."></textarea>
 
@@ -857,7 +810,7 @@
   </div>
 
   <!-- Floating tools -->
-  <div class="tools" aria-label="أدوات">
+  <div class="tools" id="toolsBox" aria-label="أدوات">
     <button class="fab" type="button" onclick="togglePanel()" aria-label="فتح الأدوات">⚙️</button>
     <div class="panel" id="panel" hidden>
       <div class="grid">
@@ -878,141 +831,441 @@
   <div class="toast" id="toast"></div>
 
   <script>
+    /* ---------------------------
+       Questions (AR + full EN)
+    ----------------------------*/
     const questions = [
       // Axis 1: 1-10
-      { id: 1, text: "أختار الأسلوب الهين اللين عند الحديث أو الشكوى", axis: 1 },
-      { id: 2, text: "أتجنب تضخيم الأمور البسيطة وتحويلها لمشكلات كبيرة", axis: 1 },
-      { id: 3, text: "أكون مصدر راحة وسكينة لزوجي بعد يوم عمل شاق", axis: 1 },
-      { id: 4, text: "استقبل زوجي بوجه بشوش ينسيه همومه ومشاكله", axis: 1 },
-      { id: 5, text: "أعبر لزوجي عن حبي ومشاعري بالكلام ولا أكتفي بالصمت", axis: 1 },
-      { id: 6, text: "أهتم بمظهري وجمالي ونظافتي لأكون جذابة لزوجي", axis: 1 },
-      { id: 7, text: "أحرص على أن أكون \"قرة عين\" لزوجي في البيت", axis: 1 },
-      { id: 8, text: "أهتم بالعلاقة الخاصة وأعتبرها ركيزة لاستقرار حياتنا", axis: 1 },
-      { id: 9, text: "اسعى لإغوائه حميمياً، وفي أحيان أكون أنا المبادرة، وأتزين له", axis: 1 },
-      { id: 10, text: "أرى العلاقة الحميمة ركناً في التعبير عن الحبّ، وأخلق لها الأجواء", axis: 1 },
+      { id: 1,  axis: 1, ar: "أختار الأسلوب الهين اللين عند الحديث أو الشكوى", en: "I choose a gentle, kind tone when I speak or complain" },
+      { id: 2,  axis: 1, ar: "أتجنب تضخيم الأمور البسيطة وتحويلها لمشكلات كبيرة", en: "I avoid exaggerating small issues and turning them into big problems" },
+      { id: 3,  axis: 1, ar: "أكون مصدر راحة وسكينة لزوجي بعد يوم عمل شاق", en: "I’m a source of comfort and calm for my husband after a hard workday" },
+      { id: 4,  axis: 1, ar: "استقبل زوجي بوجه بشوش ينسيه همومه ومشاكله", en: "I welcome my husband with a warm face that helps him forget his worries" },
+      { id: 5,  axis: 1, ar: "أعبر لزوجي عن حبي ومشاعري بالكلام ولا أكتفي بالصمت", en: "I express my love and feelings with words, not silence" },
+      { id: 6,  axis: 1, ar: "أهتم بمظهري وجمالي ونظافتي لأكون جذابة لزوجي", en: "I care about my appearance, cleanliness, and attractiveness for my husband" },
+      { id: 7,  axis: 1, ar: "أحرص على أن أكون \"قرة عين\" لزوجي في البيت", en: "I try to be a “comfort to his eyes” at home" },
+      { id: 8,  axis: 1, ar: "أهتم بالعلاقة الخاصة وأعتبرها ركيزة لاستقرار حياتنا", en: "I care about our intimate relationship and see it as key to stability" },
+      { id: 9,  axis: 1, ar: "أسعى لإغوائه حميمياً، وفي أحيان أكون أنا المبادرة، وأتزين له", en: "I try to attract him intimately, and sometimes I initiate and dress up for him" },
+      { id: 10, axis: 1, ar: "أرى العلاقة الحميمة ركناً في التعبير عن الحبّ، وأخلق لها الأجواء", en: "I see intimacy as part of expressing love, and I create the right atmosphere" },
 
       // Axis 2: 11-16
-      { id: 11, text: "أشعر زوجي بأنه السند الذي أعتمد عليه", axis: 2 },
-      { id: 12, text: "أدعم زوجي في مشاريعه وطموحاته ولا أحطمه", axis: 2 },
-      { id: 13, text: "أكون مصدر قوة وتشجيع لزوجي في الأوقات الصعبة", axis: 2 },
-      { id: 14, text: "أشكر زوجي على ما يبذله من جهد وإن كان بسيطاً", axis: 2 },
-      { id: 15, text: "أقدر ما يقدمه زوجي ولا أستقل الكثير منه", axis: 2 },
-      { id: 16, text: "أعبر عن امتناني لزوجي بالكلمات والأفعال", axis: 2 },
+      { id: 11, axis: 2, ar: "أشعر زوجي بأنه السند الذي أعتمد عليه", en: "I make my husband feel he is the support I rely on" },
+      { id: 12, axis: 2, ar: "أدعم زوجي في مشاريعه وطموحاته ولا أحطمه", en: "I support my husband’s projects and ambitions, I don’t tear him down" },
+      { id: 13, axis: 2, ar: "أكون مصدر قوة وتشجيع لزوجي في الأوقات الصعبة", en: "I’m a source of strength and encouragement in hard times" },
+      { id: 14, axis: 2, ar: "أشكر زوجي على ما يبذله من جهد وإن كان بسيطاً", en: "I thank my husband for his effort, even if it’s small" },
+      { id: 15, axis: 2, ar: "أقدر ما يقدمه زوجي ولا أستقل الكثير منه", en: "I value what my husband provides and don’t belittle it" },
+      { id: 16, axis: 2, ar: "أعبر عن امتناني لزوجي بالكلمات والأفعال", en: "I show gratitude with words and actions" },
 
       // Axis 3: 17-23
-      { id: 17, text: "أحتوي الخلافات داخل البيت ولا أصعدها للأهل", axis: 3 },
-      { id: 18, text: "أحاول فهم دوافع زوجي حتى لو كان مخطئاً", axis: 3 },
-      { id: 19, text: "أبادر لإنهاء الخصام ولا أطيل أمد الزعل", axis: 3 },
-      { id: 20, text: "أتعامل مع الخلافات بحكمة وهدوء", axis: 3 },
-      { id: 21, text: "أراعي وضع زوجي المالي ومراحل حياته الوظيفية", axis: 3 },
-      { id: 22, text: "أميز بين الضروريات والكماليات في الإنفاق", axis: 3 },
-      { id: 23, text: "أنفق بحكمة واقتصاد وأحافظ على مال البيت", axis: 3 }
+      { id: 17, axis: 3, ar: "أحتوي الخلافات داخل البيت ولا أصعدها للأهل", en: "I keep conflicts inside the home and don’t escalate them to relatives" },
+      { id: 18, axis: 3, ar: "أحاول فهم دوافع زوجي حتى لو كان مخطئاً", en: "I try to understand my husband’s motives even when he’s wrong" },
+      { id: 19, axis: 3, ar: "أبادر لإنهاء الخصام ولا أطيل أمد الزعل", en: "I take the lead to end distance and don’t prolong coldness" },
+      { id: 20, axis: 3, ar: "أتعامل مع الخلافات بحكمة وهدوء", en: "I handle disagreements with wisdom and calm" },
+      { id: 21, axis: 3, ar: "أراعي وضع زوجي المالي ومراحل حياته الوظيفية", en: "I consider my husband’s financial situation and career stage" },
+      { id: 22, axis: 3, ar: "أميز بين الضروريات والكماليات في الإنفاق", en: "I distinguish between needs and wants in spending" },
+      { id: 23, axis: 3, ar: "أنفق بحكمة واقتصاد وأحافظ على مال البيت", en: "I spend wisely and protect the household budget" }
     ];
 
-    /* English translations (aligned with the Arabic questions) */
-    const questionsEN = {
-      1: "I choose a gentle, kind tone when I speak or complain",
-      2: "I avoid exaggerating small issues and turning them into big problems",
-      3: "I’m a source of comfort and calm for my husband after a hard workday",
-      4: "I welcome my husband with a warm face that helps him forget his worries",
-      5: "I express my love and feelings with words, not silence",
-      6: "I care about my appearance, cleanliness, and attractiveness for my husband",
-      7: "I try to be a ‘comfort to his eyes’ at home",
-      8: "I care about our intimate relationship and see it as key to stability",
-      9: "I try to attract him intimately, and sometimes I initiate and dress up for him",
-      10:"I see intimacy as part of expressing love and I create the right atmosphere",
+    /* ---------------------------
+       Language packs (FULL pages)
+    ----------------------------*/
+    const LANG_KEY = "wife_lang_v2";
+    const STORAGE_KEY = "wife_assessment_manual_save_v3";
 
-      11:"I make my husband feel he is the support I rely on",
-      12:"I support my husband’s projects and ambitions, I don’t tear him down",
-      13:"I’m a source of strength and encouragement in hard times",
-      14:"I thank my husband for his effort, even if it’s small",
-      15:"I value what my husband provides and don’t belittle it",
-      16:"I show gratitude with words and actions",
+    const UI = {
+      ar: {
+        htmlLang: "ar",
+        htmlDir: "rtl",
+        bodyLTR: false,
+        docTitle: "هل أنتِ زوجة جيدة؟ | بوابة التقييم الذاتي",
+        metaDesc: "تقييم ذاتي للزوجة عبر أسئلة قصيرة، يعطيك نتيجتك ونصائح عملية لتحسين العلاقة الزوجية.",
 
-      17:"I keep conflicts inside the home and don’t escalate them to relatives",
-      18:"I try to understand my husband’s motives even when he’s wrong",
-      19:"I take the lead to end coldness, I don’t prolong distance",
-      20:"I handle disagreements with wisdom and calm",
-      21:"I consider my husband’s financial situation and career stages",
-      22:"I distinguish between needs and wants in spending",
-      23:"I spend wisely and protect the household budget"
+        noscript: "هذا الملف يحتاج تفعيل JavaScript لكي يعمل التقييم، الرجاء تفعيل JavaScript في المتصفح ثم إعادة فتح الصفحة.",
+        progressAria: "مؤشر التقدم",
+        toolsAria: "أدوات",
+
+        introTitle: "هل أنتِ زوجةٌ جيدة؟",
+        introSubtitle: "تقييم ذاتي مستوحى من خطبة الشيخ د. حسن البلوشي",
+        introHTML: `
+          <p>
+            في خطبته، يطرح الشيخ الدكتور حسن البلوشي سؤالاً مهماً:
+            <strong>"هل أنتِ زوجةٌ جيدة؟"</strong>
+          </p>
+          <p>
+            ويجيب عنه من خلال صفات <strong>واقعية وليست خيالية</strong> للزوجة الصالحة،
+            مستنداً إلى تعاليم أهل البيت (ع) وسيرة السيدة الزهراء والسيدة خديجة (عليهما السلام).
+          </p>
+          <p><strong>طريقة الإجابة:</strong> قيّمي كل عبارة من 1 إلى 5 حيث:</p>
+          <ul class="pillar-list">
+            <li><strong>1</strong> = لا ينطبق أبداً</li>
+            <li><strong>2</strong> = نادراً</li>
+            <li><strong>3</strong> = أحياناً</li>
+            <li><strong>4</strong> = غالباً</li>
+            <li><strong>5</strong> = ينطبق دائماً</li>
+          </ul>
+          <p><strong>الهدف:</strong> الوصول إلى <strong>60%</strong> على الأقل في كل محور</p>
+        `,
+        videoAlt: "رابط الخطبة على يوتيوب",
+        videoCta: "شاهد الخطبة كاملة (اختياري)",
+
+        axesTitle: "المحاور الثلاثة للزوجة الصالحة:",
+        axisIntroItems: [
+          {
+            n: 1,
+            title: "أخلاق السكينة",
+            desc: "أن تكوني مصدراً للهدوء والأمان النفسي، منطقة راحة تنسيه هموم العمل. كما وصف أمير المؤمنين (ع) السيدة الزهراء (ع): كان ينظر إليها فتنكشف عنه الهموم."
+          },
+          {
+            n: 2,
+            title: "أخلاق المودة",
+            desc: "إشعار الزوج بأنه السند والفارس، ودعمه في طموحاته. كما فعلت السيدة خديجة (ع) حين ثبّتت النبي (ص) وآمنت به."
+          },
+          {
+            n: 3,
+            title: "أخلاق الرحمة",
+            desc: "التعامل بحكمة في الخلافات، واحتواؤها داخل البيت، مع التدبير الاقتصادي الحكيم الذي وصفه النبي (ص) بأن فاعلته من \"عمّال الله\"."
+          }
+        ],
+
+        btnStart: "ابدأي التقييم ←",
+
+        axis1Title: "💕 المحور الأول: أخلاق السكينة",
+        axis2Title: "💜 المحور الثاني: أخلاق المودة",
+        axis3Title: "💚 المحور الثالث: أخلاق الرحمة",
+        axis1Hint: "العاطفة والأنوثة والأمان النفسي",
+        axis2Hint: "التقدير والشكر والدعم المعنوي",
+        axis3Hint: "إدارة الخلافات والتدبير المنزلي",
+
+        btnPrev: "→ السابق",
+        btnNext: "التالي ←",
+        btnShowResults: "عرض النتائج 📊",
+
+        resultsTitle: "📊 نتائج التقييم",
+        finalLabel: "النتيجة الإجمالية",
+        targetLabel: "🎯 الهدف المطلوب: 60%",
+        axesAnalysisTitle: "تحليل المحاور",
+        axis1Label: "💕 أخلاق السكينة",
+        axis2Label: "💜 أخلاق المودة",
+        axis3Label: "💚 أخلاق الرحمة",
+        btnRestart: "🔄 إعادة التقييم",
+        btnGoAdvice: "النصائح والتوجيهات ←",
+
+        adviceTitle: "💡 النصائح والتوجيهات",
+        adviceHeader: "📋 نصائح مخصصة لك",
+
+        pointsTitle: "📋 نقاط التقييم",
+        pointsHint: "انسخي نقاط التقييم لتتابعي تقدمك أو لتشاركيها",
+        btnCopyPoints: "📋 نسخ نقاط التقييم",
+
+        promiseTitle: "وعدي لنفسي",
+        promiseIntro: `اكتبي وعداً لنفسك حول ما تريدين تطويره وتحسينه في حياتك الزوجية.<br/>هذا الوعد بينك وبين نفسك، والتزامك به هو أول خطوة نحو التغيير الإيجابي.`,
+        promisePlaceholder: "أكتبي وعدك هنا...",
+        suggestionsTitle: "💡 اقتراحات للإلهام (اضغطي للإضافة):",
+        btnCopyPromise: "📋 نسخ الوعد",
+        btnBackResults: "→ العودة للنتائج",
+        btnNewAssessment: "🔄 تقييم جديد",
+
+        toolLang: "🌐 EN",
+        toolTheme: "🌙 الوضع",
+        toolExport: "📄 تقرير",
+        toolReset: "🧹 تفريغ",
+        toolSave: "💾 حفظ",
+        toolLoad: "📥 تحميل",
+        toolClear: "🗑️ مسح",
+
+        toastAnswer: (n)=>`⚠️ الرجاء الإجابة على السؤال رقم ${n}`,
+        toastAdded: "✅ تم إضافة الاقتراح",
+        toastCopied: "✅ تم النسخ",
+        toastWritePromise: "⚠️ اكتبي وعداً أولاً",
+        toastSaved: "💾 تم الحفظ",
+        toastNoSave: "ℹ️ لا يوجد حفظ سابق",
+        toastLoaded: "📥 تم التحميل",
+        toastCleared: "🗑️ تم مسح الحفظ",
+        toastReset: "🧹 تم تفريغ الإجابات",
+        toastReport: "📄 تم نسخ التقرير",
+
+        finalMsg: (p)=>{
+          if(p >= 80) return "🌟 ممتاز! أداء قوي، استمري وركزي على تثبيت العادات الجميلة.";
+          if(p >= 60) return "👍 جيد جداً، ركزي على المحور الأضعف وستلاحظين فرقاً واضحاً.";
+          if(p >= 40) return "💪 يحتاج تحسين، ابدئي بخطوة واحدة ثابتة اليوم.";
+          return "🚨 يحتاج تغيير جاد، ابدئي بأبسط عادة يومية وداومي عليها.";
+        },
+
+        enc: (p)=>{
+          if(p >= 80) return {cls:"good", icon:"🌟", title:"أداء مميز", msg:"استمري على هذا النهج، وركزي على تثبيت العادات الجميلة."};
+          if(p >= 60) return {cls:"medium", icon:"👍", title:"على الطريق الصحيح", msg:"مستوى جيد، ركزي على المحور الأضعف وستلاحظين فرقاً واضحاً."};
+          return {cls:"low", icon:"💪", title:"حان وقت التغيير", msg:"ابدئي بالأمور الصغيرة، خطوة واحدة ثابتة كل يوم تصنع تحولاً كبيراً."};
+        },
+
+        reportHeader: "تقرير التقييم الذاتي للزوجة",
+        reportTotal: "النتيجة الإجمالية",
+        reportAxes: "نتائج المحاور",
+        reportWeakest: "أضعف الأسئلة (للتركيز عليها)",
+        reportPromise: "الوعد المكتوب",
+        reportNone: "(لا يوجد)",
+
+        adviceAxisTitles: {
+          1: "💕 أخلاق السكينة",
+          2: "💜 أخلاق المودة",
+          3: "💚 أخلاق الرحمة"
+        },
+
+        adviceHTML: {
+          1: `
+            <p>السكينة والهدوء من أعظم ما تُهديه الزوجة لبيتها. الهدف هنا أن تكوني مساحة أمان لا ساحة توتر.</p>
+            <ul>
+              <li>اختاري كلمات هادئة وقت الضغط، واطلبي ما تريدين بوضوح.</li>
+              <li>خففي تضخيم التفاصيل، وميّزي بين المشكلة وبين الأسلوب.</li>
+              <li>اهتمي بالدفء العاطفي، وبالأجواء التي تُشعره بالراحة بعد العمل.</li>
+              <li>اهتمي بنفسك وبمظهرك وبالعلاقة الخاصة، فهي جزء من الاستقرار.</li>
+            </ul>
+            <details class="quote">
+              <summary>نصوص عربية (اختياري)</summary>
+              <p>
+                <strong>"وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا"</strong>
+              </p>
+              <p style="font-weight:bold;">
+                "ولقد كنت أنظر إليها فتنكشف عني الهموم والأحزان"
+              </p>
+            </details>
+          `,
+          2: `
+            <p>المودة تُقاس بما يظهر في الكلام والسلوك، خصوصاً وقت التعب والضغط.</p>
+            <ul>
+              <li>ادعميه في أهدافه، وابتعدي عن التثبيط وقت الحماس.</li>
+              <li>اجعلي الشكر عادة يومية، حتى لو كان الشيء بسيطاً.</li>
+              <li>عبّري عن الامتنان بكلمات واضحة وبأفعال صغيرة.</li>
+            </ul>
+            <details class="quote">
+              <summary>نصوص عربية (اختياري)</summary>
+              <p style="font-weight:bold;">
+                "كلا والله لا يخزيك الله أبداً..."
+              </p>
+              <p style="font-weight:bold;">
+                "لو أحسنت إلى إحداهن الدهر ثم رأت منك شيئاً قالت: ما رأيت منك خيراً قط"
+              </p>
+            </details>
+          `,
+          3: `
+            <p>الرحمة تظهر وقت الخلاف. النجاح هنا أن تُداري الأزمة بسرعة وبحكمة، وتحمي خصوصية البيت.</p>
+            <ul>
+              <li>لا تُخرجي الخلاف للأهل أو الأصدقاء، واجعلي الإصلاح داخل البيت.</li>
+              <li>بادري لإنهاء الخصام، ولا تطيلي أمد التوتر.</li>
+              <li>راعي الظروف المالية، وميّزي بين الضروري والكمالي.</li>
+              <li>اقتصاد البيت قوة، ويزيد الاستقرار.</li>
+            </ul>
+            <details class="quote">
+              <summary>نصوص عربية (اختياري)</summary>
+              <p><strong>"جهاد المرأة حسن التبعّل"</strong></p>
+              <p><strong>"القصد مثراة"</strong></p>
+            </details>
+          `
+        },
+
+        suggestions: [
+          "أعد نفسي أن أختار الأسلوب الهين اللين عند الحديث",
+          "أعد نفسي أن أستقبل زوجي بوجه بشوش وكلمة طيبة",
+          "أعد نفسي أن أعبّر عن الشكر والتقدير كل يوم",
+          "أعد نفسي أن أدعم زوجي في طموحاته دون تحطيم",
+          "أعد نفسي أن أحتوي الخلافات داخل البيت وأتعامل بحكمة",
+          "أعد نفسي أن أوازن الإنفاق وأميّز بين الضروريات والكماليات"
+        ]
+      },
+
+      en: {
+        htmlLang: "en",
+        htmlDir: "ltr",
+        bodyLTR: true,
+        docTitle: "Are You a Good Wife? | Self-Assessment Portal",
+        metaDesc: "A short self-assessment for wives. Get your score and practical advice to improve your marriage.",
+
+        noscript: "This page needs JavaScript to run the assessment. Please enable JavaScript in your browser, then reload the page.",
+        progressAria: "Progress indicator",
+        toolsAria: "Tools",
+
+        introTitle: "Are You a Good Wife?",
+        introSubtitle: "A self-assessment inspired by a sermon by Dr. Hassan Al-Balushi",
+        introHTML: `
+          <p>
+            In his sermon, Dr. Hassan Al-Balushi raises an important question:
+            <strong>"Are you a good wife?"</strong>
+          </p>
+          <p>
+            He answers it through <strong>realistic, not idealized</strong> traits of a strong wife,
+            inspired by Ahlulbayt teachings and the examples of Lady Fatimah and Lady Khadijah (peace be upon them).
+          </p>
+          <p><strong>How to answer:</strong> Rate each statement from 1 to 5:</p>
+          <ul class="pillar-list">
+            <li><strong>1</strong> = Never true</li>
+            <li><strong>2</strong> = Rarely</li>
+            <li><strong>3</strong> = Sometimes</li>
+            <li><strong>4</strong> = Often</li>
+            <li><strong>5</strong> = Always true</li>
+          </ul>
+          <p><strong>Target:</strong> reach at least <strong>60%</strong> in each axis</p>
+        `,
+        videoAlt: "YouTube sermon link",
+        videoCta: "Watch the full sermon (optional)",
+
+        axesTitle: "Three axes of a strong wife:",
+        axisIntroItems: [
+          {
+            n: 1,
+            title: "Calm (Sakinah)",
+            desc: "Be a source of peace and emotional safety, a comfort zone that helps him unwind after work. A home should feel like relief, not another battlefield."
+          },
+          {
+            n: 2,
+            title: "Affection (Mawaddah)",
+            desc: "Make him feel respected and supported, and stand with him in his goals. Support is not flattery, it’s steady encouragement."
+          },
+          {
+            n: 3,
+            title: "Mercy (Rahmah)",
+            desc: "Handle disagreements wisely, keep them inside the home, and practice smart household budgeting. Mercy shows most when stress is high."
+          }
+        ],
+
+        btnStart: "Start assessment →",
+
+        axis1Title: "💕 Axis 1: Calm (Sakinah)",
+        axis2Title: "💜 Axis 2: Affection (Mawaddah)",
+        axis3Title: "💚 Axis 3: Mercy (Rahmah)",
+        axis1Hint: "Emotional warmth, femininity, psychological safety",
+        axis2Hint: "Appreciation, gratitude, moral support",
+        axis3Hint: "Managing conflict, wise household budgeting",
+
+        btnPrev: "← Back",
+        btnNext: "Next →",
+        btnShowResults: "Show results 📊",
+
+        resultsTitle: "📊 Results",
+        finalLabel: "Overall score",
+        targetLabel: "🎯 Target: 60%",
+        axesAnalysisTitle: "Axis breakdown",
+        axis1Label: "💕 Calm",
+        axis2Label: "💜 Affection",
+        axis3Label: "💚 Mercy",
+        btnRestart: "🔄 Restart",
+        btnGoAdvice: "Advice →",
+
+        adviceTitle: "💡 Advice",
+        adviceHeader: "📋 Personalized advice",
+
+        pointsTitle: "📋 Your scores",
+        pointsHint: "Copy your scores to track progress or share them",
+        btnCopyPoints: "📋 Copy scores",
+
+        promiseTitle: "My promise to myself",
+        promiseIntro: `Write a promise about what you want to improve.<br/>This is between you and yourself. Commitment is the first step toward change.`,
+        promisePlaceholder: "Write your promise here...",
+        suggestionsTitle: "💡 Suggestions (tap to add):",
+        btnCopyPromise: "📋 Copy promise",
+        btnBackResults: "← Back to results",
+        btnNewAssessment: "🔄 New assessment",
+
+        toolLang: "🌐 AR",
+        toolTheme: "🌙 Theme",
+        toolExport: "📄 Report",
+        toolReset: "🧹 Clear",
+        toolSave: "💾 Save",
+        toolLoad: "📥 Load",
+        toolClear: "🗑️ Delete",
+
+        toastAnswer: (n)=>`⚠️ Please answer question #${n}`,
+        toastAdded: "✅ Added",
+        toastCopied: "✅ Copied",
+        toastWritePromise: "⚠️ Write a promise first",
+        toastSaved: "💾 Saved",
+        toastNoSave: "ℹ️ No saved progress",
+        toastLoaded: "📥 Loaded",
+        toastCleared: "🗑️ Deleted saved progress",
+        toastReset: "🧹 Answers cleared",
+        toastReport: "📄 Report copied",
+
+        finalMsg: (p)=>{
+          if(p >= 80) return "🌟 Excellent. Keep these habits and stay consistent.";
+          if(p >= 60) return "👍 Good. Focus on your weakest axis and you’ll improve fast.";
+          if(p >= 40) return "💪 Needs improvement. Start with one steady step today.";
+          return "🚨 Needs serious change. Start with one daily habit and stick to it.";
+        },
+
+        enc: (p)=>{
+          if(p >= 80) return {cls:"good", icon:"🌟", title:"Excellent", msg:"Keep these habits, and aim for steady improvement."};
+          if(p >= 60) return {cls:"medium", icon:"👍", title:"On the right track", msg:"Good level. Focus on the weakest axis and you’ll feel the change."};
+          return {cls:"low", icon:"💪", title:"Time to change", msg:"Small daily steps can create big shifts."};
+        },
+
+        reportHeader: "Wife Self-Assessment Report",
+        reportTotal: "Overall score",
+        reportAxes: "Axis scores",
+        reportWeakest: "Lowest questions (focus on these)",
+        reportPromise: "Your promise",
+        reportNone: "(none)",
+
+        adviceAxisTitles: {
+          1: "💕 Calm (Sakinah)",
+          2: "💜 Affection (Mawaddah)",
+          3: "💚 Mercy (Rahmah)"
+        },
+
+        adviceHTML: {
+          1: `
+            <p>Calm and emotional safety are among the best gifts a wife gives her home. The goal is a “safe place”, not constant tension.</p>
+            <ul>
+              <li>Use a soft tone under pressure, and ask clearly for what you need.</li>
+              <li>Don’t inflate small details. Separate the problem from the style.</li>
+              <li>Create a warm atmosphere after work, with attention and kindness.</li>
+              <li>Care for yourself and for intimacy. It’s part of stability.</li>
+            </ul>
+            <details class="quote">
+              <summary>Arabic texts (optional)</summary>
+              <p><strong>"وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا"</strong></p>
+              <p style="font-weight:bold;">"ولقد كنت أنظر إليها فتنكشف عني الهموم والأحزان"</p>
+            </details>
+          `,
+          2: `
+            <p>Affection shows in words and actions, especially during stress.</p>
+            <ul>
+              <li>Support his goals and projects. Avoid discouragement when he’s motivated.</li>
+              <li>Make gratitude a daily habit, even for small efforts.</li>
+              <li>Say appreciation clearly, and back it with small actions.</li>
+            </ul>
+            <details class="quote">
+              <summary>Arabic texts (optional)</summary>
+              <p style="font-weight:bold;">"كلا والله لا يخزيك الله أبداً..."</p>
+              <p style="font-weight:bold;">"لو أحسنت إلى إحداهن الدهر ثم رأت منك شيئاً قالت: ما رأيت منك خيراً قط"</p>
+            </details>
+          `,
+          3: `
+            <p>Mercy shows most during disagreements. Success is repairing quickly, protecting privacy, and managing money wisely.</p>
+            <ul>
+              <li>Keep conflicts inside the home. Don’t escalate to relatives or friends.</li>
+              <li>Take the lead to end coldness early. Don’t prolong tension.</li>
+              <li>Consider financial realities. Separate needs from wants.</li>
+              <li>Smart budgeting strengthens the home and reduces conflict.</li>
+            </ul>
+            <details class="quote">
+              <summary>Arabic texts (optional)</summary>
+              <p><strong>"جهاد المرأة حسن التبعّل"</strong></p>
+              <p><strong>"القصد مثراة"</strong></p>
+            </details>
+          `
+        },
+
+        suggestions: [
+          "I promise to choose a gentle tone when I speak",
+          "I promise to welcome my husband with warmth and a kind word",
+          "I promise to express gratitude daily",
+          "I promise to support my husband’s ambitions without tearing him down",
+          "I promise to keep conflicts inside the home and act with wisdom",
+          "I promise to budget wisely and separate needs from wants"
+        ]
+      }
     };
 
-    const adviceDB = {
-      axis1_ar: `
-        <p>
-          السكينة والهدوء من أعظم ما تُهديه الزوجة لبيتها. قال الله تعالى:
-          <strong>"وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا"</strong>.
-        </p>
-        <p>وقد وصف أمير المؤمنين (عليه السلام) السيدة الزهراء (عليها السلام) بقوله:</p>
-        <p style="font-weight:bold; background:rgba(255,255,255,0.55); padding:10px; border-radius:10px;">
-          "فوالله ما أغضبتها ولا أكرهتها على أمر حتى قبضها الله، ولا أغضبتني ولا عصت لي أمراً، ولقد كنت أنظر إليها فتنكشف عني الهموم والأحزان"
-        </p>
-        <p>واعتني بنفسك وجمالك له، فقد روي عن الإمام الصادق (عليه السلام):</p>
-        <p style="font-weight:bold; background:rgba(255,255,255,0.55); padding:10px; border-radius:10px;">
-          "لا غنى بالزوجة فيما بينها وبين زوجها الموقف عنده عن ثلاث خصال: صيانة نفسها عن كل دنس حتى يطمئن قلبه إلى الثقة بها، وتدللها عليه حتى تكون له السكن، وإظهار العشق له بالخلابة"
-        </p>
-      `,
-      axis2_ar: `
-        <p>
-          المودة هي الحب الظاهر بالأفعال والأقوال. وخير مثال السيدة خديجة (عليها السلام)،
-          حين ثبّتت النبي (صلى الله عليه وآله) وقالت:
-        </p>
-        <p style="font-weight:bold; background:rgba(255,255,255,0.55); padding:10px; border-radius:10px;">
-          "كلا والله لا يخزيك الله أبداً، إنك لتصل الرحم، وتحمل الكَلّ، وتُكسب المعدوم، وتُقري الضيف، وتُعين على نوائب الحق"
-        </p>
-        <p>واحذري من كفران العشير، فقد ورد التحذير المشهور:</p>
-        <p style="font-weight:bold; background:rgba(255,255,255,0.55); padding:10px; border-radius:10px;">
-          "لو أحسنت إلى إحداهن الدهر ثم رأت منك شيئاً قالت: ما رأيت منك خيراً قط"
-        </p>
-        <p>اجعلي الشكر والتقدير عادة يومية، فإن الشكر يزيد النعم ويُديم المودة.</p>
-      `,
-      axis3_ar: `
-        <p>
-          الرحمة تظهر وقت الخلاف. وقد روي:
-          <strong>"جهاد المرأة حسن التبعّل"</strong>.
-        </p>
-        <p>وحسن التبعّل يشمل الصبر وكظم الغيظ، وبناء الجسور لا إطالة الخصام.</p>
-        <p>
-          وفي التدبير الاقتصادي، روي عن الإمام الصادق (عليه السلام):
-          <strong>"القصد مثراة"</strong> أي أن الاقتصاد يزيد المال.
-        </p>
-        <p>راعي ظروف زوجك المالية، وميّزي بين الضروري والكمالي، واحفظي أسرار البيت.</p>
-      `,
-
-      axis1_en: `
-        <p>Calm and emotional safety are among the best gifts a wife gives her home.</p>
-        <ul>
-          <li>Choose a soft tone when you’re upset.</li>
-          <li>Don’t inflate small issues.</li>
-          <li>Be a “safe place” after a hard day.</li>
-        </ul>
-        <p>Also, care for your appearance and connection. Intimacy matters for stability.</p>
-      `,
-      axis2_en: `
-        <p>Affection shows through words and actions, especially support and appreciation.</p>
-        <ul>
-          <li>Encourage his goals and projects.</li>
-          <li>Say “thank you” daily, even for small efforts.</li>
-          <li>Show gratitude in practical ways.</li>
-        </ul>
-      `,
-      axis3_en: `
-        <p>Mercy shows most during disagreements and financial pressure.</p>
-        <ul>
-          <li>Keep conflicts inside the home, don’t escalate to relatives.</li>
-          <li>End distance early, repair quickly.</li>
-          <li>Spend wisely, separate needs from wants.</li>
-        </ul>
-      `
-    };
-
+    let currentLang = localStorage.getItem(LANG_KEY) || "ar";
     let currentPage = 0;
     const totalPages = 6;
-
-    const STORAGE_KEY = "wife_assessment_manual_save_v2";
-    const LANG_KEY = "wife_lang_v1";
-    let currentLang = localStorage.getItem(LANG_KEY) || "ar";
 
     let calculatedResults = { axisPct:{}, totalPercentage:0 };
 
@@ -1028,167 +1281,122 @@
       if(!a || a < 1) return 0;
       return (a - 1) * 1.25;
     }
-
     function answerToPct(ans){
       const a = Number(ans);
       if(!a || a < 1) return 0;
       return (a - 1) * 25;
     }
 
-    const UI_TEXT = {
-      ar: {
-        title: "هل أنتِ زوجة جيدة؟ | بوابة التقييم الذاتي",
-        desc: "تقييم ذاتي للزوجة عبر أسئلة قصيرة، يعطيك نتيجتك ونصائح عملية لتحسين العلاقة الزوجية.",
-        introTitle: "هل أنتِ زوجةٌ جيدة؟",
-        introSubtitle: "تقييم ذاتي مستوحى من خطبة الشيخ د. حسن البلوشي",
-        videoCta: "شاهد الخطبة كاملة (اختياري)",
-        axesTitle: "المحاور الثلاثة للزوجة الصالحة:",
-        btnStart: "ابدأي التقييم ←",
-        axis1Title: "💕 المحور الأول: أخلاق السكينة",
-        axis2Title: "💜 المحور الثاني: أخلاق المودة",
-        axis3Title: "💚 المحور الثالث: أخلاق الرحمة",
-        axis1Hint: "العاطفة والأنوثة والأمان النفسي",
-        axis2Hint: "التقدير والشكر والدعم المعنوي",
-        axis3Hint: "إدارة الخلافات والتدبير المنزلي",
-        resultsTitle: "📊 نتائج التقييم",
-        adviceTitle: "💡 النصائح والتوجيهات",
-        finalLabel: "النتيجة الإجمالية",
-        targetLabel: "🎯 الهدف المطلوب: 60%",
-        axesAnalysisTitle: "تحليل المحاور",
-        axis1Label: "💕 أخلاق السكينة",
-        axis2Label: "💜 أخلاق المودة",
-        axis3Label: "💚 أخلاق الرحمة",
-        btnPrev: "→ السابق",
-        btnNext: "التالي ←",
-        btnShowResults: "عرض النتائج 📊",
-        btnRestart: "🔄 إعادة التقييم",
-        btnGoAdvice: "النصائح والتوجيهات ←",
-        pointsTitle: "📋 نقاط التقييم",
-        pointsHint: "انسخي نقاط التقييم لتتابعي تقدمك أو لتشاركيها",
-        btnCopyPoints: "📋 نسخ نقاط التقييم",
-        promiseTitle: "وعدي لنفسي",
-        promiseIntro: "اكتبي وعداً لنفسك حول ما تريدين تطويره وتحسينه في حياتك الزوجية.\nهذا الوعد بينك وبين نفسك، والتزامك به هو أول خطوة نحو التغيير الإيجابي.",
-        promisePlaceholder: "أكتبي وعدك هنا...",
-        suggestionsTitle: "💡 اقتراحات للإلهام (اضغطي للإضافة):",
-        btnCopyPromise: "📋 نسخ الوعد",
-        btnBackResults: "→ العودة للنتائج",
-        btnNewAssessment: "🔄 تقييم جديد",
-        toolTheme: "🌙 الوضع",
-        toolExport: "📄 تقرير",
-        toolReset: "🧹 تفريغ",
-        toolSave: "💾 حفظ",
-        toolLoad: "📥 تحميل",
-        toolClear: "🗑️ مسح",
-        toastAnswerQ: (n)=>`⚠️ الرجاء الإجابة على السؤال رقم ${n}`,
-        toastAdded: "✅ تم إضافة الاقتراح",
-        toastCopied: "✅ تم النسخ",
-        toastWritePromise: "⚠️ اكتبي وعداً أولاً",
-        toastSaved: "💾 تم الحفظ",
-        toastNoSave: "ℹ️ لا يوجد حفظ سابق",
-        toastLoaded: "📥 تم التحميل",
-        toastCleared: "🗑️ تم مسح الحفظ",
-        toastReset: "🧹 تم تفريغ الإجابات",
-        toastReport: "📄 تم نسخ التقرير",
-        langBtn: "🌐 EN",
-        finalMsg: (p)=>{
-          if(p >= 80) return "🌟 ممتاز! أداء رائع، استمري في هذا المستوى المميز.";
-          if(p >= 60) return "👍 جيد جداً، مع بعض التحسينات ستصلين للأفضل.";
-          if(p >= 40) return "💪 يحتاج تحسين، ابدئي بخطوة واحدة اليوم وستمضين للأمام.";
-          return "🚨 حان وقت التغيير، ابدئي بخطوة جادة اليوم.";
-        },
-        enc: (p)=>{
-          if(p >= 80) return {cls:"good", icon:"🌟", title:"أداء مميز", msg:"استمري على هذا النهج، وركزي على تثبيت العادات الجميلة."};
-          if(p >= 60) return {cls:"medium", icon:"👍", title:"على الطريق الصحيح", msg:"مستوى جيد، ركزي على المحور الأضعف وستلاحظين فرقاً واضحاً."};
-          return {cls:"low", icon:"💪", title:"حان وقت التغيير", msg:"ابدئي بالأمور الصغيرة، خطوة واحدة ثابتة كل يوم تصنع تحولاً كبيراً."};
-        },
-        reportHeader: "تقرير التقييم الذاتي للزوجة",
-        reportTotal: "النتيجة الإجمالية",
-        reportAxes: "نتائج المحاور",
-        reportWeakest: "أضعف الأسئلة (للتركيز عليها)",
-        reportPromise: "الوعد المكتوب",
-        reportNone: "(لا يوجد)",
-        adviceHeader: "📋 نصائح مخصصة لك"
-      },
-
-      en: {
-        title: "Are You a Good Wife? | Self-Assessment Portal",
-        desc: "A short self-assessment for wives. Get your score and practical advice to improve your marriage.",
-        introTitle: "Are You a Good Wife?",
-        introSubtitle: "A self-assessment inspired by a sermon by Dr. Hassan Al-Balushi",
-        videoCta: "Watch the full sermon (optional)",
-        axesTitle: "Three axes of a strong wife:",
-        btnStart: "Start assessment →",
-        axis1Title: "💕 Axis 1: Calm (Sakinah)",
-        axis2Title: "💜 Axis 2: Affection (Mawaddah)",
-        axis3Title: "💚 Axis 3: Mercy (Rahmah)",
-        axis1Hint: "Emotional warmth, femininity, psychological safety",
-        axis2Hint: "Appreciation, gratitude, moral support",
-        axis3Hint: "Managing conflict, wise household budgeting",
-        resultsTitle: "📊 Results",
-        adviceTitle: "💡 Advice",
-        finalLabel: "Overall score",
-        targetLabel: "🎯 Target: 60%",
-        axesAnalysisTitle: "Axis breakdown",
-        axis1Label: "💕 Calm",
-        axis2Label: "💜 Affection",
-        axis3Label: "💚 Mercy",
-        btnPrev: "← Back",
-        btnNext: "Next →",
-        btnShowResults: "Show results 📊",
-        btnRestart: "🔄 Restart",
-        btnGoAdvice: "Advice →",
-        pointsTitle: "📋 Scores",
-        pointsHint: "Copy your scores to track progress or share them",
-        btnCopyPoints: "📋 Copy scores",
-        promiseTitle: "My promise to myself",
-        promiseIntro: "Write a promise about what you want to improve.\nThis is between you and yourself, commitment is the first step toward change.",
-        promisePlaceholder: "Write your promise here...",
-        suggestionsTitle: "💡 Suggestions (tap to add):",
-        btnCopyPromise: "📋 Copy promise",
-        btnBackResults: "← Back to results",
-        btnNewAssessment: "🔄 New assessment",
-        toolTheme: "🌙 Theme",
-        toolExport: "📄 Report",
-        toolReset: "🧹 Clear",
-        toolSave: "💾 Save",
-        toolLoad: "📥 Load",
-        toolClear: "🗑️ Delete",
-        toastAnswerQ: (n)=>`⚠️ Please answer question #${n}`,
-        toastAdded: "✅ Added",
-        toastCopied: "✅ Copied",
-        toastWritePromise: "⚠️ Write a promise first",
-        toastSaved: "💾 Saved",
-        toastNoSave: "ℹ️ No saved progress",
-        toastLoaded: "📥 Loaded",
-        toastCleared: "🗑️ Deleted saved progress",
-        toastReset: "🧹 Answers cleared",
-        toastReport: "📄 Report copied",
-        langBtn: "🌐 AR",
-        finalMsg: (p)=>{
-          if(p >= 80) return "🌟 Excellent. Keep it up.";
-          if(p >= 60) return "👍 Good. With a few improvements, you’ll do even better.";
-          if(p >= 40) return "💪 Needs improvement. Start with one small step today.";
-          return "🚨 Time for serious change. Start with one strong step today.";
-        },
-        enc: (p)=>{
-          if(p >= 80) return {cls:"good", icon:"🌟", title:"Excellent", msg:"Keep these habits, and aim for steady improvement."};
-          if(p >= 60) return {cls:"medium", icon:"👍", title:"On the right track", msg:"Good level. Focus on the weakest axis and you’ll feel the change."};
-          return {cls:"low", icon:"💪", title:"Time to change", msg:"Small daily steps can create big shifts."};
-        },
-        reportHeader: "Wife Self-Assessment Report",
-        reportTotal: "Overall score",
-        reportAxes: "Axis scores",
-        reportWeakest: "Lowest questions (focus on these)",
-        reportPromise: "Your promise",
-        reportNone: "(none)",
-        adviceHeader: "📋 Personalized advice"
-      }
-    };
-
-    function t(key, arg){
-      const pack = UI_TEXT[currentLang] || UI_TEXT.ar;
+    function U(key, arg){
+      const pack = UI[currentLang] || UI.ar;
       const val = pack[key];
       return (typeof val === "function") ? val(arg) : val;
+    }
+
+    function applyLanguage(){
+      const pack = UI[currentLang] || UI.ar;
+
+      document.documentElement.lang = pack.htmlLang;
+      document.documentElement.dir = pack.htmlDir;
+
+      document.body.classList.toggle("ltr", !!pack.bodyLTR);
+
+      document.title = pack.docTitle;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if(metaDesc) metaDesc.setAttribute("content", pack.metaDesc);
+
+      // Aria + noscript
+      const ns = document.getElementById("noscriptBox");
+      if(ns) ns.textContent = pack.noscript;
+
+      const pd = document.getElementById("progressDots");
+      if(pd) pd.setAttribute("aria-label", pack.progressAria);
+
+      const tb = document.getElementById("toolsBox");
+      if(tb) tb.setAttribute("aria-label", pack.toolsAria);
+
+      // Page 0
+      setText("introTitle", pack.introTitle);
+      setText("introSubtitle", pack.introSubtitle);
+      setHTML("introText", pack.introHTML);
+      const thumb = document.getElementById("videoThumb");
+      if(thumb) thumb.alt = pack.videoAlt;
+      setText("videoCta", pack.videoCta);
+      setText("axesTitle", pack.axesTitle);
+      setText("btnStart", pack.btnStart);
+
+      // Axis intro blocks
+      renderAxisIntro();
+
+      // Pages 1-3
+      setText("axis1Title", pack.axis1Title);
+      setText("axis2Title", pack.axis2Title);
+      setText("axis3Title", pack.axis3Title);
+      setText("axis1Hint", pack.axis1Hint);
+      setText("axis2Hint", pack.axis2Hint);
+      setText("axis3Hint", pack.axis3Hint);
+
+      setText("btnP1Prev", pack.btnPrev);
+      setText("btnP1Next", pack.btnNext);
+      setText("btnP2Prev", pack.btnPrev);
+      setText("btnP2Next", pack.btnNext);
+      setText("btnP3Prev", pack.btnPrev);
+      setText("btnShowResults", pack.btnShowResults);
+
+      // Page 4
+      setText("resultsTitle", pack.resultsTitle);
+      setText("finalLabel", pack.finalLabel);
+      setText("targetLabel", pack.targetLabel);
+      setText("axesAnalysisTitle", pack.axesAnalysisTitle);
+      setText("axis1Label", pack.axis1Label);
+      setText("axis2Label", pack.axis2Label);
+      setText("axis3Label", pack.axis3Label);
+      setText("btnRestart", pack.btnRestart);
+      setText("btnGoAdvice", pack.btnGoAdvice);
+
+      // Page 5
+      setText("adviceTitle", pack.adviceTitle);
+      setText("pointsTitle", pack.pointsTitle);
+      setText("pointsHint", pack.pointsHint);
+      setText("btnCopyPoints", pack.btnCopyPoints);
+
+      setText("promiseTitle", pack.promiseTitle);
+      setHTML("promiseIntro", pack.promiseIntro);
+
+      const promise = document.getElementById("promiseText");
+      if(promise) promise.placeholder = pack.promisePlaceholder;
+
+      setText("suggestionsTitle", pack.suggestionsTitle);
+      setText("btnCopyPromise", pack.btnCopyPromise);
+      setText("btnBackResults", pack.btnBackResults);
+      setText("btnNewAssessment", pack.btnNewAssessment);
+
+      // Tools
+      setText("langBtn", pack.toolLang);
+      setText("btnTheme", pack.toolTheme);
+      setText("btnExport", pack.toolExport);
+      setText("btnReset", pack.toolReset);
+      setText("btnSave", pack.toolSave);
+      setText("btnLoad", pack.toolLoad);
+      setText("btnClear", pack.toolClear);
+
+      // Rerender questions in selected language, preserve answers
+      rerenderQuestionsPreserveAnswers();
+
+      // Regenerate suggestions
+      generatePromiseSuggestions();
+
+      // If advice already open, regenerate in the chosen language
+      if(currentPage === 5) generateAdvicePage();
+    }
+
+    function setText(id, text){
+      const el = document.getElementById(id);
+      if(el) el.textContent = text;
+    }
+    function setHTML(id, html){
+      const el = document.getElementById(id);
+      if(el) el.innerHTML = html;
     }
 
     function toggleLang(){
@@ -1197,96 +1405,31 @@
       applyLanguage();
     }
 
-    function applyLanguage(){
-      document.documentElement.lang = currentLang;
-      document.documentElement.dir = (currentLang === "en") ? "ltr" : "rtl";
-      document.body.classList.toggle("ltr", currentLang === "en");
+    function renderAxisIntro(){
+      const box = document.getElementById("axisIntro");
+      if(!box) return;
+      box.innerHTML = "";
+      const items = UI[currentLang].axisIntroItems;
 
-      document.title = t("title");
-      const metaDesc = document.querySelector('meta[name="description"]');
-      if(metaDesc) metaDesc.setAttribute("content", t("desc"));
-
-      const setText = (id, text) => { const el = document.getElementById(id); if(el) el.textContent = text; };
-
-      setText("introTitle", t("introTitle"));
-      setText("introSubtitle", t("introSubtitle"));
-      setText("videoCta", t("videoCta"));
-      setText("axesTitle", t("axesTitle"));
-
-      setText("btnStart", t("btnStart"));
-
-      setText("axis1Title", t("axis1Title"));
-      setText("axis2Title", t("axis2Title"));
-      setText("axis3Title", t("axis3Title"));
-
-      setText("axis1Hint", t("axis1Hint"));
-      setText("axis2Hint", t("axis2Hint"));
-      setText("axis3Hint", t("axis3Hint"));
-
-      setText("btnP1Prev", t("btnPrev"));
-      setText("btnP1Next", t("btnNext"));
-      setText("btnP2Prev", t("btnPrev"));
-      setText("btnP2Next", t("btnNext"));
-      setText("btnP3Prev", t("btnPrev"));
-      setText("btnShowResults", t("btnShowResults"));
-
-      setText("resultsTitle", t("resultsTitle"));
-      setText("finalLabel", t("finalLabel"));
-      setText("targetLabel", t("targetLabel"));
-      setText("axesAnalysisTitle", t("axesAnalysisTitle"));
-      setText("axis1Label", t("axis1Label"));
-      setText("axis2Label", t("axis2Label"));
-      setText("axis3Label", t("axis3Label"));
-
-      setText("btnRestart", t("btnRestart"));
-      setText("btnGoAdvice", t("btnGoAdvice"));
-
-      setText("adviceTitle", t("adviceTitle"));
-      setText("pointsTitle", t("pointsTitle"));
-      setText("pointsHint", t("pointsHint"));
-      setText("btnCopyPoints", t("btnCopyPoints"));
-
-      setText("promiseTitle", t("promiseTitle"));
-      setText("promiseIntro", t("promiseIntro"));
-      const promiseEl = document.getElementById("promiseText");
-      if(promiseEl) promiseEl.placeholder = t("promisePlaceholder");
-
-      setText("suggestionsTitle", t("suggestionsTitle"));
-      setText("btnCopyPromise", t("btnCopyPromise"));
-
-      setText("btnBackResults", t("btnBackResults"));
-      setText("btnNewAssessment", t("btnNewAssessment"));
-
-      setText("langBtn", t("langBtn"));
-      setText("btnTheme", t("toolTheme"));
-      setText("btnExport", t("toolExport"));
-      setText("btnReset", t("toolReset"));
-      setText("btnSave", t("toolSave"));
-      setText("btnLoad", t("toolLoad"));
-      setText("btnClear", t("toolClear"));
-
-      // Rerender questions with the right language, preserving answers
-      rerenderQuestionsPreserveAnswers();
-
-      if(currentPage === 5) generatePromiseSuggestions();
-      if(currentPage === 5) generateAdvicePage();
-    }
-
-    function init(){
-      applyLanguage();
-      updateProgressDots();
-      scrollTopNow();
-      loadSavedIntoUI();
-      generatePromiseSuggestions();
+      items.forEach(it=>{
+        const wrap = document.createElement("div");
+        wrap.className = "axis-intro-item";
+        wrap.innerHTML = `
+          <div class="axis-number">${it.n}</div>
+          <div class="axis-content">
+            <strong>${it.title}</strong>
+            <p>${it.desc}</p>
+          </div>
+        `;
+        box.appendChild(wrap);
+      });
     }
 
     function getQuestionText(q){
-      if(currentLang === "en") return (questionsEN[q.id] || q.text);
-      return q.text;
+      return (currentLang === "en") ? q.en : q.ar;
     }
 
     function renderQuestions(){
-      // clear containers
       for(const a of [1,2,3]){
         const c = document.getElementById(`axis${a}_questions`);
         if(c) c.innerHTML = "";
@@ -1371,18 +1514,14 @@
     }
 
     function validatePage(pageNum){
-      const ranges = {
-        1: [1,10],
-        2: [11,16],
-        3: [17,23]
-      };
+      const ranges = { 1:[1,10], 2:[11,16], 3:[17,23] };
       if(!(pageNum in ranges)) return true;
 
       const [startQ, endQ] = ranges[pageNum];
       for(let i=startQ;i<=endQ;i++){
         const selected = document.querySelector(`input[name="q${i}"]:checked`);
         if(!selected){
-          showToast(t("toastAnswerQ", i));
+          showToast(U("toastAnswer", i));
           const row = document.getElementById(`qrow${i}`);
           if(row) row.scrollIntoView({behavior:'smooth', block:'center'});
           return false;
@@ -1421,7 +1560,7 @@
       calculatedResults.totalPercentage = totalPercentage;
 
       document.getElementById('finalScore').innerText = totalPercentage.toFixed(0) + "%";
-      document.getElementById('finalMessage').innerText = t("finalMsg", totalPercentage);
+      document.getElementById('finalMessage').innerText = U("finalMsg", totalPercentage);
 
       updateAxisUI(axisPct[1], 'barAxis1', 'scoreAxis1');
       updateAxisUI(axisPct[2], 'barAxis2', 'scoreAxis2');
@@ -1446,7 +1585,7 @@
       const section = document.getElementById('encouragementSection');
       if(!section) return;
 
-      const e = UI_TEXT[currentLang].enc(totalPercentage);
+      const e = UI[currentLang].enc(totalPercentage);
 
       section.className = 'encouragement-section ' + e.cls;
       const titleColor = (e.cls === "good") ? "#155724" : (e.cls === "medium") ? "#856404" : "#721c24";
@@ -1476,28 +1615,16 @@
       const a2 = calculatedResults.axisPct[2] ?? 0;
       const a3 = calculatedResults.axisPct[3] ?? 0;
 
+      const titles = UI[currentLang].adviceAxisTitles;
+      const bodies = UI[currentLang].adviceHTML;
+
       const items = [
-        {
-          axis:1,
-          title:(currentLang==="en" ? "💕 Calm (Sakinah)" : "💕 أخلاق السكينة"),
-          pct:a1,
-          body:(currentLang==="en" ? adviceDB.axis1_en : adviceDB.axis1_ar)
-        },
-        {
-          axis:2,
-          title:(currentLang==="en" ? "💜 Affection (Mawaddah)" : "💜 أخلاق المودة"),
-          pct:a2,
-          body:(currentLang==="en" ? adviceDB.axis2_en : adviceDB.axis2_ar)
-        },
-        {
-          axis:3,
-          title:(currentLang==="en" ? "💚 Mercy (Rahmah)" : "💚 أخلاق الرحمة"),
-          pct:a3,
-          body:(currentLang==="en" ? adviceDB.axis3_en : adviceDB.axis3_ar)
-        }
+        { axis:1, title: titles[1], pct:a1, body: bodies[1] },
+        { axis:2, title: titles[2], pct:a2, body: bodies[2] },
+        { axis:3, title: titles[3], pct:a3, body: bodies[3] }
       ].sort((x,y)=>x.pct - y.pct);
 
-      adviceDiv.innerHTML = `<div class="tips-title">${t("adviceHeader")}</div>`;
+      adviceDiv.innerHTML = `<div class="tips-title">${U("adviceHeader")}</div>`;
 
       items.forEach(item=>{
         const card = document.createElement('div');
@@ -1514,13 +1641,15 @@
       const a = calculatedResults.axisPct || {};
       const total = calculatedResults.totalPercentage || 0;
 
-      let text = (currentLang === "en") ? "My scores:\n\n" : "نقاط تقييمي:\n\n";
+      let text = "";
       if(currentLang === "en"){
+        text += "My scores:\n\n";
         text += `Calm: ${Math.round(a[1] || 0)}%\n`;
         text += `Affection: ${Math.round(a[2] || 0)}%\n`;
         text += `Mercy: ${Math.round(a[3] || 0)}%\n`;
         text += `\nOverall score: ${Math.round(total)}%`;
       } else {
+        text += "نقاط تقييمي:\n\n";
         text += `أخلاق السكينة: ${Math.round(a[1] || 0)}%\n`;
         text += `أخلاق المودة: ${Math.round(a[2] || 0)}%\n`;
         text += `أخلاق الرحمة: ${Math.round(a[3] || 0)}%\n`;
@@ -1530,29 +1659,11 @@
     }
 
     function generatePromiseSuggestions(){
-      const suggestionsAR = [
-        "أعد نفسي أن أختار الأسلوب الهين اللين عند الحديث",
-        "أعد نفسي أن أستقبل زوجي بوجه بشوش وكلمة طيبة",
-        "أعد نفسي أن أعبّر عن الشكر والتقدير كل يوم",
-        "أعد نفسي أن أدعم زوجي في طموحاته دون تحطيم",
-        "أعد نفسي أن أحتوي الخلافات داخل البيت وأتعامل بحكمة",
-        "أعد نفسي أن أوازن الإنفاق وأميّز بين الضروريات والكماليات"
-      ];
-
-      const suggestionsEN = [
-        "I promise to choose a gentle tone when I speak",
-        "I promise to welcome my husband with warmth and a kind word",
-        "I promise to express gratitude daily",
-        "I promise to support my husband’s ambitions without tearing him down",
-        "I promise to keep conflicts inside the home and act with wisdom",
-        "I promise to budget wisely and separate needs from wants"
-      ];
-
-      const suggestions = (currentLang === "en") ? suggestionsEN : suggestionsAR;
-
       const list = document.getElementById('suggestionsList');
       if(!list) return;
+
       list.innerHTML = '';
+      const suggestions = UI[currentLang].suggestions || [];
 
       suggestions.forEach(s=>{
         const item = document.createElement('div');
@@ -1568,13 +1679,13 @@
       if(!textarea) return;
       if(textarea.value.trim() === '') textarea.value = text;
       else textarea.value += "\n" + text;
-      showToast(t("toastAdded"));
+      showToast(U("toastAdded"));
     }
 
     function copyPromise(){
       const text = (document.getElementById('promiseText').value || "").trim();
       if(text === ''){
-        showToast(t("toastWritePromise"));
+        showToast(U("toastWritePromise"));
         return;
       }
       copyToClipboard(text);
@@ -1582,7 +1693,7 @@
 
     function copyToClipboard(text){
       if(navigator.clipboard && navigator.clipboard.writeText){
-        navigator.clipboard.writeText(text).then(()=>showToast(t("toastCopied"))).catch(()=>fallbackCopy(text));
+        navigator.clipboard.writeText(text).then(()=>showToast(U("toastCopied"))).catch(()=>fallbackCopy(text));
       } else fallbackCopy(text);
     }
 
@@ -1591,7 +1702,7 @@
       temp.value = text;
       document.body.appendChild(temp);
       temp.select();
-      try{ document.execCommand('copy'); showToast(t("toastCopied")); }
+      try{ document.execCommand('copy'); showToast(U("toastCopied")); }
       catch(e){ showToast("❌"); }
       document.body.removeChild(temp);
     }
@@ -1632,7 +1743,7 @@
       document.getElementById('encouragementSection').innerHTML = "";
       document.getElementById('adviceContent').innerHTML = "";
 
-      if(!silent) showToast(t("toastReset"));
+      if(!silent) showToast(U("toastReset"));
       scrollTopNow();
     }
 
@@ -1665,11 +1776,11 @@
         .sort((x,y)=>answerToPoints(x.v) - answerToPoints(y.v))
         .slice(0, 8);
 
-      let out = t("reportHeader") + "\n";
+      let out = UI[currentLang].reportHeader + "\n";
       out += "--------------------------------\n";
-      out += `${t("reportTotal")}: ${total}%\n\n`;
+      out += `${UI[currentLang].reportTotal}: ${total}%\n\n`;
 
-      out += t("reportAxes") + ":\n";
+      out += UI[currentLang].reportAxes + ":\n";
       if(currentLang === "en"){
         out += `- Calm: ${Math.round(a[1] || 0)}%\n`;
         out += `- Affection: ${Math.round(a[2] || 0)}%\n`;
@@ -1680,28 +1791,31 @@
         out += `- أخلاق الرحمة: ${Math.round(a[3] || 0)}%\n`;
       }
 
-      out += "\n" + t("reportWeakest") + ":\n";
-      if(!weakest.length) out += "- " + (currentLang==="en" ? "Not enough data" : "لا توجد بيانات كافية") + "\n";
-      else weakest.forEach(x=>{
-        const pts = answerToPoints(x.v);
-        const pct = answerToPct(x.v);
-        const qText = getQuestionText(x.q);
-        out += `- ${x.q.id}. ${qText} = ${x.v} (pts: ${pts.toFixed(2)}/5, ${pct.toFixed(0)}%)\n`;
-      });
+      out += "\n" + UI[currentLang].reportWeakest + ":\n";
+      if(!weakest.length){
+        out += "- " + (currentLang==="en" ? "Not enough data" : "لا توجد بيانات كافية") + "\n";
+      } else {
+        weakest.forEach(x=>{
+          const pts = answerToPoints(x.v);
+          const pct = answerToPct(x.v);
+          const qText = getQuestionText(x.q);
+          out += `- ${x.q.id}. ${qText} = ${x.v} (pts: ${pts.toFixed(2)}/5, ${pct.toFixed(0)}%)\n`;
+        });
+      }
 
-      out += "\n" + t("reportPromise") + ":\n";
+      out += "\n" + UI[currentLang].reportPromise + ":\n";
       const pr = (document.getElementById('promiseText').value || "").trim();
-      out += pr ? pr + "\n" : t("reportNone") + "\n";
+      out += pr ? pr + "\n" : UI[currentLang].reportNone + "\n";
 
       copyToClipboard(out);
-      showToast(t("toastReport"));
+      showToast(U("toastReport"));
     }
 
-    /* Manual save and load only */
+    /* Manual save & load */
     function buildState(){
       const answers = {};
-      questions.forEach(function(q){
-        const el = document.querySelector('input[name="q' + q.id + '"]:checked');
+      questions.forEach(q=>{
+        const el = document.querySelector(`input[name="q${q.id}"]:checked`);
         answers[q.id] = el ? Number(el.value) : null;
       });
 
@@ -1709,8 +1823,8 @@
       const promise = promiseEl ? promiseEl.value : "";
 
       return {
-        answers: answers,
-        promise: promise,
+        answers,
+        promise,
         dark: document.body.classList.contains('dark'),
         page: currentPage,
         lang: currentLang,
@@ -1731,10 +1845,10 @@
 
       applyLanguage();
 
-      questions.forEach(function(q){
+      questions.forEach(q=>{
         const val = state.answers[q.id];
         if(val === null || val === undefined) return;
-        const radio = document.querySelector('input[name="q' + q.id + '"][value="' + val + '"]');
+        const radio = document.querySelector(`input[name="q${q.id}"][value="${val}"]`);
         if(radio){
           radio.checked = true;
           markAnswered(q.id);
@@ -1756,7 +1870,7 @@
       try{
         const state = buildState();
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-        showToast(t("toastSaved"));
+        showToast(U("toastSaved"));
       } catch(e){
         showToast("❌");
       }
@@ -1766,12 +1880,12 @@
       try{
         const raw = localStorage.getItem(STORAGE_KEY);
         if(!raw){
-          showToast(t("toastNoSave"));
+          showToast(U("toastNoSave"));
           return;
         }
         const state = JSON.parse(raw);
         applyState(state);
-        showToast(t("toastLoaded"));
+        showToast(U("toastLoaded"));
       } catch(e){
         showToast("❌");
       }
@@ -1780,26 +1894,18 @@
     function clearSaved(){
       try{
         localStorage.removeItem(STORAGE_KEY);
-        showToast(t("toastCleared"));
+        showToast(U("toastCleared"));
       } catch(e){
         showToast("❌");
       }
     }
 
-    function loadSavedIntoUI(){
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if(!raw) {
-        renderQuestions(); // initial
-        return;
-      }
-      try{
-        const state = JSON.parse(raw);
-        // render first, then apply
-        renderQuestions();
-        applyState(state);
-      } catch(e){
-        renderQuestions();
-      }
+    function init(){
+      renderQuestions();
+      applyLanguage();
+      updateProgressDots();
+      scrollTopNow();
+      generatePromiseSuggestions();
     }
 
     init();
