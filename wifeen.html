@@ -1,0 +1,1808 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/apple-touch-icon-120x120-precomposed.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>هل أنتِ زوجة جيدة؟ | بوابة التقييم الذاتي</title>
+  <meta name="description" content="تقييم ذاتي للزوجة عبر أسئلة قصيرة، يعطيك نتيجتك ونصائح عملية لتحسين العلاقة الزوجية.">
+
+  <style>
+    :root{
+      --primary:#d63384;
+      --secondary:#6f42c1;
+      --success:#198754;
+      --warning:#ffc107;
+      --danger:#dc3545;
+
+      --bg1:#fce4ec;
+      --bg2:#ede7f6;
+
+      --text:#212529;
+      --card:#ffffff;
+      --border:rgba(0,0,0,0.08);
+
+      --radius:16px;
+      --shadow:0 10px 30px rgba(0,0,0,0.12);
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      padding:20px;
+      font-family:Tahoma, Arial, sans-serif;
+      background:linear-gradient(135deg,var(--bg1),var(--bg2));
+      color:var(--text);
+      min-height:100vh;
+      line-height:1.85;
+    }
+
+    .container{
+      max-width:850px;
+      margin:0 auto;
+      background:rgba(255,255,255,0.98);
+      padding:25px;
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      border:1px solid rgba(255,255,255,0.4);
+    }
+
+    .page{display:none; animation:fadeIn 0.35s ease;}
+    .page.active{display:block;}
+    @keyframes fadeIn{
+      from{opacity:0; transform:translateY(8px);}
+      to{opacity:1; transform:translateY(0);}
+    }
+
+    h1,h2,h3{ text-align:center; margin:0 0 15px 0; }
+    h1{ color:var(--primary); font-size:32px; }
+    h2{ color:var(--primary); font-size:26px; }
+    h3{ color:#495057; font-size:20px; }
+
+    .intro-icon{
+      text-align:center;
+      font-size:55px;
+      margin-bottom:12px;
+    }
+
+    .intro-text{
+      background:rgba(214,51,132,0.08);
+      padding:20px;
+      border-radius:var(--radius);
+      margin:18px 0;
+      border:1px solid rgba(214,51,132,0.18);
+      line-height:1.85;
+    }
+
+    .pillar-list{margin:10px 0; padding-right:20px;}
+    .pillar-list li{margin:6px 0;}
+
+    /* Progress dots */
+    .progress-dots{
+      display:flex;
+      justify-content:center;
+      margin:12px 0 18px;
+      gap:8px;
+    }
+    .progress-dot{
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      background:rgba(0,0,0,0.15);
+      transition:all 0.25s ease;
+    }
+    .progress-dot.active{
+      background:var(--primary);
+      transform:scale(1.15);
+    }
+
+    /* Axis intro items */
+    .axis-intro{margin:22px 0;}
+    .axis-intro-item{
+      display:flex;
+      align-items:flex-start;
+      gap:14px;
+      margin-bottom:16px;
+      padding:15px;
+      background:rgba(255,255,255,0.7);
+      border-radius:14px;
+      border:1px solid rgba(0,0,0,0.06);
+    }
+    .axis-number{
+      width:45px;
+      height:45px;
+      background:var(--primary);
+      color:white;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:bold;
+      font-size:18px;
+      flex:0 0 auto;
+    }
+    .axis-content{flex:1;}
+    .axis-content strong{color:#4b1f34;}
+    .axis-content p{margin:8px 0 0 0; color:#6c757d; line-height:1.65;}
+
+    /* Section headers inside pages */
+    .sub-section-title{
+      background:linear-gradient(135deg, rgba(214,51,132,0.12), rgba(111,66,193,0.12));
+      padding:12px 15px;
+      border-radius:14px;
+      margin:18px 0 10px;
+      font-weight:bold;
+      border:1px solid rgba(214,51,132,0.18);
+      text-align:center;
+    }
+    .section-hint{
+      text-align:center;
+      color:#6c757d;
+      margin:0 0 12px 0;
+      font-size:14px;
+      line-height:1.7;
+    }
+
+    /* Questions */
+    .question-row{
+      display:flex;
+      flex-direction:column;
+      background:rgba(255,255,255,0.95);
+      padding:15px;
+      margin:10px 0;
+      border-radius:14px;
+      border:1px solid rgba(0,0,0,0.08);
+      transition:transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .question-row:hover{
+      transform:translateY(-2px);
+      box-shadow:0 7px 18px rgba(0,0,0,0.08);
+    }
+    .question-row.answered{
+      border-color:rgba(25,135,84,0.35);
+      background:rgba(25,135,84,0.06);
+    }
+    .question-text{
+      font-weight:bold;
+      margin-bottom:12px;
+      font-size:16px;
+      line-height:1.55;
+    }
+
+    .options{
+      display:flex;
+      justify-content:space-between;
+      gap:6px;
+      flex-wrap:wrap;
+    }
+    .options label{
+      cursor:pointer;
+      padding:10px 12px;
+      border-radius:12px;
+      border:2px solid rgba(214,51,132,0.18);
+      background:rgba(255,255,255,0.85);
+      transition:all 0.2s ease;
+      text-align:center;
+      min-width:52px;
+      flex:1;
+      user-select:none;
+    }
+    .options label:hover{
+      border-color:rgba(214,51,132,0.5);
+      background:rgba(214,51,132,0.07);
+    }
+    .options input[type="radio"]{display:none;}
+    .options input[type="radio"]:checked + span{
+      font-weight:bold;
+      color:white;
+      background:var(--primary);
+      display:inline-block;
+      width:100%;
+      padding:8px 0;
+      border-radius:10px;
+    }
+
+    /* Buttons */
+    .btn-container{
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      margin-top:25px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      padding:14px 22px;
+      font-size:16px;
+      border:none;
+      border-radius:14px;
+      cursor:pointer;
+      transition:all 0.15s ease;
+      font-weight:bold;
+      min-width:140px;
+    }
+    .btn:hover{transform:translateY(-2px); opacity:0.95;}
+    .btn:active{transform:translateY(1px);}
+    .btn-primary{background:var(--primary); color:white;}
+    .btn-secondary{background:#6c757d; color:white;}
+    .btn-success{background:var(--success); color:white;}
+    .btn-warning{background:var(--warning); color:var(--text);}
+
+    /* Results */
+    .result-card{
+      background:linear-gradient(135deg, rgba(214,51,132,0.08), rgba(111,66,193,0.08));
+      padding:22px;
+      border-radius:var(--radius);
+      margin:18px 0;
+      text-align:center;
+      border:1px solid rgba(214,51,132,0.18);
+    }
+    .score-label{font-size:18px; margin-bottom:10px; font-weight:bold;}
+    .total-score{
+      font-size:55px;
+      font-weight:bold;
+      color:var(--primary);
+      margin:10px 0;
+    }
+    .target-score{
+      background:rgba(255,193,7,0.15);
+      padding:12px 18px;
+      border-radius:14px;
+      margin-top:15px;
+      display:inline-block;
+      font-weight:bold;
+      border:1px solid rgba(255,193,7,0.35);
+    }
+
+    .axis-result{
+      background:rgba(255,255,255,0.95);
+      padding:18px;
+      border-radius:14px;
+      margin:15px 0;
+      border:1px solid rgba(0,0,0,0.08);
+    }
+    .axis-title{
+      font-size:18px;
+      font-weight:bold;
+      margin-bottom:10px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .progress-bar-container{
+      background:rgba(0,0,0,0.06);
+      height:12px;
+      border-radius:10px;
+      overflow:hidden;
+      margin:10px 0;
+    }
+    .progress-bar{
+      height:100%;
+      border-radius:10px;
+      transition:width 0.8s ease;
+      width:0;
+    }
+
+    .encouragement-section{
+      margin-top:20px;
+      padding:18px;
+      border-radius:var(--radius);
+      text-align:center;
+      border:1px solid rgba(0,0,0,0.06);
+    }
+    .encouragement-section.good{background:rgba(25,135,84,0.10); border-color:rgba(25,135,84,0.22);}
+    .encouragement-section.medium{background:rgba(255,193,7,0.12); border-color:rgba(255,193,7,0.28);}
+    .encouragement-section.low{background:rgba(220,53,69,0.10); border-color:rgba(220,53,69,0.22);}
+    .encouragement-icon{font-size:42px; margin-bottom:10px;}
+    .encouragement-title{font-size:18px; font-weight:bold; margin-bottom:8px;}
+    .encouragement-message{line-height:1.7; font-size:15px;}
+
+    /* Advice page cards */
+    .tips-section{
+      background:rgba(214,51,132,0.06);
+      padding:20px;
+      border-radius:var(--radius);
+      margin:20px 0;
+      border:1px solid rgba(214,51,132,0.14);
+    }
+    .tips-title{
+      font-size:20px;
+      font-weight:bold;
+      margin-bottom:15px;
+      text-align:center;
+      color:var(--primary);
+    }
+
+    .tip-card{
+      background:rgba(255,255,255,0.9);
+      padding:15px;
+      border-radius:14px;
+      margin:12px 0;
+      border-right:4px solid var(--primary);
+      border-left:1px solid rgba(0,0,0,0.06);
+      border-top:1px solid rgba(0,0,0,0.06);
+      border-bottom:1px solid rgba(0,0,0,0.06);
+      line-height:1.9;
+    }
+    .tip-card h4{margin:0 0 8px 0;}
+
+    .tip-card.good{
+      border-right-color:var(--success);
+      background:rgba(25,135,84,0.06);
+    }
+    .tip-card.good h4{color:var(--success);}
+
+    .tip-card.medium{
+      border-right-color:var(--warning);
+      background:rgba(255,193,7,0.14);
+    }
+    .tip-card.medium h4{color:#856404;}
+
+    .tip-card.low{
+      border-right-color:var(--danger);
+      background:rgba(220,53,69,0.08);
+    }
+    .tip-card.low h4{color:#721c24;}
+
+    /* Promise */
+    .promise-container{
+      background:rgba(111,66,193,0.07);
+      padding:20px;
+      border-radius:var(--radius);
+      margin:20px 0;
+      border:1px solid rgba(111,66,193,0.18);
+    }
+
+    textarea{
+      width:100%;
+      min-height:140px;
+      padding:15px;
+      border-radius:14px;
+      border:2px solid rgba(111,66,193,0.2);
+      font-family:inherit;
+      font-size:16px;
+      resize:vertical;
+      line-height:1.6;
+      color:var(--text);
+      background:white;
+    }
+    textarea::placeholder{color:rgba(33,37,41,0.65);}
+    textarea:focus{
+      outline:none;
+      border-color:rgba(111,66,193,0.55);
+      box-shadow:0 0 0 4px rgba(111,66,193,0.12);
+    }
+
+    .suggestion-item{
+      background:rgba(255,255,255,0.9);
+      padding:12px;
+      border-radius:12px;
+      margin:8px 0;
+      cursor:pointer;
+      transition:transform 0.15s ease;
+      border:1px solid rgba(0,0,0,0.06);
+      line-height:1.7;
+    }
+    .suggestion-item:hover{
+      transform:translateY(-2px);
+      background:rgba(111,66,193,0.08);
+    }
+
+    /* Toast */
+    .toast{
+      position:fixed;
+      bottom:16px;
+      left:16px;
+      background:rgba(33,37,41,0.95);
+      color:white;
+      padding:12px 16px;
+      border-radius:14px;
+      font-weight:bold;
+      transform:translateY(100px);
+      opacity:0;
+      transition:all 0.25s ease;
+      z-index:1000;
+      max-width:85vw;
+    }
+    .toast.show{transform:translateY(0); opacity:1;}
+
+    /* Floating tools */
+    .tools{
+      position:fixed;
+      bottom:16px;
+      right:16px;
+      z-index:1200;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:flex-end;
+    }
+    .fab{
+      width:46px;
+      height:46px;
+      border-radius:50%;
+      border:none;
+      cursor:pointer;
+      font-size:20px;
+      color:white;
+      background:linear-gradient(135deg,var(--primary), var(--secondary));
+      box-shadow:0 12px 25px rgba(0,0,0,0.18);
+    }
+    .panel{
+      width:220px;
+      background:rgba(255,255,255,0.96);
+      border:1px solid rgba(0,0,0,0.10);
+      border-radius:16px;
+      padding:10px;
+      box-shadow:0 16px 30px rgba(0,0,0,0.14);
+      backdrop-filter:blur(6px);
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+    }
+    .tbtn{
+      border:1px solid rgba(0,0,0,0.12);
+      background:#fff;
+      border-radius:12px;
+      padding:10px 8px;
+      cursor:pointer;
+      font-weight:900;
+      font-size:13px;
+    }
+
+    @media (max-width:600px){
+      body{padding:10px;}
+      .container{padding:15px;}
+      .options label{min-width:44px; padding:8px 6px;}
+      .btn{min-width:120px; padding:12px 16px;}
+      .total-score{font-size:45px;}
+    }
+
+    /* Unified YouTube Card (same as husband file) */
+    .video-section { margin: 25px 0; }
+    .video-link-card {
+      display:block;
+      text-decoration:none;
+      border-radius:15px;
+      overflow:hidden;
+      box-shadow:0 4px 15px rgba(0,0,0,0.1);
+      transition:all 0.3s;
+      background:white;
+    }
+    .video-link-card:hover {
+      transform: translateY(-3px);
+      box-shadow:0 8px 25px rgba(0,0,0,0.15);
+    }
+    .video-thumbnail {
+      position:relative;
+      width:100%;
+      padding-bottom:56.25%;
+      background:#000;
+      overflow:hidden;
+    }
+    .video-thumbnail img {
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform: translate(-50%, -50%);
+      width:100%;
+      height:auto;
+      min-height:100%;
+      object-fit:cover;
+    }
+    .play-button {
+      position:absolute;
+      top:50%;
+      left:50%;
+      transform: translate(-50%, -50%);
+      transition: all 0.3s;
+    }
+    .video-link-card:hover .play-button {
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+    .play-button svg { filter: drop-shadow(0 2px 10px rgba(0,0,0,0.3)); }
+    .video-info {
+      display:flex;
+      align-items:center;
+      padding:15px 20px;
+      background: linear-gradient(135deg, var(--primary), #047857);
+      color:white;
+    }
+    .video-icon-small { font-size:1.3em; margin-left:10px; }
+    .video-text { flex:1; font-weight:bold; font-size:1em; }
+    .external-icon { font-size:1.2em; opacity:0.8; }
+
+    /* Dark mode */
+    body.dark{
+      background:#0b1220 !important;
+      color:#e5e7eb !important;
+    }
+    body.dark .container{
+      background:rgba(2,6,23,0.72) !important;
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    body.dark h1, body.dark h2{color:#fbcfe8;}
+    body.dark h3{color:#cbd5e1;}
+
+    body.dark .intro-text,
+    body.dark .axis-intro-item,
+    body.dark .question-row,
+    body.dark .axis-result,
+    body.dark .result-card,
+    body.dark .tips-section,
+    body.dark .promise-container,
+    body.dark .video-link-card{
+      background:rgba(255,255,255,0.06) !important;
+      border-color:rgba(255,255,255,0.10) !important;
+      color:#e5e7eb !important;
+    }
+
+    body.dark .sub-section-title{
+      background:linear-gradient(135deg, rgba(251,207,232,0.14), rgba(196,181,253,0.12));
+      border-color:rgba(255,255,255,0.10);
+      color:#e5e7eb;
+    }
+    body.dark .section-hint{color:#cbd5e1;}
+
+    body.dark .options label{
+      background:rgba(255,255,255,0.06);
+      border-color:rgba(255,255,255,0.14);
+      color:#e5e7eb;
+    }
+    body.dark .options label:hover{
+      background:rgba(251,207,232,0.10);
+      border-color:rgba(251,207,232,0.25);
+    }
+
+    body.dark textarea{
+      background:rgba(255,255,255,0.06);
+      border-color:rgba(255,255,255,0.16);
+      color:#e5e7eb;
+    }
+
+    body.dark .suggestion-item{
+      background:rgba(255,255,255,0.06);
+      border-color:rgba(255,255,255,0.12);
+      color:#e5e7eb;
+    }
+
+    body.dark .panel{
+      background:rgba(2,6,23,0.90);
+      border-color:rgba(255,255,255,0.10);
+      color:#e5e7eb;
+    }
+    body.dark .tbtn{
+      background:rgba(255,255,255,0.06);
+      border-color:rgba(255,255,255,0.12);
+      color:#e5e7eb;
+    }
+
+    /* Print */
+    @media print{
+      .tools,.toast,.progress-dots,.btn-container{display:none !important;}
+      body{background:white !important; color:black !important;}
+      #page4,#page5{display:block !important;}
+      #page0,#page1,#page2,#page3{display:none !important;}
+    }
+
+    /* LTR mode (English) */
+    body.ltr{ direction:ltr; }
+    body.ltr .pillar-list{ padding-left:20px; padding-right:0; }
+    body.ltr .tip-card{
+      border-left:4px solid var(--primary);
+      border-right:1px solid rgba(0,0,0,0.06);
+    }
+    body.ltr .tip-card.good{ border-left-color:var(--success); }
+    body.ltr .tip-card.medium{ border-left-color:var(--warning); }
+    body.ltr .tip-card.low{ border-left-color:var(--danger); }
+    body.ltr .video-icon-small{ margin-right:10px; margin-left:0; }
+  </style>
+
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MFBM0K072V"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-MFBM0K072V');
+  </script>
+
+  <link rel="canonical" href="https://squaredoo.netlify.app/wife">
+  <meta name="robots" content="index,follow">
+  <meta property="og:locale" content="ar_AR">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="بوابة التقييم الذاتي">
+  <meta property="og:title" content="هل أنت زوجة جيدة؟ | بوابة التقييم الذاتي">
+  <meta property="og:description" content="تقييم ذاتي للزوجة عبر أسئلة قصيرة، يعطيك نتيجتك ونصائح عملية لتحسين العلاقة الزوجية.">
+  <meta property="og:url" content="https://squaredoo.netlify.app/wife">
+  <meta property="og:image" content="https://squaredoo.netlify.app/apple-touch-icon-180x180.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="هل أنت زوجة جيدة؟ | بوابة التقييم الذاتي">
+  <meta name="twitter:description" content="تقييم ذاتي للزوجة عبر أسئلة قصيرة، يعطيك نتيجتك ونصائح عملية لتحسين العلاقة الزوجية.">
+  <meta name="twitter:image" content="https://squaredoo.netlify.app/apple-touch-icon-180x180.png">
+</head>
+
+<body>
+  <noscript>
+    <div style="max-width:850px;margin:0 auto 12px;background:#fff3cd;border:1px solid rgba(0,0,0,0.12);padding:14px;border-radius:14px;line-height:1.7;">
+      هذا الملف يحتاج تفعيل JavaScript لكي يعمل التقييم، الرجاء تفعيل JavaScript في المتصفح ثم إعادة فتح الصفحة.
+    </div>
+  </noscript>
+
+  <div class="container">
+
+    <div class="progress-dots" aria-label="مؤشر التقدم">
+      <div class="progress-dot active" id="dot0"></div>
+      <div class="progress-dot" id="dot1"></div>
+      <div class="progress-dot" id="dot2"></div>
+      <div class="progress-dot" id="dot3"></div>
+      <div class="progress-dot" id="dot4"></div>
+      <div class="progress-dot" id="dot5"></div>
+    </div>
+
+    <!-- Page 0: Intro -->
+    <div class="page active" id="page0">
+      <div class="intro-icon">💝</div>
+      <h1 id="introTitle">هل أنتِ زوجةٌ جيدة؟</h1>
+      <h3 id="introSubtitle">تقييم ذاتي مستوحى من خطبة الشيخ د. حسن البلوشي</h3>
+
+      <div class="intro-text" id="introText">
+        <p>
+          في خطبته، يطرح الشيخ الدكتور حسن البلوشي سؤالاً مهماً:
+          <strong>"هل أنتِ زوجةٌ جيدة؟"</strong>
+        </p>
+        <p>
+          ويجيب عنه من خلال صفات <strong>واقعية وليست خيالية</strong> للزوجة الصالحة،
+          مستنداً إلى تعاليم أهل البيت (ع) وسيرة السيدة الزهراء والسيدة خديجة (عليهما السلام).
+        </p>
+
+        <p><strong>طريقة الإجابة:</strong> قيّمي كل عبارة من 1 إلى 5 حيث:</p>
+        <ul class="pillar-list">
+          <li><strong>1</strong> = لا ينطبق أبداً</li>
+          <li><strong>2</strong> = نادراً</li>
+          <li><strong>3</strong> = أحياناً</li>
+          <li><strong>4</strong> = غالباً</li>
+          <li><strong>5</strong> = ينطبق دائماً</li>
+        </ul>
+
+        <p><strong>الهدف:</strong> الوصول إلى <strong>60%</strong> على الأقل في كل محور</p>
+      </div>
+
+      <div class="video-section">
+        <a href="https://www.youtube.com/watch?v=cDoZfNmQ_Oo" target="_blank" rel="noopener" class="video-link-card">
+          <div class="video-thumbnail">
+            <img src="https://i.ytimg.com/vi/cDoZfNmQ_Oo/maxresdefault.jpg"
+                 onerror="this.onerror=null;this.src='https://img.youtube.com/vi/cDoZfNmQ_Oo/hqdefault.jpg';"
+                 alt="YouTube">
+            <div class="play-button">
+              <svg viewBox="0 0 68 48" width="68" height="48">
+                <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#f00"></path>
+                <path d="M 45,24 27,14 27,34" fill="#fff"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="video-info">
+            <span class="video-icon-small">🎬</span>
+            <span class="video-text" id="videoCta">شاهد الخطبة كاملة (اختياري)</span>
+            <span class="external-icon">↗</span>
+          </div>
+        </a>
+      </div>
+
+      <h3 id="axesTitle">المحاور الثلاثة للزوجة الصالحة:</h3>
+
+      <div class="axis-intro" id="axisIntro">
+        <div class="axis-intro-item">
+          <div class="axis-number">1</div>
+          <div class="axis-content">
+            <strong>أخلاق السكينة</strong>
+            <p>أن تكوني مصدراً للهدوء والأمان النفسي، منطقة راحة تنسيه هموم العمل. كما وصف أمير المؤمنين (ع) السيدة الزهراء (ع): كان ينظر إليها فتنكشف عنه الهموم.</p>
+          </div>
+        </div>
+
+        <div class="axis-intro-item">
+          <div class="axis-number">2</div>
+          <div class="axis-content">
+            <strong>أخلاق المودة</strong>
+            <p>إشعار الزوج بأنه السند والفارس، ودعمه في طموحاته. كما فعلت السيدة خديجة (ع) حين ثبّتت النبي (ص) وآمنت به.</p>
+          </div>
+        </div>
+
+        <div class="axis-intro-item">
+          <div class="axis-number">3</div>
+          <div class="axis-content">
+            <strong>أخلاق الرحمة</strong>
+            <p>التعامل بحكمة في الخلافات، واحتواؤها داخل البيت، مع التدبير الاقتصادي الحكيم الذي وصفه النبي (ص) بأن فاعلته من "عمّال الله".</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-container">
+        <button class="btn btn-primary" type="button" onclick="nextPage()" id="btnStart">ابدأي التقييم ←</button>
+      </div>
+    </div>
+
+    <!-- Page 1: Axis 1 -->
+    <div class="page" id="page1">
+      <h2 id="axis1Title">💕 المحور الأول: أخلاق السكينة</h2>
+      <p class="section-hint" id="axis1Hint">العاطفة والأنوثة والأمان النفسي</p>
+      <div id="axis1_questions"></div>
+      <div class="btn-container">
+        <button class="btn btn-secondary" type="button" onclick="prevPage()" id="btnP1Prev">→ السابق</button>
+        <button class="btn btn-primary" type="button" onclick="nextPage()" id="btnP1Next">التالي ←</button>
+      </div>
+    </div>
+
+    <!-- Page 2: Axis 2 -->
+    <div class="page" id="page2">
+      <h2 id="axis2Title">💜 المحور الثاني: أخلاق المودة</h2>
+      <p class="section-hint" id="axis2Hint">التقدير والشكر والدعم المعنوي</p>
+      <div id="axis2_questions"></div>
+      <div class="btn-container">
+        <button class="btn btn-secondary" type="button" onclick="prevPage()" id="btnP2Prev">→ السابق</button>
+        <button class="btn btn-primary" type="button" onclick="nextPage()" id="btnP2Next">التالي ←</button>
+      </div>
+    </div>
+
+    <!-- Page 3: Axis 3 -->
+    <div class="page" id="page3">
+      <h2 id="axis3Title">💚 المحور الثالث: أخلاق الرحمة</h2>
+      <p class="section-hint" id="axis3Hint">إدارة الخلافات والتدبير المنزلي</p>
+      <div id="axis3_questions"></div>
+      <div class="btn-container">
+        <button class="btn btn-secondary" type="button" onclick="prevPage()" id="btnP3Prev">→ السابق</button>
+        <button class="btn btn-success" type="button" onclick="calculateResults()" id="btnShowResults">عرض النتائج 📊</button>
+      </div>
+    </div>
+
+    <!-- Page 4: Results -->
+    <div class="page" id="page4">
+      <h2 id="resultsTitle">📊 نتائج التقييم</h2>
+
+      <div class="result-card">
+        <div class="score-label" id="finalLabel">النتيجة الإجمالية</div>
+        <div class="total-score" id="finalScore">0%</div>
+        <p id="finalMessage"></p>
+        <div class="target-score" id="targetLabel">🎯 الهدف المطلوب: 60%</div>
+      </div>
+
+      <h3 id="axesAnalysisTitle">تحليل المحاور</h3>
+
+      <div class="axis-result">
+        <div class="axis-title">
+          <span id="axis1Label">💕 أخلاق السكينة</span>
+          <span id="scoreAxis1">0%</span>
+        </div>
+        <div class="progress-bar-container">
+          <div class="progress-bar" id="barAxis1"></div>
+        </div>
+      </div>
+
+      <div class="axis-result">
+        <div class="axis-title">
+          <span id="axis2Label">💜 أخلاق المودة</span>
+          <span id="scoreAxis2">0%</span>
+        </div>
+        <div class="progress-bar-container">
+          <div class="progress-bar" id="barAxis2"></div>
+        </div>
+      </div>
+
+      <div class="axis-result">
+        <div class="axis-title">
+          <span id="axis3Label">💚 أخلاق الرحمة</span>
+          <span id="scoreAxis3">0%</span>
+        </div>
+        <div class="progress-bar-container">
+          <div class="progress-bar" id="barAxis3"></div>
+        </div>
+      </div>
+
+      <div class="encouragement-section" id="encouragementSection"></div>
+
+      <div class="btn-container">
+        <button class="btn btn-secondary" type="button" onclick="restartAssessment()" id="btnRestart">🔄 إعادة التقييم</button>
+        <button class="btn btn-primary" type="button" onclick="goToAdvicePage()" id="btnGoAdvice">النصائح والتوجيهات ←</button>
+      </div>
+    </div>
+
+    <!-- Page 5: Advice + Copy points + Promise -->
+    <div class="page" id="page5">
+      <h2 id="adviceTitle">💡 النصائح والتوجيهات</h2>
+
+      <div class="tips-section" id="adviceContent"></div>
+
+      <div class="result-card" style="margin-top:18px;">
+        <div class="score-label" id="pointsTitle">📋 نقاط التقييم</div>
+        <p style="margin:10px 0;" id="pointsHint">انسخي نقاط التقييم لتتابعي تقدمك أو لتشاركيها</p>
+        <button class="btn btn-warning" type="button" onclick="copyAssessmentPoints()" id="btnCopyPoints">📋 نسخ نقاط التقييم</button>
+      </div>
+
+      <div class="promise-container">
+        <div class="intro-icon">✍️</div>
+        <h3 style="margin-top:0;" id="promiseTitle">وعدي لنفسي</h3>
+        <p style="line-height:1.7; text-align:center; margin-top:0;" id="promiseIntro">
+          اكتبي وعداً لنفسك حول ما تريدين تطويره وتحسينه في حياتك الزوجية.
+          <br />
+          هذا الوعد بينك وبين نفسك، والتزامك به هو أول خطوة نحو التغيير الإيجابي.
+        </p>
+
+        <textarea id="promiseText" placeholder="أكتبي وعدك هنا..."></textarea>
+
+        <div style="margin-top:14px;">
+          <h4 style="text-align:center; margin:0 0 10px; color:#6f42c1;" id="suggestionsTitle">💡 اقتراحات للإلهام (اضغطي للإضافة):</h4>
+          <div id="suggestionsList"></div>
+        </div>
+
+        <div style="text-align:center; margin-top:15px;">
+          <button class="btn btn-warning" type="button" onclick="copyPromise()" id="btnCopyPromise">📋 نسخ الوعد</button>
+        </div>
+      </div>
+
+      <div class="btn-container">
+        <button class="btn btn-secondary" type="button" onclick="goToPage(4)" id="btnBackResults">→ العودة للنتائج</button>
+        <button class="btn btn-success" type="button" onclick="restartAssessment()" id="btnNewAssessment">🔄 تقييم جديد</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Floating tools -->
+  <div class="tools" aria-label="أدوات">
+    <button class="fab" type="button" onclick="togglePanel()" aria-label="فتح الأدوات">⚙️</button>
+    <div class="panel" id="panel" hidden>
+      <div class="grid">
+        <button class="tbtn" type="button" onclick="toggleLang()" id="langBtn">🌐 EN</button>
+        <button class="tbtn" type="button" onclick="toggleTheme()" id="btnTheme">🌙 الوضع</button>
+
+        <button class="tbtn" type="button" onclick="exportText()" id="btnExport">📄 تقرير</button>
+        <button class="tbtn" type="button" onclick="resetAnswers()" id="btnReset">🧹 تفريغ</button>
+
+        <button class="tbtn" type="button" onclick="saveProgress()" id="btnSave">💾 حفظ</button>
+        <button class="tbtn" type="button" onclick="loadProgress()" id="btnLoad">📥 تحميل</button>
+
+        <button class="tbtn" type="button" onclick="clearSaved()" id="btnClear">🗑️ مسح</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const questions = [
+      // Axis 1: 1-10
+      { id: 1, text: "أختار الأسلوب الهين اللين عند الحديث أو الشكوى", axis: 1 },
+      { id: 2, text: "أتجنب تضخيم الأمور البسيطة وتحويلها لمشكلات كبيرة", axis: 1 },
+      { id: 3, text: "أكون مصدر راحة وسكينة لزوجي بعد يوم عمل شاق", axis: 1 },
+      { id: 4, text: "استقبل زوجي بوجه بشوش ينسيه همومه ومشاكله", axis: 1 },
+      { id: 5, text: "أعبر لزوجي عن حبي ومشاعري بالكلام ولا أكتفي بالصمت", axis: 1 },
+      { id: 6, text: "أهتم بمظهري وجمالي ونظافتي لأكون جذابة لزوجي", axis: 1 },
+      { id: 7, text: "أحرص على أن أكون \"قرة عين\" لزوجي في البيت", axis: 1 },
+      { id: 8, text: "أهتم بالعلاقة الخاصة وأعتبرها ركيزة لاستقرار حياتنا", axis: 1 },
+      { id: 9, text: "اسعى لإغوائه حميمياً، وفي أحيان أكون أنا المبادرة، وأتزين له", axis: 1 },
+      { id: 10, text: "أرى العلاقة الحميمة ركناً في التعبير عن الحبّ، وأخلق لها الأجواء", axis: 1 },
+
+      // Axis 2: 11-16
+      { id: 11, text: "أشعر زوجي بأنه السند الذي أعتمد عليه", axis: 2 },
+      { id: 12, text: "أدعم زوجي في مشاريعه وطموحاته ولا أحطمه", axis: 2 },
+      { id: 13, text: "أكون مصدر قوة وتشجيع لزوجي في الأوقات الصعبة", axis: 2 },
+      { id: 14, text: "أشكر زوجي على ما يبذله من جهد وإن كان بسيطاً", axis: 2 },
+      { id: 15, text: "أقدر ما يقدمه زوجي ولا أستقل الكثير منه", axis: 2 },
+      { id: 16, text: "أعبر عن امتناني لزوجي بالكلمات والأفعال", axis: 2 },
+
+      // Axis 3: 17-23
+      { id: 17, text: "أحتوي الخلافات داخل البيت ولا أصعدها للأهل", axis: 3 },
+      { id: 18, text: "أحاول فهم دوافع زوجي حتى لو كان مخطئاً", axis: 3 },
+      { id: 19, text: "أبادر لإنهاء الخصام ولا أطيل أمد الزعل", axis: 3 },
+      { id: 20, text: "أتعامل مع الخلافات بحكمة وهدوء", axis: 3 },
+      { id: 21, text: "أراعي وضع زوجي المالي ومراحل حياته الوظيفية", axis: 3 },
+      { id: 22, text: "أميز بين الضروريات والكماليات في الإنفاق", axis: 3 },
+      { id: 23, text: "أنفق بحكمة واقتصاد وأحافظ على مال البيت", axis: 3 }
+    ];
+
+    /* English translations (aligned with the Arabic questions) */
+    const questionsEN = {
+      1: "I choose a gentle, kind tone when I speak or complain",
+      2: "I avoid exaggerating small issues and turning them into big problems",
+      3: "I’m a source of comfort and calm for my husband after a hard workday",
+      4: "I welcome my husband with a warm face that helps him forget his worries",
+      5: "I express my love and feelings with words, not silence",
+      6: "I care about my appearance, cleanliness, and attractiveness for my husband",
+      7: "I try to be a ‘comfort to his eyes’ at home",
+      8: "I care about our intimate relationship and see it as key to stability",
+      9: "I try to attract him intimately, and sometimes I initiate and dress up for him",
+      10:"I see intimacy as part of expressing love and I create the right atmosphere",
+
+      11:"I make my husband feel he is the support I rely on",
+      12:"I support my husband’s projects and ambitions, I don’t tear him down",
+      13:"I’m a source of strength and encouragement in hard times",
+      14:"I thank my husband for his effort, even if it’s small",
+      15:"I value what my husband provides and don’t belittle it",
+      16:"I show gratitude with words and actions",
+
+      17:"I keep conflicts inside the home and don’t escalate them to relatives",
+      18:"I try to understand my husband’s motives even when he’s wrong",
+      19:"I take the lead to end coldness, I don’t prolong distance",
+      20:"I handle disagreements with wisdom and calm",
+      21:"I consider my husband’s financial situation and career stages",
+      22:"I distinguish between needs and wants in spending",
+      23:"I spend wisely and protect the household budget"
+    };
+
+    const adviceDB = {
+      axis1_ar: `
+        <p>
+          السكينة والهدوء من أعظم ما تُهديه الزوجة لبيتها. قال الله تعالى:
+          <strong>"وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا"</strong>.
+        </p>
+        <p>وقد وصف أمير المؤمنين (عليه السلام) السيدة الزهراء (عليها السلام) بقوله:</p>
+        <p style="font-weight:bold; background:rgba(255,255,255,0.55); padding:10px; border-radius:10px;">
+          "فوالله ما أغضبتها ولا أكرهتها على أمر حتى قبضها الله، ولا أغضبتني ولا عصت لي أمراً، ولقد كنت أنظر إليها فتنكشف عني الهموم والأحزان"
+        </p>
+        <p>واعتني بنفسك وجمالك له، فقد روي عن الإمام الصادق (عليه السلام):</p>
+        <p style="font-weight:bold; background:rgba(255,255,255,0.55); padding:10px; border-radius:10px;">
+          "لا غنى بالزوجة فيما بينها وبين زوجها الموقف عنده عن ثلاث خصال: صيانة نفسها عن كل دنس حتى يطمئن قلبه إلى الثقة بها، وتدللها عليه حتى تكون له السكن، وإظهار العشق له بالخلابة"
+        </p>
+      `,
+      axis2_ar: `
+        <p>
+          المودة هي الحب الظاهر بالأفعال والأقوال. وخير مثال السيدة خديجة (عليها السلام)،
+          حين ثبّتت النبي (صلى الله عليه وآله) وقالت:
+        </p>
+        <p style="font-weight:bold; background:rgba(255,255,255,0.55); padding:10px; border-radius:10px;">
+          "كلا والله لا يخزيك الله أبداً، إنك لتصل الرحم، وتحمل الكَلّ، وتُكسب المعدوم، وتُقري الضيف، وتُعين على نوائب الحق"
+        </p>
+        <p>واحذري من كفران العشير، فقد ورد التحذير المشهور:</p>
+        <p style="font-weight:bold; background:rgba(255,255,255,0.55); padding:10px; border-radius:10px;">
+          "لو أحسنت إلى إحداهن الدهر ثم رأت منك شيئاً قالت: ما رأيت منك خيراً قط"
+        </p>
+        <p>اجعلي الشكر والتقدير عادة يومية، فإن الشكر يزيد النعم ويُديم المودة.</p>
+      `,
+      axis3_ar: `
+        <p>
+          الرحمة تظهر وقت الخلاف. وقد روي:
+          <strong>"جهاد المرأة حسن التبعّل"</strong>.
+        </p>
+        <p>وحسن التبعّل يشمل الصبر وكظم الغيظ، وبناء الجسور لا إطالة الخصام.</p>
+        <p>
+          وفي التدبير الاقتصادي، روي عن الإمام الصادق (عليه السلام):
+          <strong>"القصد مثراة"</strong> أي أن الاقتصاد يزيد المال.
+        </p>
+        <p>راعي ظروف زوجك المالية، وميّزي بين الضروري والكمالي، واحفظي أسرار البيت.</p>
+      `,
+
+      axis1_en: `
+        <p>Calm and emotional safety are among the best gifts a wife gives her home.</p>
+        <ul>
+          <li>Choose a soft tone when you’re upset.</li>
+          <li>Don’t inflate small issues.</li>
+          <li>Be a “safe place” after a hard day.</li>
+        </ul>
+        <p>Also, care for your appearance and connection. Intimacy matters for stability.</p>
+      `,
+      axis2_en: `
+        <p>Affection shows through words and actions, especially support and appreciation.</p>
+        <ul>
+          <li>Encourage his goals and projects.</li>
+          <li>Say “thank you” daily, even for small efforts.</li>
+          <li>Show gratitude in practical ways.</li>
+        </ul>
+      `,
+      axis3_en: `
+        <p>Mercy shows most during disagreements and financial pressure.</p>
+        <ul>
+          <li>Keep conflicts inside the home, don’t escalate to relatives.</li>
+          <li>End distance early, repair quickly.</li>
+          <li>Spend wisely, separate needs from wants.</li>
+        </ul>
+      `
+    };
+
+    let currentPage = 0;
+    const totalPages = 6;
+
+    const STORAGE_KEY = "wife_assessment_manual_save_v2";
+    const LANG_KEY = "wife_lang_v1";
+    let currentLang = localStorage.getItem(LANG_KEY) || "ar";
+
+    let calculatedResults = { axisPct:{}, totalPercentage:0 };
+
+    /* Scoring map:
+       1 => 0%  => 0 points
+       2 => 25% => 1.25 points
+       3 => 50% => 2.5 points
+       4 => 75% => 3.75 points
+       5 => 100%=> 5 points
+    */
+    function answerToPoints(ans){
+      const a = Number(ans);
+      if(!a || a < 1) return 0;
+      return (a - 1) * 1.25;
+    }
+
+    function answerToPct(ans){
+      const a = Number(ans);
+      if(!a || a < 1) return 0;
+      return (a - 1) * 25;
+    }
+
+    const UI_TEXT = {
+      ar: {
+        title: "هل أنتِ زوجة جيدة؟ | بوابة التقييم الذاتي",
+        desc: "تقييم ذاتي للزوجة عبر أسئلة قصيرة، يعطيك نتيجتك ونصائح عملية لتحسين العلاقة الزوجية.",
+        introTitle: "هل أنتِ زوجةٌ جيدة؟",
+        introSubtitle: "تقييم ذاتي مستوحى من خطبة الشيخ د. حسن البلوشي",
+        videoCta: "شاهد الخطبة كاملة (اختياري)",
+        axesTitle: "المحاور الثلاثة للزوجة الصالحة:",
+        btnStart: "ابدأي التقييم ←",
+        axis1Title: "💕 المحور الأول: أخلاق السكينة",
+        axis2Title: "💜 المحور الثاني: أخلاق المودة",
+        axis3Title: "💚 المحور الثالث: أخلاق الرحمة",
+        axis1Hint: "العاطفة والأنوثة والأمان النفسي",
+        axis2Hint: "التقدير والشكر والدعم المعنوي",
+        axis3Hint: "إدارة الخلافات والتدبير المنزلي",
+        resultsTitle: "📊 نتائج التقييم",
+        adviceTitle: "💡 النصائح والتوجيهات",
+        finalLabel: "النتيجة الإجمالية",
+        targetLabel: "🎯 الهدف المطلوب: 60%",
+        axesAnalysisTitle: "تحليل المحاور",
+        axis1Label: "💕 أخلاق السكينة",
+        axis2Label: "💜 أخلاق المودة",
+        axis3Label: "💚 أخلاق الرحمة",
+        btnPrev: "→ السابق",
+        btnNext: "التالي ←",
+        btnShowResults: "عرض النتائج 📊",
+        btnRestart: "🔄 إعادة التقييم",
+        btnGoAdvice: "النصائح والتوجيهات ←",
+        pointsTitle: "📋 نقاط التقييم",
+        pointsHint: "انسخي نقاط التقييم لتتابعي تقدمك أو لتشاركيها",
+        btnCopyPoints: "📋 نسخ نقاط التقييم",
+        promiseTitle: "وعدي لنفسي",
+        promiseIntro: "اكتبي وعداً لنفسك حول ما تريدين تطويره وتحسينه في حياتك الزوجية.\nهذا الوعد بينك وبين نفسك، والتزامك به هو أول خطوة نحو التغيير الإيجابي.",
+        promisePlaceholder: "أكتبي وعدك هنا...",
+        suggestionsTitle: "💡 اقتراحات للإلهام (اضغطي للإضافة):",
+        btnCopyPromise: "📋 نسخ الوعد",
+        btnBackResults: "→ العودة للنتائج",
+        btnNewAssessment: "🔄 تقييم جديد",
+        toolTheme: "🌙 الوضع",
+        toolExport: "📄 تقرير",
+        toolReset: "🧹 تفريغ",
+        toolSave: "💾 حفظ",
+        toolLoad: "📥 تحميل",
+        toolClear: "🗑️ مسح",
+        toastAnswerQ: (n)=>`⚠️ الرجاء الإجابة على السؤال رقم ${n}`,
+        toastAdded: "✅ تم إضافة الاقتراح",
+        toastCopied: "✅ تم النسخ",
+        toastWritePromise: "⚠️ اكتبي وعداً أولاً",
+        toastSaved: "💾 تم الحفظ",
+        toastNoSave: "ℹ️ لا يوجد حفظ سابق",
+        toastLoaded: "📥 تم التحميل",
+        toastCleared: "🗑️ تم مسح الحفظ",
+        toastReset: "🧹 تم تفريغ الإجابات",
+        toastReport: "📄 تم نسخ التقرير",
+        langBtn: "🌐 EN",
+        finalMsg: (p)=>{
+          if(p >= 80) return "🌟 ممتاز! أداء رائع، استمري في هذا المستوى المميز.";
+          if(p >= 60) return "👍 جيد جداً، مع بعض التحسينات ستصلين للأفضل.";
+          if(p >= 40) return "💪 يحتاج تحسين، ابدئي بخطوة واحدة اليوم وستمضين للأمام.";
+          return "🚨 حان وقت التغيير، ابدئي بخطوة جادة اليوم.";
+        },
+        enc: (p)=>{
+          if(p >= 80) return {cls:"good", icon:"🌟", title:"أداء مميز", msg:"استمري على هذا النهج، وركزي على تثبيت العادات الجميلة."};
+          if(p >= 60) return {cls:"medium", icon:"👍", title:"على الطريق الصحيح", msg:"مستوى جيد، ركزي على المحور الأضعف وستلاحظين فرقاً واضحاً."};
+          return {cls:"low", icon:"💪", title:"حان وقت التغيير", msg:"ابدئي بالأمور الصغيرة، خطوة واحدة ثابتة كل يوم تصنع تحولاً كبيراً."};
+        },
+        reportHeader: "تقرير التقييم الذاتي للزوجة",
+        reportTotal: "النتيجة الإجمالية",
+        reportAxes: "نتائج المحاور",
+        reportWeakest: "أضعف الأسئلة (للتركيز عليها)",
+        reportPromise: "الوعد المكتوب",
+        reportNone: "(لا يوجد)",
+        adviceHeader: "📋 نصائح مخصصة لك"
+      },
+
+      en: {
+        title: "Are You a Good Wife? | Self-Assessment Portal",
+        desc: "A short self-assessment for wives. Get your score and practical advice to improve your marriage.",
+        introTitle: "Are You a Good Wife?",
+        introSubtitle: "A self-assessment inspired by a sermon by Dr. Hassan Al-Balushi",
+        videoCta: "Watch the full sermon (optional)",
+        axesTitle: "Three axes of a strong wife:",
+        btnStart: "Start assessment →",
+        axis1Title: "💕 Axis 1: Calm (Sakinah)",
+        axis2Title: "💜 Axis 2: Affection (Mawaddah)",
+        axis3Title: "💚 Axis 3: Mercy (Rahmah)",
+        axis1Hint: "Emotional warmth, femininity, psychological safety",
+        axis2Hint: "Appreciation, gratitude, moral support",
+        axis3Hint: "Managing conflict, wise household budgeting",
+        resultsTitle: "📊 Results",
+        adviceTitle: "💡 Advice",
+        finalLabel: "Overall score",
+        targetLabel: "🎯 Target: 60%",
+        axesAnalysisTitle: "Axis breakdown",
+        axis1Label: "💕 Calm",
+        axis2Label: "💜 Affection",
+        axis3Label: "💚 Mercy",
+        btnPrev: "← Back",
+        btnNext: "Next →",
+        btnShowResults: "Show results 📊",
+        btnRestart: "🔄 Restart",
+        btnGoAdvice: "Advice →",
+        pointsTitle: "📋 Scores",
+        pointsHint: "Copy your scores to track progress or share them",
+        btnCopyPoints: "📋 Copy scores",
+        promiseTitle: "My promise to myself",
+        promiseIntro: "Write a promise about what you want to improve.\nThis is between you and yourself, commitment is the first step toward change.",
+        promisePlaceholder: "Write your promise here...",
+        suggestionsTitle: "💡 Suggestions (tap to add):",
+        btnCopyPromise: "📋 Copy promise",
+        btnBackResults: "← Back to results",
+        btnNewAssessment: "🔄 New assessment",
+        toolTheme: "🌙 Theme",
+        toolExport: "📄 Report",
+        toolReset: "🧹 Clear",
+        toolSave: "💾 Save",
+        toolLoad: "📥 Load",
+        toolClear: "🗑️ Delete",
+        toastAnswerQ: (n)=>`⚠️ Please answer question #${n}`,
+        toastAdded: "✅ Added",
+        toastCopied: "✅ Copied",
+        toastWritePromise: "⚠️ Write a promise first",
+        toastSaved: "💾 Saved",
+        toastNoSave: "ℹ️ No saved progress",
+        toastLoaded: "📥 Loaded",
+        toastCleared: "🗑️ Deleted saved progress",
+        toastReset: "🧹 Answers cleared",
+        toastReport: "📄 Report copied",
+        langBtn: "🌐 AR",
+        finalMsg: (p)=>{
+          if(p >= 80) return "🌟 Excellent. Keep it up.";
+          if(p >= 60) return "👍 Good. With a few improvements, you’ll do even better.";
+          if(p >= 40) return "💪 Needs improvement. Start with one small step today.";
+          return "🚨 Time for serious change. Start with one strong step today.";
+        },
+        enc: (p)=>{
+          if(p >= 80) return {cls:"good", icon:"🌟", title:"Excellent", msg:"Keep these habits, and aim for steady improvement."};
+          if(p >= 60) return {cls:"medium", icon:"👍", title:"On the right track", msg:"Good level. Focus on the weakest axis and you’ll feel the change."};
+          return {cls:"low", icon:"💪", title:"Time to change", msg:"Small daily steps can create big shifts."};
+        },
+        reportHeader: "Wife Self-Assessment Report",
+        reportTotal: "Overall score",
+        reportAxes: "Axis scores",
+        reportWeakest: "Lowest questions (focus on these)",
+        reportPromise: "Your promise",
+        reportNone: "(none)",
+        adviceHeader: "📋 Personalized advice"
+      }
+    };
+
+    function t(key, arg){
+      const pack = UI_TEXT[currentLang] || UI_TEXT.ar;
+      const val = pack[key];
+      return (typeof val === "function") ? val(arg) : val;
+    }
+
+    function toggleLang(){
+      currentLang = (currentLang === "ar") ? "en" : "ar";
+      localStorage.setItem(LANG_KEY, currentLang);
+      applyLanguage();
+    }
+
+    function applyLanguage(){
+      document.documentElement.lang = currentLang;
+      document.documentElement.dir = (currentLang === "en") ? "ltr" : "rtl";
+      document.body.classList.toggle("ltr", currentLang === "en");
+
+      document.title = t("title");
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if(metaDesc) metaDesc.setAttribute("content", t("desc"));
+
+      const setText = (id, text) => { const el = document.getElementById(id); if(el) el.textContent = text; };
+
+      setText("introTitle", t("introTitle"));
+      setText("introSubtitle", t("introSubtitle"));
+      setText("videoCta", t("videoCta"));
+      setText("axesTitle", t("axesTitle"));
+
+      setText("btnStart", t("btnStart"));
+
+      setText("axis1Title", t("axis1Title"));
+      setText("axis2Title", t("axis2Title"));
+      setText("axis3Title", t("axis3Title"));
+
+      setText("axis1Hint", t("axis1Hint"));
+      setText("axis2Hint", t("axis2Hint"));
+      setText("axis3Hint", t("axis3Hint"));
+
+      setText("btnP1Prev", t("btnPrev"));
+      setText("btnP1Next", t("btnNext"));
+      setText("btnP2Prev", t("btnPrev"));
+      setText("btnP2Next", t("btnNext"));
+      setText("btnP3Prev", t("btnPrev"));
+      setText("btnShowResults", t("btnShowResults"));
+
+      setText("resultsTitle", t("resultsTitle"));
+      setText("finalLabel", t("finalLabel"));
+      setText("targetLabel", t("targetLabel"));
+      setText("axesAnalysisTitle", t("axesAnalysisTitle"));
+      setText("axis1Label", t("axis1Label"));
+      setText("axis2Label", t("axis2Label"));
+      setText("axis3Label", t("axis3Label"));
+
+      setText("btnRestart", t("btnRestart"));
+      setText("btnGoAdvice", t("btnGoAdvice"));
+
+      setText("adviceTitle", t("adviceTitle"));
+      setText("pointsTitle", t("pointsTitle"));
+      setText("pointsHint", t("pointsHint"));
+      setText("btnCopyPoints", t("btnCopyPoints"));
+
+      setText("promiseTitle", t("promiseTitle"));
+      setText("promiseIntro", t("promiseIntro"));
+      const promiseEl = document.getElementById("promiseText");
+      if(promiseEl) promiseEl.placeholder = t("promisePlaceholder");
+
+      setText("suggestionsTitle", t("suggestionsTitle"));
+      setText("btnCopyPromise", t("btnCopyPromise"));
+
+      setText("btnBackResults", t("btnBackResults"));
+      setText("btnNewAssessment", t("btnNewAssessment"));
+
+      setText("langBtn", t("langBtn"));
+      setText("btnTheme", t("toolTheme"));
+      setText("btnExport", t("toolExport"));
+      setText("btnReset", t("toolReset"));
+      setText("btnSave", t("toolSave"));
+      setText("btnLoad", t("toolLoad"));
+      setText("btnClear", t("toolClear"));
+
+      // Rerender questions with the right language, preserving answers
+      rerenderQuestionsPreserveAnswers();
+
+      if(currentPage === 5) generatePromiseSuggestions();
+      if(currentPage === 5) generateAdvicePage();
+    }
+
+    function init(){
+      applyLanguage();
+      updateProgressDots();
+      scrollTopNow();
+      loadSavedIntoUI();
+      generatePromiseSuggestions();
+    }
+
+    function getQuestionText(q){
+      if(currentLang === "en") return (questionsEN[q.id] || q.text);
+      return q.text;
+    }
+
+    function renderQuestions(){
+      // clear containers
+      for(const a of [1,2,3]){
+        const c = document.getElementById(`axis${a}_questions`);
+        if(c) c.innerHTML = "";
+      }
+
+      questions.forEach(q=>{
+        const container = document.getElementById(`axis${q.axis}_questions`);
+        if(!container) return;
+
+        const html = `
+          <div class="question-row" id="qrow${q.id}">
+            <div class="question-text">${q.id}. ${getQuestionText(q)}</div>
+            <div class="options">
+              ${[1,2,3,4,5].map(val=>`
+                <label>
+                  <input type="radio" name="q${q.id}" value="${val}" onchange="markAnswered(${q.id})">
+                  <span>${val}</span>
+                </label>
+              `).join('')}
+            </div>
+          </div>
+        `;
+        container.insertAdjacentHTML('beforeend', html);
+      });
+    }
+
+    function rerenderQuestionsPreserveAnswers(){
+      const answers = {};
+      questions.forEach(q=>{
+        const el = document.querySelector(`input[name="q${q.id}"]:checked`);
+        answers[q.id] = el ? Number(el.value) : null;
+      });
+
+      renderQuestions();
+
+      questions.forEach(q=>{
+        const val = answers[q.id];
+        if(val === null || val === undefined) return;
+        const radio = document.querySelector(`input[name="q${q.id}"][value="${val}"]`);
+        if(radio){
+          radio.checked = true;
+          markAnswered(q.id);
+        }
+      });
+    }
+
+    function markAnswered(qid){
+      const row = document.getElementById(`qrow${qid}`);
+      if(row) row.classList.add('answered');
+    }
+
+    function updateProgressDots(){
+      for(let i=0;i<totalPages;i++){
+        const d = document.getElementById(`dot${i}`);
+        if(!d) continue;
+        d.classList.toggle('active', i===currentPage);
+      }
+    }
+
+    function scrollTopNow(){
+      try{ window.scrollTo({ top: 0, left: 0, behavior: 'auto' }); }
+      catch(e){ window.scrollTo(0,0); }
+    }
+
+    function goToPage(pageNum){
+      const cur = document.getElementById('page' + currentPage);
+      if(cur) cur.classList.remove('active');
+      currentPage = pageNum;
+      const next = document.getElementById('page' + currentPage);
+      if(next) next.classList.add('active');
+      updateProgressDots();
+      scrollTopNow();
+    }
+
+    function nextPage(){
+      if(!validatePage(currentPage)) return;
+      if(currentPage < totalPages - 1) goToPage(currentPage + 1);
+    }
+
+    function prevPage(){
+      if(currentPage > 0) goToPage(currentPage - 1);
+    }
+
+    function validatePage(pageNum){
+      const ranges = {
+        1: [1,10],
+        2: [11,16],
+        3: [17,23]
+      };
+      if(!(pageNum in ranges)) return true;
+
+      const [startQ, endQ] = ranges[pageNum];
+      for(let i=startQ;i<=endQ;i++){
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        if(!selected){
+          showToast(t("toastAnswerQ", i));
+          const row = document.getElementById(`qrow${i}`);
+          if(row) row.scrollIntoView({behavior:'smooth', block:'center'});
+          return false;
+        }
+      }
+      return true;
+    }
+
+    function calculateResults(){
+      for(let p=1;p<=3;p++){
+        if(!validatePage(p)){ goToPage(p); return; }
+      }
+
+      let scores = {1:0,2:0,3:0};
+      let counts = {1:0,2:0,3:0};
+
+      questions.forEach(q=>{
+        const selected = document.querySelector(`input[name="q${q.id}"]:checked`);
+        const ans = selected ? parseInt(selected.value, 10) : 0;
+        const pts = answerToPoints(ans);
+        scores[q.axis] += pts;
+        counts[q.axis] += 1;
+      });
+
+      const axisPct = {};
+      for(const a of [1,2,3]){
+        const maxScore = counts[a]*5;
+        axisPct[a] = maxScore ? (scores[a]/maxScore)*100 : 0;
+      }
+
+      const totalScore = scores[1]+scores[2]+scores[3];
+      const totalMax = (counts[1]+counts[2]+counts[3]) * 5;
+      const totalPercentage = totalMax ? (totalScore/totalMax)*100 : 0;
+
+      calculatedResults.axisPct = axisPct;
+      calculatedResults.totalPercentage = totalPercentage;
+
+      document.getElementById('finalScore').innerText = totalPercentage.toFixed(0) + "%";
+      document.getElementById('finalMessage').innerText = t("finalMsg", totalPercentage);
+
+      updateAxisUI(axisPct[1], 'barAxis1', 'scoreAxis1');
+      updateAxisUI(axisPct[2], 'barAxis2', 'scoreAxis2');
+      updateAxisUI(axisPct[3], 'barAxis3', 'scoreAxis3');
+
+      updateEncouragement(totalPercentage);
+      goToPage(4);
+    }
+
+    function updateAxisUI(percentage, barId, scoreId){
+      document.getElementById(scoreId).innerText = percentage.toFixed(0) + "%";
+
+      const bar = document.getElementById(barId);
+      setTimeout(()=>{ bar.style.width = percentage + "%"; }, 80);
+
+      if(percentage >= 80) bar.style.backgroundColor = "#198754";
+      else if(percentage >= 60) bar.style.backgroundColor = "#ffc107";
+      else bar.style.backgroundColor = "#dc3545";
+    }
+
+    function updateEncouragement(totalPercentage){
+      const section = document.getElementById('encouragementSection');
+      if(!section) return;
+
+      const e = UI_TEXT[currentLang].enc(totalPercentage);
+
+      section.className = 'encouragement-section ' + e.cls;
+      const titleColor = (e.cls === "good") ? "#155724" : (e.cls === "medium") ? "#856404" : "#721c24";
+
+      section.innerHTML =
+        `<div class="encouragement-icon">${e.icon}</div>` +
+        `<div class="encouragement-title" style="color:${titleColor};">${e.title}</div>` +
+        `<div class="encouragement-message">${e.msg}</div>`;
+    }
+
+    function goToAdvicePage(){
+      generateAdvicePage();
+      goToPage(5);
+    }
+
+    function levelClassFromScore(score){
+      if(score >= 80) return "good";
+      if(score >= 60) return "medium";
+      return "low";
+    }
+
+    function generateAdvicePage(){
+      const adviceDiv = document.getElementById('adviceContent');
+      if(!adviceDiv) return;
+
+      const a1 = calculatedResults.axisPct[1] ?? 0;
+      const a2 = calculatedResults.axisPct[2] ?? 0;
+      const a3 = calculatedResults.axisPct[3] ?? 0;
+
+      const items = [
+        {
+          axis:1,
+          title:(currentLang==="en" ? "💕 Calm (Sakinah)" : "💕 أخلاق السكينة"),
+          pct:a1,
+          body:(currentLang==="en" ? adviceDB.axis1_en : adviceDB.axis1_ar)
+        },
+        {
+          axis:2,
+          title:(currentLang==="en" ? "💜 Affection (Mawaddah)" : "💜 أخلاق المودة"),
+          pct:a2,
+          body:(currentLang==="en" ? adviceDB.axis2_en : adviceDB.axis2_ar)
+        },
+        {
+          axis:3,
+          title:(currentLang==="en" ? "💚 Mercy (Rahmah)" : "💚 أخلاق الرحمة"),
+          pct:a3,
+          body:(currentLang==="en" ? adviceDB.axis3_en : adviceDB.axis3_ar)
+        }
+      ].sort((x,y)=>x.pct - y.pct);
+
+      adviceDiv.innerHTML = `<div class="tips-title">${t("adviceHeader")}</div>`;
+
+      items.forEach(item=>{
+        const card = document.createElement('div');
+        card.className = 'tip-card ' + levelClassFromScore(item.pct);
+        card.innerHTML = `
+          <h4>${item.title} (${item.pct.toFixed(0)}%)</h4>
+          ${item.body}
+        `;
+        adviceDiv.appendChild(card);
+      });
+    }
+
+    function copyAssessmentPoints(){
+      const a = calculatedResults.axisPct || {};
+      const total = calculatedResults.totalPercentage || 0;
+
+      let text = (currentLang === "en") ? "My scores:\n\n" : "نقاط تقييمي:\n\n";
+      if(currentLang === "en"){
+        text += `Calm: ${Math.round(a[1] || 0)}%\n`;
+        text += `Affection: ${Math.round(a[2] || 0)}%\n`;
+        text += `Mercy: ${Math.round(a[3] || 0)}%\n`;
+        text += `\nOverall score: ${Math.round(total)}%`;
+      } else {
+        text += `أخلاق السكينة: ${Math.round(a[1] || 0)}%\n`;
+        text += `أخلاق المودة: ${Math.round(a[2] || 0)}%\n`;
+        text += `أخلاق الرحمة: ${Math.round(a[3] || 0)}%\n`;
+        text += `\nالنتيجة الإجمالية: ${Math.round(total)}%`;
+      }
+      copyToClipboard(text);
+    }
+
+    function generatePromiseSuggestions(){
+      const suggestionsAR = [
+        "أعد نفسي أن أختار الأسلوب الهين اللين عند الحديث",
+        "أعد نفسي أن أستقبل زوجي بوجه بشوش وكلمة طيبة",
+        "أعد نفسي أن أعبّر عن الشكر والتقدير كل يوم",
+        "أعد نفسي أن أدعم زوجي في طموحاته دون تحطيم",
+        "أعد نفسي أن أحتوي الخلافات داخل البيت وأتعامل بحكمة",
+        "أعد نفسي أن أوازن الإنفاق وأميّز بين الضروريات والكماليات"
+      ];
+
+      const suggestionsEN = [
+        "I promise to choose a gentle tone when I speak",
+        "I promise to welcome my husband with warmth and a kind word",
+        "I promise to express gratitude daily",
+        "I promise to support my husband’s ambitions without tearing him down",
+        "I promise to keep conflicts inside the home and act with wisdom",
+        "I promise to budget wisely and separate needs from wants"
+      ];
+
+      const suggestions = (currentLang === "en") ? suggestionsEN : suggestionsAR;
+
+      const list = document.getElementById('suggestionsList');
+      if(!list) return;
+      list.innerHTML = '';
+
+      suggestions.forEach(s=>{
+        const item = document.createElement('div');
+        item.className = 'suggestion-item';
+        item.innerText = s;
+        item.onclick = ()=>addSuggestion(s);
+        list.appendChild(item);
+      });
+    }
+
+    function addSuggestion(text){
+      const textarea = document.getElementById('promiseText');
+      if(!textarea) return;
+      if(textarea.value.trim() === '') textarea.value = text;
+      else textarea.value += "\n" + text;
+      showToast(t("toastAdded"));
+    }
+
+    function copyPromise(){
+      const text = (document.getElementById('promiseText').value || "").trim();
+      if(text === ''){
+        showToast(t("toastWritePromise"));
+        return;
+      }
+      copyToClipboard(text);
+    }
+
+    function copyToClipboard(text){
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(()=>showToast(t("toastCopied"))).catch(()=>fallbackCopy(text));
+      } else fallbackCopy(text);
+    }
+
+    function fallbackCopy(text){
+      const temp = document.createElement('textarea');
+      temp.value = text;
+      document.body.appendChild(temp);
+      temp.select();
+      try{ document.execCommand('copy'); showToast(t("toastCopied")); }
+      catch(e){ showToast("❌"); }
+      document.body.removeChild(temp);
+    }
+
+    function showToast(message){
+      const toast = document.getElementById('toast');
+      toast.innerText = message;
+      toast.classList.add('show');
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(()=>toast.classList.remove('show'), 2400);
+    }
+
+    function restartAssessment(){
+      resetAnswers(true);
+      goToPage(0);
+    }
+
+    function resetAnswers(silent){
+      questions.forEach(q=>{
+        document.getElementsByName(`q${q.id}`).forEach(r=>r.checked=false);
+        const row = document.getElementById(`qrow${q.id}`);
+        if(row) row.classList.remove('answered');
+      });
+
+      const p = document.getElementById('promiseText');
+      if(p) p.value = '';
+
+      calculatedResults = { axisPct:{}, totalPercentage:0 };
+
+      document.getElementById('finalScore').innerText = "0%";
+      document.getElementById('finalMessage').innerText = "";
+      document.getElementById('scoreAxis1').innerText = "0%";
+      document.getElementById('scoreAxis2').innerText = "0%";
+      document.getElementById('scoreAxis3').innerText = "0%";
+      document.getElementById('barAxis1').style.width = "0%";
+      document.getElementById('barAxis2').style.width = "0%";
+      document.getElementById('barAxis3').style.width = "0%";
+      document.getElementById('encouragementSection').innerHTML = "";
+      document.getElementById('adviceContent').innerHTML = "";
+
+      if(!silent) showToast(t("toastReset"));
+      scrollTopNow();
+    }
+
+    function togglePanel(){
+      const p = document.getElementById('panel');
+      p.hidden = !p.hidden;
+    }
+
+    function toggleTheme(){
+      document.body.classList.toggle('dark');
+    }
+
+    function exportText(){
+      try{
+        if(currentPage !== 4) calculateResults();
+      } catch(e){}
+
+      const a = calculatedResults.axisPct || {};
+      const total = Math.round(calculatedResults.totalPercentage || 0);
+
+      const answers = {};
+      questions.forEach(q=>{
+        const el = document.querySelector(`input[name="q${q.id}"]:checked`);
+        answers[q.id] = el ? Number(el.value) : 0;
+      });
+
+      const weakest = questions
+        .map(q=>({q, v: answers[q.id]}))
+        .filter(x=>x.v > 0)
+        .sort((x,y)=>answerToPoints(x.v) - answerToPoints(y.v))
+        .slice(0, 8);
+
+      let out = t("reportHeader") + "\n";
+      out += "--------------------------------\n";
+      out += `${t("reportTotal")}: ${total}%\n\n`;
+
+      out += t("reportAxes") + ":\n";
+      if(currentLang === "en"){
+        out += `- Calm: ${Math.round(a[1] || 0)}%\n`;
+        out += `- Affection: ${Math.round(a[2] || 0)}%\n`;
+        out += `- Mercy: ${Math.round(a[3] || 0)}%\n`;
+      } else {
+        out += `- أخلاق السكينة: ${Math.round(a[1] || 0)}%\n`;
+        out += `- أخلاق المودة: ${Math.round(a[2] || 0)}%\n`;
+        out += `- أخلاق الرحمة: ${Math.round(a[3] || 0)}%\n`;
+      }
+
+      out += "\n" + t("reportWeakest") + ":\n";
+      if(!weakest.length) out += "- " + (currentLang==="en" ? "Not enough data" : "لا توجد بيانات كافية") + "\n";
+      else weakest.forEach(x=>{
+        const pts = answerToPoints(x.v);
+        const pct = answerToPct(x.v);
+        const qText = getQuestionText(x.q);
+        out += `- ${x.q.id}. ${qText} = ${x.v} (pts: ${pts.toFixed(2)}/5, ${pct.toFixed(0)}%)\n`;
+      });
+
+      out += "\n" + t("reportPromise") + ":\n";
+      const pr = (document.getElementById('promiseText').value || "").trim();
+      out += pr ? pr + "\n" : t("reportNone") + "\n";
+
+      copyToClipboard(out);
+      showToast(t("toastReport"));
+    }
+
+    /* Manual save and load only */
+    function buildState(){
+      const answers = {};
+      questions.forEach(function(q){
+        const el = document.querySelector('input[name="q' + q.id + '"]:checked');
+        answers[q.id] = el ? Number(el.value) : null;
+      });
+
+      const promiseEl = document.getElementById('promiseText');
+      const promise = promiseEl ? promiseEl.value : "";
+
+      return {
+        answers: answers,
+        promise: promise,
+        dark: document.body.classList.contains('dark'),
+        page: currentPage,
+        lang: currentLang,
+        savedAt: new Date().toISOString()
+      };
+    }
+
+    function applyState(state){
+      if(!state || !state.answers) return;
+
+      if(state.lang){
+        currentLang = state.lang;
+        localStorage.setItem(LANG_KEY, currentLang);
+      }
+
+      if(state.dark) document.body.classList.add('dark');
+      else document.body.classList.remove('dark');
+
+      applyLanguage();
+
+      questions.forEach(function(q){
+        const val = state.answers[q.id];
+        if(val === null || val === undefined) return;
+        const radio = document.querySelector('input[name="q' + q.id + '"][value="' + val + '"]');
+        if(radio){
+          radio.checked = true;
+          markAnswered(q.id);
+        }
+      });
+
+      const promiseEl = document.getElementById('promiseText');
+      if(promiseEl && typeof state.promise === "string") promiseEl.value = state.promise;
+
+      if(typeof state.page === "number" && state.page >= 0 && state.page < totalPages){
+        goToPage(state.page);
+      } else {
+        updateProgressDots();
+        scrollTopNow();
+      }
+    }
+
+    function saveProgress(){
+      try{
+        const state = buildState();
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        showToast(t("toastSaved"));
+      } catch(e){
+        showToast("❌");
+      }
+    }
+
+    function loadProgress(){
+      try{
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if(!raw){
+          showToast(t("toastNoSave"));
+          return;
+        }
+        const state = JSON.parse(raw);
+        applyState(state);
+        showToast(t("toastLoaded"));
+      } catch(e){
+        showToast("❌");
+      }
+    }
+
+    function clearSaved(){
+      try{
+        localStorage.removeItem(STORAGE_KEY);
+        showToast(t("toastCleared"));
+      } catch(e){
+        showToast("❌");
+      }
+    }
+
+    function loadSavedIntoUI(){
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) {
+        renderQuestions(); // initial
+        return;
+      }
+      try{
+        const state = JSON.parse(raw);
+        // render first, then apply
+        renderQuestions();
+        applyState(state);
+      } catch(e){
+        renderQuestions();
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>
