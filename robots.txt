@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://knowthyself-eight.vercel.app/sitemap.xml
+Sitemap: https://knowthy.vercel.app/sitemap.xml
