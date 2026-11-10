@@ -250,9 +250,15 @@
     document.head.appendChild(s);
   };
 
+  // Deferred scripts run while readyState is already "interactive" but before
+  // DOMContentLoaded, so readyState alone can't tell whether every script
+  // (content files included) has run. core.js is the first script on every
+  // page, so it can record the event itself.
+  var domReady = document.readyState === 'complete';
+  document.addEventListener('DOMContentLoaded', function () { domReady = true; });
   SQ.ready = function (fn) {
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
-    else fn();
+    if (domReady) fn();
+    else document.addEventListener('DOMContentLoaded', fn);
   };
 
   SQ.ready(function () {

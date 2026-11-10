@@ -406,3 +406,9 @@ details[open] summary{margin-bottom:8px}
   #paper{position:absolute;inset:0 0 auto 0;box-shadow:none;padding:0;border-radius:0}
   .w-sec{border:0}
 }
+@media (max-width:480px){
+  .home-card{align-items:flex-start;gap:12px;padding:16px 14px}
+  .avatar{width:58px;height:58px;border-radius:14px}
+  .avatar svg{width:34px;height:34px}
+  .home-card .btn{width:100%}
+}
