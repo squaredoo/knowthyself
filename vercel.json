@@ -3,6 +3,12 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "knowthyself-eight.vercel.app" }],
+      "destination": "https://knowthy.vercel.app/:path*",
+      "permanent": true
+    },
     { "source": "/major-selection", "destination": "/major", "permanent": true },
     { "source": "/life-goals", "destination": "/goals", "permanent": true },
     { "source": "/marital-culture", "destination": "/marital", "permanent": true },
