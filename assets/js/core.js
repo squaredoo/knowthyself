@@ -12,7 +12,7 @@
 
   var SQ = (window.SQ = window.SQ || {});
 
-  SQ.SITE = 'https://knowthyself.vercel.app';
+  SQ.SITE = 'https://knowthyself-eight.vercel.app';
   SQ.GA_ID = 'G-MFBM0K072V';
   SQ.LANGS = [
     { code: 'ar', label: 'العربية', short: 'ع', dir: 'rtl', locale: 'ar-u-nu-latn' },
