@@ -216,7 +216,7 @@
         (l.code === 'ar' ? 'عربي' : l.label) + '</button>';
     }).join('');
     bar.innerHTML =
-      '<a class="brand" href="/"><img src="/apple-touch-icon-180x180.png" alt="" width="30" height="30"><span></span></a>' +
+      '<a class="brand" href="/"><img src="/assets/img/logo.svg" alt="" width="34" height="34"><span></span></a>' +
       '<div class="topbar-actions">' +
       '<div class="lang-switch" role="group">' + langs + '</div>' +
       '<button type="button" class="icon-btn" id="themeBtn"></button>' +
