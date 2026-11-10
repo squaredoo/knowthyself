@@ -290,6 +290,13 @@
   }
 
   /* ---------- navigation ---------- */
+  // Every axis page has its own stepper; keep all of them in step with the answers.
+  function refreshTotals() {
+    var lbl = answeredLabel();
+    var els = document.querySelectorAll('#app [data-total-answered]');
+    for (var k = 0; k < els.length; k++) els[k].textContent = lbl;
+  }
+
   function goTo(i, opts) {
     i = Math.max(0, Math.min(pages.length - 1, i));
     var needsRender = pages[i] === 'results' || pages[i] === 'advice' || pages[i] === 'promise';
@@ -500,8 +507,7 @@
       state.answers[id] = Number(inp.value);
       results = null; // answers changed → results must be recalculated
       autosave();
-      var totalLbl = document.querySelector('.page.active [data-total-answered]');
-      if (totalLbl) totalLbl.textContent = answeredLabel();
+      refreshTotals();
       var box = document.getElementById('q' + id);
       if (box) { box.classList.add('answered'); box.classList.remove('missing'); }
       var q = cfg.qs[id - 1];
