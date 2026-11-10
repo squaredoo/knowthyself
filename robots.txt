@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://squaredoo.netlify.app/sitemap.xml
+Sitemap: https://squaredoo.vercel.app/sitemap.xml
