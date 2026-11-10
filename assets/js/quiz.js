@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Squaredoo quiz engine – one engine for every assessment.
+   Know Thyself quiz engine – one engine for every assessment.
 
    A quiz page is a small HTML shell with <body data-quiz="husband"> that loads:
      /content/<quiz>/quiz.js   – structure (axes, pillars, accent colour, video)

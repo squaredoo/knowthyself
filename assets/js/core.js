@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Squaredoo core – shared by every page.
+   Know Thyself core – shared by every page.
    - Content registry: SQ.register(key, lang, data)
    - Language: Arabic (default), English, Danish. Remembered across pages,
      and can be forced with ?lang=da in a link.
@@ -12,7 +12,7 @@
 
   var SQ = (window.SQ = window.SQ || {});
 
-  SQ.SITE = 'https://squaredoo.vercel.app';
+  SQ.SITE = 'https://knowthyself.vercel.app';
   SQ.GA_ID = 'G-MFBM0K072V';
   SQ.LANGS = [
     { code: 'ar', label: 'العربية', short: 'ع', dir: 'rtl', locale: 'ar-u-nu-latn' },

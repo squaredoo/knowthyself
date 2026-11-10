@@ -1,6 +1,6 @@
-# بوابة التقييم الذاتي · Self-Assessment Portal · Selvevalueringsportalen
+# Know Thyself · بوابة التقييم الذاتي · Self-Assessment Portal · Selvevalueringsportalen
 
-A static website (plain HTML, CSS and JavaScript, no build step) with nine self-assessments and an interactive Islamic will, in **Arabic, English and Danish**. Hosted on Vercel; every push to `main` deploys.
+A static website (plain HTML, CSS and JavaScript, no build step) with nine self-assessments and an interactive Islamic will, in **Arabic, English and Danish**. Live at https://knowthyself.vercel.app (Vercel). Every push to `main` deploys.
 
 ## Where things are
 
