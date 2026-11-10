@@ -412,3 +412,4 @@ details[open] summary{margin-bottom:8px}
   .avatar svg{width:34px;height:34px}
   .home-card .btn{width:100%}
 }
+.axis-res .row span:last-child,.pillars b,.tip h4 span,.score-ring .pct{white-space:nowrap}
