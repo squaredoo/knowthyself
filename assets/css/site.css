@@ -413,3 +413,17 @@ details[open] summary{margin-bottom:8px}
   .home-card .btn{width:100%}
 }
 .axis-res .row span:last-child,.pillars b,.tip h4 span,.score-ring .pct{white-space:nowrap}
+
+/* ---------- Breathing room for Arabic headings and quotes ---------- */
+.brand img{width:34px;height:34px;border-radius:9px}
+h1{line-height:1.5}
+html[lang="ar"] h1,html[lang="ar"] h2{line-height:1.65}
+.hero .bismillah{line-height:2.1;margin:4px 0 18px;padding-top:6px}
+.hero h1{margin-bottom:10px}
+.subtitle{line-height:1.7;margin-top:2px}
+cite,.src{font-style:normal}
+.verse{padding:20px 18px 16px}
+.verse .ar{line-height:2.2}
+.verse .src{margin-top:10px;line-height:1.7}
+.quote .ar{line-height:2.1}
+.big-icon{margin-bottom:12px}
