@@ -73,11 +73,16 @@
   }
 
   /* ---------- rendering ---------- */
+  function answeredLabel() {
+    var done = cfg.qs.filter(function (q) { return state.answers[q.id]; }).length;
+    return t('answered', done, cfg.qs.length);
+  }
+
   function stepper(i) {
     var n = pages.length;
     var shown = Math.min(i + 1, n);
     return '<div class="stepper" aria-hidden="true"><div class="bar"><i style="width:' + Math.round((shown / n) * 100) + '%"></i></div>' +
-      '<div class="label"><span>' + esc(t('stepOf', shown, n)) + '</span><span>' + esc(SQ.pct((shown / n) * 100)) + '</span></div></div>';
+      '<div class="label"><span>' + esc(t('stepOf', shown, n)) + '</span><span data-total-answered>' + esc(answeredLabel()) + '</span></div></div>';
   }
 
   function renderIntro() {
@@ -176,7 +181,8 @@
       h += '</div>';
     });
     if (c.outro) h += '<div class="card center">' + SQ.rich(c.outro) + '</div>';
-    h += '<div class="btn-row"><button type="button" class="btn ghost" data-act="copyScores">' + esc(t('copyScores')) + '</button>' +
+    h += '<div class="btn-row">' + (navigator.share ? '<button type="button" class="btn ghost" data-act="share">' + esc(t('share')) + '</button>' : '') +
+      '<button type="button" class="btn ghost" data-act="copyScores">' + esc(t('copyScores')) + '</button>' +
       '<button type="button" class="btn ghost" data-act="restart">' + esc(t('restart')) + '</button>' +
       '<button type="button" class="btn primary" data-act="next">' + esc(t('toAdvice')) + '</button></div>';
     h += '<p class="disclaimer">' + esc(t('disclaimer')) + '</p>';
@@ -288,6 +294,7 @@
     i = Math.max(0, Math.min(pages.length - 1, i));
     var needsRender = pages[i] === 'results' || pages[i] === 'advice' || pages[i] === 'promise';
     state.page = i;
+    autosave();
     if (needsRender) render();
     var secs = document.querySelectorAll('#app .page');
     for (var k = 0; k < secs.length; k++) secs[k].classList.toggle('active', k === i);
@@ -329,7 +336,12 @@
     goTo(pages.indexOf('results'));
   }
 
-  function restart() {
+  function hasProgress() {
+    return Object.keys(state.answers).length > 0 || state.promise.trim() !== '';
+  }
+
+  function restart(force) {
+    if (!force && hasProgress() && !window.confirm(t('confirmClear'))) return;
     state.answers = {};
     state.promise = '';
     results = null;
@@ -356,6 +368,34 @@
   }
 
   var SAVE_KEY = function () { return 'sq_save_' + key; };
+  var SESSION_KEY = function () { return 'sq_session_' + key; };
+  var sessionTimer;
+  function autosave() {
+    clearTimeout(sessionTimer);
+    sessionTimer = setTimeout(function () {
+      try {
+        if (hasProgress()) sessionStorage.setItem(SESSION_KEY(), JSON.stringify({ answers: state.answers, promise: state.promise, page: state.page }));
+        else sessionStorage.removeItem(SESSION_KEY());
+      } catch (e) {}
+    }, 250);
+  }
+  function restoreSession() {
+    try {
+      var raw = sessionStorage.getItem(SESSION_KEY());
+      if (!raw) return false;
+      var s = JSON.parse(raw);
+      Object.keys(s.answers || {}).forEach(function (k) {
+        var v = Number(s.answers[k]);
+        if (v >= 1 && v <= 5 && cfg.qs[Number(k) - 1]) state.answers[k] = v;
+      });
+      state.promise = s.promise || '';
+      if (!firstMissing(cfg.qs)) results = compute();
+      var pg = Number(s.page) || 0;
+      if (!results && pg >= pages.indexOf('results')) pg = pages.indexOf('axis:' + firstMissing(cfg.qs).axis);
+      state.page = Math.max(0, Math.min(pages.length - 1, pg));
+      return Object.keys(state.answers).length > 0;
+    } catch (e) { return false; }
+  }
 
   function tool(name) {
     if (name === 'report') {
@@ -393,7 +433,7 @@
       SQ.toast(t('deleted'));
     } else if (name === 'clear') {
       if (!window.confirm(t('confirmClear'))) return;
-      restart();
+      restart(true);
       SQ.toast(t('cleared'));
     }
   }
@@ -436,6 +476,19 @@
     return lines.join('\n');
   }
 
+  /* Bring the next unanswered question on this page into view (phones). */
+  function scrollToNext(q) {
+    var next = cfg.qs.filter(function (x) { return x.axis === q.axis && x.id > q.id && !state.answers[x.id]; })[0];
+    if (!next) return;
+    var el = document.getElementById('q' + next.id);
+    if (!el) return;
+    var r = el.getBoundingClientRect();
+    if (r.top > window.innerHeight * 0.72 || r.bottom < 0) {
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      setTimeout(function () { el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }); }, 180);
+    }
+  }
+
   /* ---------- events ---------- */
   function bind() {
     var app = document.getElementById('app');
@@ -443,8 +496,12 @@
       var inp = e.target;
       if (inp.type !== 'radio') return;
       var id = Number(inp.name.slice(1));
+      var wasNew = !state.answers[id];
       state.answers[id] = Number(inp.value);
       results = null; // answers changed → results must be recalculated
+      autosave();
+      var totalLbl = document.querySelector('.page.active [data-total-answered]');
+      if (totalLbl) totalLbl.textContent = answeredLabel();
       var box = document.getElementById('q' + id);
       if (box) { box.classList.add('answered'); box.classList.remove('missing'); }
       var q = cfg.qs[id - 1];
@@ -453,9 +510,10 @@
         var list = cfg.qs.filter(function (x) { return x.axis === q.axis; });
         counter.textContent = t('answered', list.filter(function (x) { return state.answers[x.id]; }).length, list.length);
       }
+      if (wasNew) scrollToNext(q);
     });
     app.addEventListener('input', function (e) {
-      if (e.target.id === 'promiseText') state.promise = e.target.value;
+      if (e.target.id === 'promiseText') { state.promise = e.target.value; autosave(); }
     });
     app.addEventListener('click', function (e) {
       var sug = e.target.closest('[data-sug]');
@@ -479,6 +537,9 @@
       else if (act === 'results') showResults();
       else if (act === 'restart') restart();
       else if (act === 'copyScores') SQ.copy(scoresText());
+      else if (act === 'share') {
+        navigator.share({ title: (C().meta || {}).title || document.title, text: scoresText(), url: location.origin + location.pathname }).catch(function () {});
+      }
       else if (act === 'copyPromise') {
         if (!state.promise.trim()) SQ.toast(t('writePromiseFirst'));
         else SQ.copy(state.promise);
@@ -516,8 +577,10 @@
     if (!key || !cfg || !SQ.data[key]) return;
     if (cfg.accent) document.body.style.setProperty('--accent', cfg.accent);
     pages = ['intro'].concat(cfg.axes.map(function (a) { return 'axis:' + a.key; }), ['results', 'advice', 'promise']);
+    var restored = restoreSession();
     render();
     bind();
-    try { history.replaceState({ sqPage: 0 }, ''); } catch (e) {}
+    try { history.replaceState({ sqPage: state.page }, ''); } catch (e) {}
+    if (restored) setTimeout(function () { SQ.toast(t('restored')); }, 400);
   });
 })();

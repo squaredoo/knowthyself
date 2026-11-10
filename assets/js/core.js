@@ -64,6 +64,10 @@
     if (!langInfo(code) || code === SQ.lang) return;
     SQ.lang = code;
     SQ.store.set('sq_lang', code);
+    try {
+      var u = new URL(location.href);
+      if (u.searchParams.has('lang')) { u.searchParams.set('lang', code); history.replaceState(history.state, '', u.toString()); }
+    } catch (e) {}
     applyDocLang();
     updateSwitcher();
     document.dispatchEvent(new CustomEvent('sq:lang', { detail: { lang: code } }));
@@ -237,9 +241,12 @@
     if (m && desc) m.setAttribute('content', desc);
   };
 
-  /* ---------- analytics (page views only, never answers) ---------- */
+  /* ---------- analytics (page views only, never answers; only after consent) ---------- */
+  var gaLoaded = false;
   SQ.analytics = function () {
-    if (!SQ.GA_ID || /^(localhost|127\.)/.test(location.hostname)) return;
+    if (gaLoaded || !SQ.GA_ID || /^(localhost|127\.)/.test(location.hostname)) return;
+    if (SQ.store.get('sq_consent') !== 'yes') return;
+    gaLoaded = true;
     window.dataLayer = window.dataLayer || [];
     window.gtag = function () { window.dataLayer.push(arguments); };
     window.gtag('js', new Date());
@@ -261,8 +268,34 @@
     else document.addEventListener('DOMContentLoaded', fn);
   };
 
+  function consentBanner() {
+    if (SQ.store.get('sq_consent') || document.getElementById('consent')) return;
+    var el = document.createElement('div');
+    el.id = 'consent';
+    el.className = 'consent no-print';
+    el.setAttribute('role', 'region');
+    var paint = function () {
+      el.innerHTML = '<p>' + SQ.esc(SQ.t('consentText')) + '</p><div><button type="button" class="btn small" data-consent="no">' + SQ.esc(SQ.t('consentNo')) +
+        '</button><button type="button" class="btn small primary" data-consent="yes">' + SQ.esc(SQ.t('consentYes')) + '</button></div>';
+    };
+    paint();
+    document.addEventListener('sq:lang', paint);
+    el.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-consent]');
+      if (!b) return;
+      SQ.store.set('sq_consent', b.getAttribute('data-consent'));
+      document.removeEventListener('sq:lang', paint);
+      el.remove();
+      SQ.analytics();
+    });
+    document.body.appendChild(el);
+  }
+  /** Lets visitors change their statistics choice later (link on the homepage). */
+  SQ.resetConsent = function () { SQ.store.del('sq_consent'); consentBanner(); };
+
   SQ.ready(function () {
     SQ.topbar();
     SQ.analytics();
+    consentBanner();
   });
 })();
