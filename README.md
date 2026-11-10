@@ -39,7 +39,11 @@ Answers 1–5 count as 0, 25, 50, 75, 100 %. Area, aspect and overall scores are
 
 ## Privacy
 
-Answers never leave the browser. "Save progress" stores them in the browser's local storage on that device only; the will draft is downloaded as a file. Google Analytics records page views only.
+Answers never leave the browser.
+
+- While a quiz or the will is open, answers are kept in the tab's session storage, so a reload or accidental back doesn't lose them; they disappear when the tab is closed.
+- "Save progress" (tools menu) stores answers in local storage on that device until deleted; the will draft is downloaded as a file.
+- Google Analytics (page views only) loads only after the visitor allows statistics cookies in the banner. "Statistics settings" at the bottom of the homepage changes that choice.
 
 ## Adding a language
 

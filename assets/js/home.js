@@ -35,7 +35,7 @@
     h += '<section class="closing"><div class="closing-line"></div>' + SQ.quote(c.closing, 'verse') +
       '<div class="dua" lang="ar" dir="rtl">' + c.dua + '</div>' + (c.duaMeaning ? '<p class="muted">' + c.duaMeaning + '</p>' : '') +
       '<div class="closing-line"></div></section>';
-    h += '<p class="footer">' + c.footer + '</p>';
+    h += '<p class="footer">' + c.footer + '<br><button type="button" class="linklike" data-consent-settings>' + SQ.esc(SQ.t('consentSettings')) + '</button></p>';
     h += '</div>';
     document.getElementById('app').innerHTML = h;
   }
@@ -44,5 +44,8 @@
     SQ.pageKey = 'home';
     render();
     document.addEventListener('sq:lang', render);
+    document.addEventListener('click', function (e) {
+      if (e.target.closest('[data-consent-settings]')) SQ.resetConsent();
+    });
   });
 })();

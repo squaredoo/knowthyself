@@ -168,6 +168,20 @@
     updateProgress();
   }
 
+  /* ---------- session autosave (survives a reload; gone when the tab closes) ---------- */
+  var SKEY = 'sq_session_waseya', dirty = false, saveTimer;
+  function hasContent() {
+    return Object.keys(vals).some(function (k) { return k !== 't_shahada' && k !== 'will_date' && k !== 'third_total' && String(vals[k] || '').trim(); }) ||
+      Object.keys(rows).some(function (k) { return rows[k].length; });
+  }
+  function autosave() {
+    dirty = true;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      try { if (hasContent()) sessionStorage.setItem(SKEY, JSON.stringify(collect())); else sessionStorage.removeItem(SKEY); } catch (e) {}
+    }, 300);
+  }
+
   /* ---------- drafts ---------- */
   function collect() {
     var fields = {};
@@ -192,6 +206,7 @@
     document.body.appendChild(a);
     a.click();
     setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+    dirty = false;
     SQ.toast(T().toastSaved);
   }
 
@@ -201,6 +216,8 @@
     rows = { debts: [], thirds: [], heirs: [] };
     renderForm();
     recalc();
+    dirty = false;
+    try { sessionStorage.removeItem(SKEY); } catch (e) {}
   }
 
   /* ---------- events ---------- */
@@ -212,6 +229,7 @@
       else if (el.dataset.t) { rows[el.dataset.t][Number(el.dataset.r)][el.dataset.c] = el.value; }
       else return;
       recalc();
+      autosave();
     });
     app.addEventListener('change', function (e) {
       if (e.target.id !== 'fileLoad') return;
@@ -221,18 +239,23 @@
         apply(JSON.parse(txt));
         renderForm();
         recalc();
+        dirty = false;
+        try { sessionStorage.setItem(SKEY, JSON.stringify(collect())); } catch (e) {}
         SQ.toast(T().toastLoaded);
       }).catch(function () { window.alert(T().loadError); });
     });
     app.addEventListener('click', function (e) {
       var b = e.target.closest('button');
       if (!b) return;
-      if (b.dataset.add) { rows[b.dataset.add].push({}); renderForm(); recalc(); var ins = document.querySelectorAll('[data-t="' + b.dataset.add + '"]'); if (ins.length) ins[ins.length - 4].focus(); }
-      else if (b.dataset.clear) { if (!rows[b.dataset.clear].length || window.confirm(T().confirmClearTable)) { rows[b.dataset.clear] = []; renderForm(); recalc(); } }
-      else if (b.dataset.del) { rows[b.dataset.del].splice(Number(b.dataset.r), 1); renderForm(); recalc(); }
+      if (b.dataset.add) { rows[b.dataset.add].push({}); renderForm(); recalc(); autosave(); var ins = document.querySelectorAll('[data-t="' + b.dataset.add + '"]'); if (ins.length) ins[ins.length - 4].focus(); }
+      else if (b.dataset.clear) { if (!rows[b.dataset.clear].length || window.confirm(T().confirmClearTable)) { rows[b.dataset.clear] = []; renderForm(); recalc(); autosave(); } }
+      else if (b.dataset.del) { rows[b.dataset.del].splice(Number(b.dataset.r), 1); renderForm(); recalc(); autosave(); }
       else if (b.dataset.act === 'print') { updatePreview(); window.print(); }
       else if (b.dataset.act === 'save') download();
       else if (b.dataset.act === 'reset') resetAll();
+    });
+    window.addEventListener('beforeunload', function (e) {
+      if (dirty && hasContent()) { e.preventDefault(); e.returnValue = ''; }
     });
     document.addEventListener('sq:lang', function () {
       if (isDefaultShahada(vals.t_shahada)) vals.t_shahada = T().shahadaDefault;
@@ -247,9 +270,16 @@
     SQ.pageKey = 'waseya';
     F = SQ.waseyaForm;
     vals = { t_shahada: T().shahadaDefault, will_date: today() };
+    var restored = false;
+    try {
+      var raw = sessionStorage.getItem(SKEY);
+      if (raw) { apply(JSON.parse(raw)); restored = true; }
+    } catch (e) {}
+    if (isDefaultShahada(vals.t_shahada)) vals.t_shahada = T().shahadaDefault;
     SQ.setMeta(T().meta.title, T().meta.desc);
     renderForm();
     bind();
     recalc();
+    if (restored) setTimeout(function () { SQ.toast(SQ.t('restored')); }, 400);
   });
 })();

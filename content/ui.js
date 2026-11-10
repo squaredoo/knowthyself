@@ -2,6 +2,12 @@
    Quiz-specific text lives in /content/<quiz>/<lang>.js */
 
 SQ.register('ui', 'ar', {
+  share: '📤 مشاركة النتيجة',
+  restored: '↩️ تم استرجاع إجاباتك من هذه الجلسة',
+  consentText: 'نستخدم ملفات إحصاءات (Google Analytics) لمعرفة عدد الزيارات فقط، ولا نجمع إجاباتك أبداً.',
+  consentYes: 'موافق',
+  consentNo: 'لا، شكراً',
+  consentSettings: 'إعدادات الإحصاءات',
   siteName: 'بوابة التقييم الذاتي',
   home: 'الرئيسية',
   language: 'اللغة',
@@ -87,6 +93,12 @@ SQ.register('ui', 'ar', {
 });
 
 SQ.register('ui', 'en', {
+  share: '📤 Share result',
+  restored: '↩️ Your answers from this session were restored',
+  consentText: 'We use statistics cookies (Google Analytics) only to count visits – never your answers.',
+  consentYes: 'Allow',
+  consentNo: 'No thanks',
+  consentSettings: 'Statistics settings',
   siteName: 'Self-Assessment Portal',
   home: 'Home',
   language: 'Language',
@@ -172,6 +184,12 @@ SQ.register('ui', 'en', {
 });
 
 SQ.register('ui', 'da', {
+  share: '📤 Del resultatet',
+  restored: '↩️ Dine svar fra denne session er hentet frem igen',
+  consentText: 'Vi bruger statistik-cookies (Google Analytics) kun til at tælle besøg – aldrig dine svar.',
+  consentYes: 'Tillad',
+  consentNo: 'Nej tak',
+  consentSettings: 'Indstillinger for statistik',
   siteName: 'Selvevalueringsportalen',
   home: 'Forside',
   language: 'Sprog',
