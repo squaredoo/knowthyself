@@ -5,24 +5,24 @@ SQ.register("wife", "en", {
   },
   intro: {
     title: "Are You a Good Wife?",
-    subtitle: "A self-assessment inspired by a sermon by Dr. Hassan Al-Balushi",
-    body: "<p> In his sermon, Dr. Hassan Al-Balushi raises an important question: <strong>\"Are you a good wife?\"</strong></p><p> He answers it through <strong>realistic, not idealized</strong> traits of a strong wife, inspired by Ahlulbayt teachings and the examples of Lady Fatimah and Lady Khadijah (peace be upon them). </p>"
+    subtitle: "A self-assessment inspired by a sermon by Sheikh Dr. Hassan Al-Balushi",
+    body: "<p>In his sermon, Sheikh Dr. Hassan Al-Balushi asks an important question: <strong>“Are you a good wife?”</strong></p><p>He answers it through <strong>realistic, not idealised</strong> qualities of a good wife, drawing on the teachings of the Ahl al-Bayt and the examples of Lady Fatima al-Zahra and Lady Khadija (peace be upon them both).</p>"
   },
   axes: {
     a1: {
       title: "Calm (Sakinah)",
       lead: "Emotional warmth, femininity, psychological safety",
-      desc: "Be a source of peace and emotional safety, a comfort zone that helps him unwind after work. A home should feel like relief, not another battlefield."
+      desc: "Be a source of calm and emotional safety, a place where he can put down the worries of work. As Imam Ali (peace be upon him) said of Lady Fatima al-Zahra: when he looked at her, his worries lifted."
     },
     a2: {
       title: "Affection (Mawaddah)",
       lead: "Appreciation, gratitude, moral support",
-      desc: "Make him feel respected and supported, and stand with him in his goals. Support is not flattery, it’s steady encouragement."
+      desc: "Make your husband feel that he is your support and your hero, and stand behind his ambitions – as Lady Khadija (peace be upon her) strengthened the Prophet and believed in him."
     },
     a3: {
       title: "Mercy (Rahmah)",
       lead: "Managing conflict, wise household budgeting",
-      desc: "Handle disagreements wisely, keep them inside the home, and practice smart household budgeting. Mercy shows most when stress is high."
+      desc: "Handle disagreements wisely and keep them inside the home, and manage the household budget well – work the Prophet (peace be upon him and his family) praised as work for Allah."
     }
   },
   questions: [
@@ -76,12 +76,14 @@ SQ.register("wife", "en", {
         {
           verse: {
             ar: "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا",
-            src: "سورة الروم – الآية 21"
+            meaning: "“And among His signs is that He created for you spouses from among yourselves, so that you may find tranquillity in them.”",
+            src: "Surah ar-Rum, verse 21"
           }
         },
         {
           ar: "ولقد كنت أنظر إليها فتنكشف عني الهموم والأحزان",
-          src: "أمير المؤمنين (ع) عن السيدة الزهراء (ع)"
+          meaning: "“Whenever I looked at her, my worries and sorrows would lift.”",
+          src: "Imam Ali (peace be upon him) about Lady Fatima al-Zahra (peace be upon her)"
         }
       ],
       tips: [
@@ -97,11 +99,13 @@ SQ.register("wife", "en", {
         "Affection shows in words and actions, especially during stress.",
         {
           ar: "كلا والله لا يخزيك الله أبداً...",
-          src: "السيدة خديجة (ع) للنبي (ص)"
+          meaning: "“Never! By Allah, Allah will never disgrace you…”",
+          src: "Lady Khadija (peace be upon her) to the Prophet (peace be upon him and his family)"
         },
         {
           ar: "لو أحسنت إلى إحداهن الدهر ثم رأت منك شيئاً قالت: ما رأيت منك خيراً قط",
-          src: "رسول الله (ص)"
+          meaning: "“If you were good to one of them for a lifetime and then she saw one thing she disliked, she would say: I have never seen any good from you.” – a reminder not to forget the good.",
+          src: "The Prophet Muhammad (peace be upon him and his family)"
         }
       ],
       tips: [
@@ -116,11 +120,13 @@ SQ.register("wife", "en", {
         "Mercy shows most during disagreements. Success is repairing quickly, protecting privacy, and managing money wisely.",
         {
           ar: "جهاد المرأة حسن التبعّل",
-          src: "أمير المؤمنين (ع) – نهج البلاغة"
+          meaning: "“A woman’s jihad (striving) is being a good wife.”",
+          src: "Imam Ali (peace be upon him) – Nahj al-Balagha"
         },
         {
           ar: "القصد مثراة",
-          src: "أمير المؤمنين (ع)"
+          meaning: "“Moderation brings wealth.”",
+          src: "Imam Ali (peace be upon him)"
         }
       ],
       tips: [

@@ -5,8 +5,8 @@ SQ.register("mother", "en", {
   },
   intro: {
     title: "Are You a Good Mother?",
-    subtitle: "A self-assessment inspired by a sermon by Dr. Hassan Al-Balushi",
-    body: "<p> This assessment helps you review your behavior and identify strengths and weaknesses in your role as a mother. </p>"
+    subtitle: "A self-assessment inspired by a sermon by Sheikh Dr. Hassan Al-Balushi",
+    body: "<p>In his sermon, Sheikh Dr. Hassan Al-Balushi asks an important question: <strong>“Are you a good mother?”</strong><br>This self-assessment helps you look honestly at yourself and find your strengths and weaknesses in your role as a mother.</p>"
   },
   axes: {
     a1: {
@@ -23,7 +23,7 @@ SQ.register("mother", "en", {
       ]
     },
     a2: {
-      title: "Emotional Engineer and Character Builder",
+      title: "Shaping Emotions and Building Character",
       desc: [
         "Being an engineer of your children's emotions and builder of their characters, including:",
         {
@@ -36,7 +36,7 @@ SQ.register("mother", "en", {
       ]
     },
     a3: {
-      title: "Paradise of Knowledge and Piety",
+      title: "A Garden of Knowledge and Piety",
       desc: [
         "Being a source of knowledge and piety for your children, including:",
         {
@@ -59,8 +59,8 @@ SQ.register("mother", "en", {
       heading: "🔄 Complementary View"
     },
     eternalModel: {
-      name: "Eternal Model",
-      heading: "👑 Eternal Model"
+      name: "Lasting Role Model",
+      heading: "👑 Lasting Role Model"
     },
     healthyMother: {
       name: "Healthy Mother",
@@ -83,8 +83,8 @@ SQ.register("mother", "en", {
       heading: "🎓 Teacher Motivator"
     },
     imamahAmbition: {
-      name: "Imamah Ambition",
-      heading: "🕋 Imamah Ambition"
+      name: "Looking to the Imam",
+      heading: "🕋 Looking to the Imam"
     }
   },
   questions: [
@@ -137,19 +137,37 @@ SQ.register("mother", "en", {
   overall: [
     {
       title: "Excellent. You're doing very well as a mother.",
-      text: ["You’re doing great. Keep your habits and aim for steady improvement."]
+      text: [
+        "Your score shows strong awareness and steady effort in your role as a mother. Keep it up.",
+        {
+          ar: "الجنة تحت أقدام الأمهات",
+          meaning: "“Paradise lies beneath the feet of mothers.”",
+          src: "The Prophet Muhammad (peace be upon him and his family)"
+        }
+      ]
     },
     {
       title: "Good. You're on the right track.",
-      text: ["You hit the target (60%). Review the tips below to improve further."]
+      text: [
+        "You reached the goal (60%), which means you are a good mother. Read the advice below to become even better."
+      ]
     },
     {
       title: "You need more effort and consistency.",
-      text: ["You can improve a lot. Start small and stay consistent."]
+      text: [
+        "There is plenty of room to improve. Focus on your weakest points and start with one small change each day."
+      ]
     },
     {
       title: "Time for serious change in your role as a mother.",
-      text: ["Start with one serious step today."]
+      text: [
+        "Don’t worry – admitting the problem is half the solution! Every day is a new chance to be a better mother.",
+        {
+          ar: "إن الله تبارك وتعالى أوحى إلى موسى بن عمران: يا موسى، أكرِم أمك، فإن الجنة تحت أقدامها",
+          meaning: "“Allah revealed to Moses son of Imran: O Moses, honour your mother, for Paradise lies beneath her feet.”",
+          src: "Imam al-Sadiq (peace be upon him)"
+        }
+      ]
     }
   ],
   feedback: {
@@ -278,7 +296,14 @@ SQ.register("mother", "en", {
       },
       needsWork: {
         title: "📖 Needs improvement in Religious Knowledge",
-        text: "You're your children's first teacher in religion.",
+        text: [
+          "You are your children’s first teacher in religion.",
+          {
+            ar: "الجنة تحت أقدام الأمهات",
+            meaning: "“Paradise lies beneath the feet of mothers.”",
+            src: "The Prophet Muhammad (peace be upon him and his family)"
+          }
+        ],
         tips: [
           "Be the source of religious awareness at home",
           "Instill love for Allah, His Messenger, and Ahlul Bayt",

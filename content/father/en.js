@@ -5,8 +5,8 @@ SQ.register("father", "en", {
   },
   intro: {
     title: "Are You a Good Father?",
-    subtitle: "A self-assessment inspired by a sermon by Dr. Hassan Al-Balushi",
-    body: "<p> This assessment helps you review your behavior and identify strengths and weaknesses in your role as a father. </p>"
+    subtitle: "A self-assessment inspired by a sermon by Sheikh Dr. Hassan Al-Balushi",
+    body: "<p>In his sermon, Sheikh Dr. Hassan Al-Balushi asks an important question: <strong>“Are you a good father?”</strong><br>This self-assessment helps you look honestly at yourself and find your strengths and weaknesses in your role as a father.</p>"
   },
   axes: {
     a1: {
@@ -88,7 +88,7 @@ SQ.register("father", "en", {
     }
   },
   questions: [
-    "I am a role model for my children in worship and obedience",
+    "I am a role model for my children in worship and obedience to Allah",
     "I strive to be a good example in my dealings with others",
     "My children want to emulate my behavior",
     "I work to build a good reputation for my children in society",
@@ -102,15 +102,15 @@ SQ.register("father", "en", {
     "My children are not afraid of my reaction when they want to tell me something",
     "I allocate daily time for real communication with my children",
     "I participate with my children in their activities and games according to their ages",
-    "I listen to my children with interaction and comment on their talk",
+    "I listen to my children with real engagement and respond to what they say",
     "My children feel that I am their support in hardships",
     "I bear with my children even if they make mistakes and help them correct",
     "I am the person my children think of turning to in calamities",
-    "I teach my children the teachings of their religion and answer their doctrinal questions",
+    "I teach my children their religion and answer their questions about faith",
     "I prepare my children for independence in life and don't do tasks for them",
-    "I teach my children life skills and social greetings",
+    "I teach my children life skills and good social manners",
     "I encourage my children to venture into life and appropriate adventures",
-    "I push my children into society and don't discourage them with negative talk",
+    "I encourage my children to take part in society and don’t discourage them with negative talk",
     "I instill in my children the spirit of appropriate challenge and courage",
     "I am my children's first advisor in their problems with friends",
     "I transfer life experiences to my children in a wise way",
@@ -137,19 +137,37 @@ SQ.register("father", "en", {
   overall: [
     {
       title: "Excellent. You're doing very well as a father.",
-      text: ["You’re doing great. Keep your habits and aim for steady improvement."]
+      text: [
+        "Your score shows strong awareness and steady effort in your role as a father. Keep it up.",
+        {
+          ar: "أكرموا أولادكم وأحسنوا آدابهم",
+          meaning: "“Honour your children and raise them with good manners.”",
+          src: "The Prophet Muhammad (peace be upon him and his family)"
+        }
+      ]
     },
     {
       title: "Good. You're on the right track.",
-      text: ["You hit the target (60%). Review the tips below to improve further."]
+      text: [
+        "You reached the goal (60%), which means you are a good father. Read the advice below to become even better."
+      ]
     },
     {
       title: "You need more effort and consistency.",
-      text: ["You can improve a lot. Start small and stay consistent."]
+      text: [
+        "There is plenty of room to improve. Focus on your weakest points and start with one small change each day."
+      ]
     },
     {
       title: "Time for serious change in your role as a father.",
-      text: ["Start with one serious step today."]
+      text: [
+        "Don’t worry – admitting the problem is half the solution! Every day is a new chance to be a better father.",
+        {
+          ar: "حق الولد على الوالد أن يحسن اسمه، ويحسن أدبه، ويعلمه القرآن",
+          meaning: "“The child’s right over the father is that he gives him a good name, raises him with good manners and teaches him the Quran.”",
+          src: "Imam Ali (peace be upon him)"
+        }
+      ]
     }
   ],
   feedback: {
@@ -164,7 +182,14 @@ SQ.register("father", "en", {
       },
       needsWork: {
         title: "🌟 Role Model needs work",
-        text: "Your children need to see a good example in you. Work on being more consistent.",
+        text: [
+          "Your children need to see a good example in you. Work on being more consistent.",
+          {
+            ar: "إن الله يصلح بصلاح العبد ولده وولد ولده",
+            meaning: "“Through the righteousness of a servant, Allah sets right his children and his children’s children.”",
+            src: "The Prophet Muhammad (peace be upon him and his family)"
+          }
+        ],
         tips: [
           "Be steady in your worship",
           "Make your behavior balanced and predictable",
@@ -278,7 +303,14 @@ SQ.register("father", "en", {
       },
       needsWork: {
         title: "📚 First Teacher needs work",
-        text: "You're your children's first teacher in religion and life. Teach them consistently.",
+        text: [
+          "You are your children’s first teacher in religion and in life. Teach them consistently.",
+          {
+            ar: "اللهم أعني على تربيتهم وتعليمهم",
+            meaning: "“O Allah, help me to raise and teach them.”",
+            src: "Imam Zayn al-Abidin (peace be upon him)"
+          }
+        ],
         tips: [
           "Teach your children religious teachings",
           "Prepare them for independence in life",

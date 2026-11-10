@@ -5,14 +5,14 @@ SQ.register("husband", "en", {
   },
   intro: {
     title: "Are You a Good Husband?",
-    subtitle: "A self-assessment inspired by a sermon by Dr. Hassan Al-Balushi",
-    body: "<p> This assessment helps you review your behavior and identify strengths and weaknesses in your marriage. </p>"
+    subtitle: "A self-assessment inspired by a sermon by Sheikh Dr. Hassan Al-Balushi",
+    body: "<p>In his sermon, Sheikh Dr. Hassan Al-Balushi asks an important question: <strong>“Are you a good husband?”</strong><br>This self-assessment helps you look honestly at yourself and find your strengths and weaknesses in your marriage.</p>"
   },
   axes: {
     a1: {
-      title: "Emotional leadership",
+      title: "Emotional responsibility",
       desc: [
-        "Leading the emotional side of the relationship through three pillars:",
+        "Taking responsibility for the emotional side of the marriage, built on three pillars:",
         {
           list: [
             "<strong>Safety:</strong> your wife feels safe with you",
@@ -23,9 +23,9 @@ SQ.register("husband", "en", {
       ]
     },
     a2: {
-      title: "Practical leadership",
+      title: "Practical responsibility",
       desc: [
-        "Leading how the marriage is managed, including:",
+        "Taking the lead in managing the practical side of the marriage:",
         {
           list: [
             "<strong>Initiative:</strong> breaking routine and renewing the relationship",
@@ -106,19 +106,37 @@ SQ.register("husband", "en", {
   overall: [
     {
       title: "Excellent. You’re doing very well.",
-      text: ["You’re doing great. Keep your habits and aim for steady improvement."]
+      text: [
+        "Your score shows strong awareness and steady effort in building a successful marriage. Keep it up.",
+        {
+          ar: "خيركم خيركم لأهله، وأنا خيركم لأهلي",
+          meaning: "“The best of you are those who are best to their families, and I am the best of you to my family.”",
+          src: "The Prophet Muhammad (peace be upon him and his family)"
+        }
+      ]
     },
     {
       title: "Good. You’re on the right track.",
-      text: ["You hit the target (60%). Review the tips below to improve further."]
+      text: [
+        "You reached the goal (60%), which means you are a good husband. Read the advice below to become even better."
+      ]
     },
     {
       title: "You need more effort and consistency.",
-      text: ["You can improve a lot. Start small and stay consistent."]
+      text: [
+        "There is plenty of room to improve. Focus on your weakest points and start with one small change each day."
+      ]
     },
     {
       title: "Time for serious change.",
-      text: ["Start with one serious step today."]
+      text: [
+        "Don’t worry – admitting the problem is half the solution! Every day is a new chance to be a better husband.",
+        {
+          ar: "أفضل الأعمال ما أكرهت نفسك عليه",
+          meaning: "“The best deeds are those you make yourself do.”",
+          src: "Imam Ali (peace be upon him)"
+        }
+      ]
     }
   ],
   feedback: {
@@ -133,7 +151,14 @@ SQ.register("husband", "en", {
       },
       needsWork: {
         title: "🛡️ Safety needs work",
-        text: "Your wife needs to feel safe with you. Work on calm reactions and clear communication.",
+        text: [
+          "Your wife needs to feel safe with you. Work on calm reactions and clear communication.",
+          {
+            ar: "رحم الله عبداً أحسن فيما بينه وبين زوجته",
+            meaning: "“May Allah have mercy on the servant who does well in what is between him and his wife.”",
+            src: "Imam al-Sadiq (peace be upon him)"
+          }
+        ],
         tips: [
           "Practice listening without interrupting",
           "Keep your reactions calm and predictable",
@@ -152,7 +177,14 @@ SQ.register("husband", "en", {
       },
       needsWork: {
         title: "🤝 Friendship needs work",
-        text: "Friendship is the base of a happy marriage. Build it daily with time and attention.",
+        text: [
+          "Friendship is the foundation of a happy marriage. The Prophet (peace be upon him and his family) joked with his wives and listened to them.",
+          {
+            ar: "خيركم خيركم لأهله",
+            meaning: "“The best of you are those who are best to their families.”",
+            src: "The Prophet Muhammad (peace be upon him and his family)"
+          }
+        ],
         tips: [
           "Set a daily time to talk",
           "Ask about her day and details",
@@ -171,7 +203,14 @@ SQ.register("husband", "en", {
       },
       needsWork: {
         title: "🙏 Respect needs work",
-        text: "Respect is a red line. Avoid harsh words and rebuild trust after conflict.",
+        text: [
+          "Respect is a red line. Never raise your voice or your hand.",
+          {
+            ar: "فإنهن أمانات الله عندكم، فلا تضاروهن",
+            meaning: "“They are a trust from Allah with you, so do not harm them.”",
+            src: "Imam Ali (peace be upon him)"
+          }
+        ],
         tips: [
           "Avoid hurtful words even when angry",
           "Apologize and repair quickly",
@@ -228,7 +267,14 @@ SQ.register("husband", "en", {
       },
       needsWork: {
         title: "🤝 Partnership needs work",
-        text: "Marriage is partnership. Build it through shared responsibilities and consultation.",
+        text: [
+          "Marriage is a partnership. The Prophet (peace be upon him and his family) helped his family and consulted his wives.",
+          {
+            ar: "كان يخصف نعله ويرقع ثوبه ويخدم نفسه",
+            meaning: "“He mended his own sandals, patched his own clothes and looked after himself.”",
+            src: "Description of the Prophet (peace be upon him and his family)"
+          }
+        ],
         tips: [
           "Help at home consistently",
           "Consult her on decisions",
