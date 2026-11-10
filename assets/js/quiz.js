@@ -99,7 +99,7 @@
     h += '<h3 class="center">' + esc(t('axesTitle')) + '</h3><div class="axis-overview">';
     cfg.axes.forEach(function (a, i) {
       var ax = (c.axes || {})[a.key] || {};
-      h += '<div class="axis-item"><div class="axis-num">' + (i + 1) + '</div><div><h3>' + (a.emoji ? a.emoji + ' ' : '') + (ax.title || '') + '</h3>' +
+      h += '<div class="axis-item"><div class="axis-num">' + (i + 1) + '</div><div><h3>' + (a.emoji ? a.emoji + ' ' : '') + (ax.overviewTitle || ax.title || '') + '</h3>' +
         SQ.rich(ax.desc) + '</div></div>';
     });
     h += '</div>';
