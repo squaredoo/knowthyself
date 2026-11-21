@@ -108,7 +108,9 @@
     });
 
     h += '<section class="w-sec" id="preview"><h2 class="no-print">' + t.nav.preview[0] + '</h2><p class="muted no-print">' + t.previewHint + '</p>' +
-      '<div class="paper" id="paper"></div></section></div></div>';
+      '<div class="paper" id="paper"></div>' +
+      '<div class="btn-row no-print w-end-actions"><button type="button" class="btn primary" data-act="print">' + esc(t.actions.print) + '</button>' +
+      '<button type="button" class="btn" data-act="save">' + esc(t.actions.save) + '</button></div></section></div></div>';
     h += '<footer class="footer no-print"><div>' + t.footer.meta + '</div><div>' + t.footer.by + '</div></footer>';
     document.getElementById('app').innerHTML = h;
     updatePreview();
