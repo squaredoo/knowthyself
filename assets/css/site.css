@@ -401,10 +401,20 @@ details[open] summary{margin-bottom:8px}
 .sign-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:26px 0 12px}
 .sign-line{display:block;border-bottom:1px solid #333;height:42px}
 @media print{
-  body *{visibility:hidden}
-  #paper,#paper *{visibility:visible}
-  #paper{position:absolute;inset:0 0 auto 0;box-shadow:none;padding:0;border-radius:0}
-  .w-sec{border:0}
+  /* Print only the will document. Hidden parts are removed from the flow (display:none),
+     and the panel that holds #paper no longer clips it (overflow:hidden), so the PDF isn't blank. */
+  body:has(#paper) > *:not(#app),
+  #app .w-head,#app .w-nav,#app .footer,
+  #app .w-sec:not(#preview),#preview > :not(#paper){display:none !important}
+  body:has(#paper){background:#fff !important}
+  #app.shell,#app .w-grid,#app .w-main,#preview{
+    display:block;width:auto;max-width:none;margin:0;padding:0;border:0;
+    overflow:visible;background:none;box-shadow:none;position:static
+  }
+  #app .w-main::before,#app .w-main::after{display:none}
+  #paper{position:static;box-shadow:none;padding:0;border-radius:0;background:#fff}
+  #paper h3,#paper tr{break-inside:avoid}
+  #paper h3{break-after:avoid}
 }
 @media (max-width:480px){
   .home-card{align-items:flex-start;gap:12px;padding:16px 14px}
