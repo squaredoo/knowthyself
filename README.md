@@ -12,6 +12,7 @@ assets/js/quiz.js          The quiz engine used by all nine assessments
 assets/js/home.js          Homepage
 assets/js/waseya.js        The interactive will
 assets/img/og-image.png    Social-media preview image (1200×630)
+assets/fonts/              The two Arabic fonts (Noto Naskh Arabic, Amiri Quran) and their licences
 content/ui.js              Shared interface text (buttons, results, tools) in ar / en / da
 content/<quiz>/quiz.js     Structure of a quiz: areas, aspects, accent colour, YouTube id
 content/<quiz>/ar.js       All Arabic text of that quiz
@@ -43,6 +44,7 @@ Answers never leave the browser.
 
 - While a quiz or the will is open, answers are kept in the tab's session storage, so a reload or accidental back doesn't lose them; they disappear when the tab is closed.
 - "Save progress" (tools menu) stores answers in local storage on that device until deleted; the will draft is downloaded as a file.
+- Fonts are served from this site, not from Google Fonts. The only outside request before consent is the YouTube preview picture on a quiz's first page.
 - Google Analytics (page views only) loads only after the visitor allows statistics cookies in the banner. "Statistics settings" at the bottom of the homepage changes that choice.
 
 ## Adding a language

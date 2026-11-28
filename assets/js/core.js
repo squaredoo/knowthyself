@@ -73,6 +73,9 @@
     document.dispatchEvent(new CustomEvent('sq:lang', { detail: { lang: code } }));
   };
 
+  /** Link to this page that opens in the language it was shared in. */
+  SQ.shareUrl = function () { return location.origin + location.pathname + '?lang=' + SQ.lang; };
+
   /** UI string lookup: SQ.t('next'), SQ.t('stepOf', 2, 6). Falls back to Arabic. */
   SQ.t = function (k) {
     var ui = SQ.data.ui || {};
@@ -278,17 +281,27 @@
       el.innerHTML = '<p>' + SQ.esc(SQ.t('consentText')) + '</p><div><button type="button" class="btn small" data-consent="no">' + SQ.esc(SQ.t('consentNo')) +
         '</button><button type="button" class="btn small primary" data-consent="yes">' + SQ.esc(SQ.t('consentYes')) + '</button></div>';
     };
+    // While the banner is up, the page, the tools button and toasts make room for it
+    // (see body.has-consent in site.css), so it never hides a button.
+    var room = function () { document.documentElement.style.setProperty('--consent-h', el.offsetHeight + 'px'); };
+    var repaint = function () { paint(); room(); };
     paint();
-    document.addEventListener('sq:lang', paint);
+    document.addEventListener('sq:lang', repaint);
+    window.addEventListener('resize', room);
     el.addEventListener('click', function (e) {
       var b = e.target.closest('[data-consent]');
       if (!b) return;
       SQ.store.set('sq_consent', b.getAttribute('data-consent'));
-      document.removeEventListener('sq:lang', paint);
+      document.removeEventListener('sq:lang', repaint);
+      window.removeEventListener('resize', room);
       el.remove();
+      document.body.classList.remove('has-consent');
+      document.documentElement.style.removeProperty('--consent-h');
       SQ.analytics();
     });
     document.body.appendChild(el);
+    document.body.classList.add('has-consent');
+    room();
   }
   /** Lets visitors change their statistics choice later (link on the homepage). */
   SQ.resetConsent = function () { SQ.store.del('sq_consent'); consentBanner(); };

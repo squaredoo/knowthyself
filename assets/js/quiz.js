@@ -57,7 +57,8 @@
   function score(list) {
     var vals = list.map(function (q) { return state.answers[q.id]; }).filter(Boolean);
     if (!vals.length) return 0;
-    return vals.reduce(function (s, v) { return s + (v - 1) * 25; }, 0) / vals.length;
+    // Rounded here, once, so the percentage shown and the level it earns always agree.
+    return Math.round(vals.reduce(function (s, v) { return s + (v - 1) * 25; }, 0) / vals.length);
   }
   function firstMissing(list) {
     for (var i = 0; i < list.length; i++) if (!state.answers[list[i].id]) return list[i];
@@ -424,7 +425,7 @@
         state.answers = {};
         Object.keys(s.answers || {}).forEach(function (k) {
           var v = Number(s.answers[k]);
-          if (v >= 1 && v <= 5) state.answers[k] = v;
+          if (v >= 1 && v <= 5 && cfg.qs[Number(k) - 1]) state.answers[k] = v;
         });
         state.promise = s.promise || '';
         results = firstMissing(cfg.qs) ? null : compute();
@@ -469,7 +470,7 @@
     lines.push(t('reportPromise') + ':');
     lines.push(state.promise.trim() || t('reportNone'));
     lines.push('');
-    lines.push(location.origin + location.pathname);
+    lines.push(SQ.shareUrl());
     return lines.join('\n');
   }
 
@@ -528,6 +529,7 @@
         var s = sug.getAttribute('data-sug');
         ta.value = ta.value.trim() ? ta.value.replace(/\s+$/, '') + '\n' + s : s;
         state.promise = ta.value;
+        autosave();
         SQ.toast(t('added'));
         return;
       }
@@ -544,7 +546,7 @@
       else if (act === 'restart') restart();
       else if (act === 'copyScores') SQ.copy(scoresText());
       else if (act === 'share') {
-        navigator.share({ title: (C().meta || {}).title || document.title, text: scoresText(), url: location.origin + location.pathname }).catch(function () {});
+        navigator.share({ title: (C().meta || {}).title || document.title, text: scoresText(), url: SQ.shareUrl() }).catch(function () {});
       }
       else if (act === 'copyPromise') {
         if (!state.promise.trim()) SQ.toast(t('writePromiseFirst'));
@@ -565,13 +567,19 @@
       if (!tools.contains(e.target)) { menu.hidden = true; fab.setAttribute('aria-expanded', 'false'); }
     });
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') { var m = document.getElementById('toolsMenu'); if (m) m.hidden = true; }
+      if (e.key !== 'Escape') return;
+      var m = document.getElementById('toolsMenu'), fab = document.querySelector('.tools .fab');
+      if (m && !m.hidden) { m.hidden = true; if (fab) { fab.setAttribute('aria-expanded', 'false'); fab.focus(); } }
     });
     // Language switch: re-render everything, keep answers and the current step.
     document.addEventListener('sq:lang', render);
     window.addEventListener('popstate', function (e) {
       var p = e.state && typeof e.state.sqPage === 'number' ? e.state.sqPage : 0;
-      if (pages[p] === 'results' || pages[p] === 'advice' || pages[p] === 'promise') { if (!results) p = 0; }
+      if ((pages[p] === 'results' || pages[p] === 'advice' || pages[p] === 'promise') && !results) {
+        // Answers changed since the results were shown: recalculate, or go to the first unanswered question.
+        var miss = firstMissing(cfg.qs);
+        if (miss) p = pages.indexOf('axis:' + miss.axis); else results = compute();
+      }
       goTo(p, { noHistory: true });
     });
   }

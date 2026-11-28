@@ -14,9 +14,15 @@
   function T() { return SQ.content('waseya'); }
   function lbl(id) { var f = T().fields[id] || {}; return f.label || id; }
   function ph(id) { var f = T().fields[id] || {}; return f.ph || ''; }
+  /** Amount as a number, never negative. Understands "90,000", "30.000,50" and "1,5" as well as plain numbers. */
   function num(x) {
-    var v = parseFloat(String(x == null ? '' : x).replace(/\s/g, '').replace(',', '.'));
-    return isNaN(v) ? 0 : v;
+    var s = String(x == null ? '' : x).replace(/\s/g, '');
+    var c = s.lastIndexOf(','), d = s.lastIndexOf('.');
+    if (c > -1 && d > -1) s = c > d ? s.replace(/\./g, '').replace(',', '.') : s.replace(/,/g, '');  // the last mark is the decimal one
+    else if (/^\d{1,3}(,\d{3})+$/.test(s)) s = s.replace(/,/g, '');                                  // 90,000
+    else s = s.replace(',', '.');                                                                   // 1,5
+    var v = parseFloat(s);
+    return isNaN(v) || v < 0 ? 0 : v;
   }
   function money(n) {
     try { return n.toLocaleString(SQ.langInfo().locale, { maximumFractionDigits: 2 }); } catch (e) { return n.toFixed(2); }
@@ -36,7 +42,7 @@
     var id = f[0], type = f[1], v = vals[id] || '';
     var h = '<div class="field' + (type === 'textarea' || type === 'shahada' ? ' wide' : '') + '"><label for="' + id + '">' + lbl(id) + '</label>';
     if (type === 'textarea' || type === 'shahada') {
-      h += '<textarea id="' + id + '" data-f="' + id + '"' + (type === 'shahada' ? ' rows="10" dir="auto"' : ' rows="3"') + ' placeholder="' + esc(ph(id)) + '">' + esc(v) + '</textarea>';
+      h += '<textarea id="' + id + '" data-f="' + id + '"' + (type === 'shahada' ? ' rows="10" dir="auto" class="bidi-lines"' : ' rows="3"') + ' placeholder="' + esc(ph(id)) + '">' + esc(v) + '</textarea>';
     } else if (type === 'readonly') {
       h += '<input type="text" id="' + id + '" readonly value="' + esc(v) + '">';
     } else {
@@ -112,7 +118,12 @@
       '<div class="btn-row no-print w-end-actions"><button type="button" class="btn primary" data-act="print">' + esc(t.actions.print) + '</button>' +
       '<button type="button" class="btn" data-act="save">' + esc(t.actions.save) + '</button></div></section></div></div>';
     h += '<footer class="footer no-print"><div>' + t.footer.meta + '</div><div>' + t.footer.by + '</div></footer>';
-    document.getElementById('app').innerHTML = h;
+    var app = document.getElementById('app');
+    // Redrawing must not close sections the visitor has opened.
+    var wasOpen = Array.prototype.map.call(app.querySelectorAll('details'), function (d) { return d.open; });
+    app.innerHTML = h;
+    var det = app.querySelectorAll('details');
+    if (det.length === wasOpen.length) for (var di = 0; di < det.length; di++) if (wasOpen[di]) det[di].open = true;
     updatePreview();
     updateProgress();
   }
@@ -140,7 +151,7 @@
     F.sections.forEach(function (s, i) {
       if (s.glossary) return;
       h += '<h3>' + t.sections[s.id].title + '</h3><div class="print-box">';
-      if (s.id === 'sec2') h += '<p style="white-space:pre-wrap" dir="auto">' + esc(vals.t_shahada || '') + '</p>';
+      if (s.id === 'sec2') h += '<p style="white-space:pre-wrap" class="bidi-lines">' + esc(vals.t_shahada || '') + '</p>';
       else (s.fields || []).forEach(function (f) { if (f[1] !== 'shahada') h += line(f[0], { pre: f[1] === 'textarea' }); });
       if (s.table) h += printTable(s.table);
       (s.more || []).forEach(function (f) { if (vals[f[0]]) h += line(f[0], { pre: f[1] === 'textarea' }); });
@@ -192,10 +203,13 @@
   }
   function apply(data) {
     var f = data.fields || {};
+    // Number boxes only accept plain numbers, so amounts written like "90,000" are normalised.
+    var plain = function (v) { v = v == null ? '' : String(v); return v.trim() && isNaN(Number(v)) ? String(num(v)) : v; };
     Object.keys(f).forEach(function (k) { vals[k] = f[k]; });
+    F.sections.forEach(function (s) { (s.fields || []).forEach(function (fd) { if (fd[1] === 'number' && fd[0] in f) vals[fd[0]] = plain(f[fd[0]]); }); });
     Object.keys(F.tables).forEach(function (k) {
       rows[k] = ((data.tables || {})[k] || []).map(function (r) {
-        var o = {}; F.tables[k].forEach(function (c) { o[c] = r[c] == null ? '' : String(r[c]); }); return o;
+        var o = {}; F.tables[k].forEach(function (c) { o[c] = c === 'amount' ? plain(r[c]) : r[c] == null ? '' : String(r[c]); }); return o;
       });
     });
   }
