@@ -4,6 +4,14 @@
    Each quiz sets its own --accent on <body> from its config.
    ========================================================================== */
 
+/* ---------- Fonts (served from this site, so no visitor data goes to a font provider) ---------- */
+@font-face{font-family:"Noto Naskh Arabic";font-style:normal;font-weight:400;font-display:swap;src:url(/assets/fonts/noto-naskh-arabic-arabic-400-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC}
+@font-face{font-family:"Noto Naskh Arabic";font-style:normal;font-weight:400;font-display:swap;src:url(/assets/fonts/noto-naskh-arabic-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Noto Naskh Arabic";font-style:normal;font-weight:700;font-display:swap;src:url(/assets/fonts/noto-naskh-arabic-arabic-700-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC}
+@font-face{font-family:"Noto Naskh Arabic";font-style:normal;font-weight:700;font-display:swap;src:url(/assets/fonts/noto-naskh-arabic-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Amiri Quran";font-style:normal;font-weight:400;font-display:swap;src:url(/assets/fonts/amiri-quran-arabic-400-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC}
+@font-face{font-family:"Amiri Quran";font-style:normal;font-weight:400;font-display:swap;src:url(/assets/fonts/amiri-quran-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
 :root{
   --bg1:#3f5f57;
   --bg2:#2f4b44;
@@ -323,9 +331,19 @@ html[data-theme="light"] .tools .menu{background:var(--surface)}
 
 /* ---------- Print ---------- */
 @media print{
+  /* Paper is white whichever theme is on screen, so print with dark ink colours. */
+  :root,html[data-theme="light"]{
+    --bg1:#fff;--bg2:#fff;--text:#1d1d1d;--muted:#555;--gold:#7a5c14;--gold-strong:#5f470f;
+    --surface:#fff;--surface-2:#f3f1ea;--input:#fff;--line:rgba(0,0,0,.2);--line-strong:rgba(0,0,0,.45);
+    --ok:#1c7d52;--mid:#8a6700;--low:#b3560f;--bad:#bf2f2f;--shadow:none;color-scheme:light;
+  }
   .topbar,.tools,.toast,.btn-row,.no-print{display:none !important}
-  body{background:#fff;color:#000}
+  body{background:#fff;color:#000;padding-bottom:0 !important}
   .panel{box-shadow:none;border:0;background:#fff}
+  .score-ring,.score-ring .inner,.meter,.meter i,.stepper .bar,.stepper .bar i,.badge,.opt span,.tip,.q{
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;box-shadow:none
+  }
+  .axis-res,.tip,.q,.band{break-inside:avoid}
 }
 
 /* ---------- Homepage ---------- */
@@ -397,6 +415,8 @@ details[open] summary{margin-bottom:8px}
 .paper .w-table{min-width:0;margin:6px 0}
 .paper .w-table th{background:#f2ead6;color:#1d1d1d}
 .paper .w-table th,.paper .w-table td{border:1px solid #d8ccb0}
+/* Mixed Arabic and translated text: every paragraph takes its own direction and side. */
+.bidi-lines{unicode-bidi:plaintext;text-align:start}
 .blank{display:inline-block;min-width:160px;border-bottom:1px dotted #888;height:1em}
 .sign-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:26px 0 12px}
 .sign-line{display:block;border-bottom:1px solid #333;height:42px}
@@ -447,6 +467,10 @@ cite,.src{font-style:normal}
 html[data-theme="light"] .consent{background:var(--surface)}
 .consent p{margin:0;font-size:14px;line-height:1.6;flex:1 1 260px}
 .consent div{display:flex;gap:8px}
+/* Room for the banner: nothing it would cover stays underneath it. */
+body.has-consent{padding-bottom:calc(var(--consent-h,0px) + 24px)}
+body.has-consent .toast{bottom:calc(var(--consent-h,0px) + 28px)}
+@media (max-width:900px){body.has-consent .tools{bottom:calc(var(--consent-h,0px) + 24px)}}
 .linklike{background:none;border:0;padding:4px;color:var(--muted);text-decoration:underline;cursor:pointer;font-size:13px}
 
 /* Stronger contrast for the selected answer and area numbers (white text on the quiz colour) */
